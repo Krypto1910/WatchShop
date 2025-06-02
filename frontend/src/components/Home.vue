@@ -4,7 +4,7 @@
         <div class="container-fluid" style="padding-right: 0px;">
             <div class="row w-100 align-items-center">
                 <!-- Logo bên trái -->
-                <div class="col-4 d-flex align-items-center" style="padding-left: 5%;">
+                <div class="col-4 d-flex align-items-center" style="padding-left: 5%">
                     <img class="logo me-2" :src="logoUrl" alt="NeoStyle Logo"
                         style="width: 40px; height: 40px; background-color: white;">
                     <h2 style="color: white;" class="brand mb-0">NeoStyle</h2>
@@ -71,11 +71,16 @@ export default {
 
 .navbar .btn {
     color: white;
-    border: 1px solid white;
+    border: 2px solid white;
+    font-weight: 900;
 }
 
 .navbar .btn:hover {
     background-color: bisque;
     color: black !important;
+}
+
+.navbar .nav-link {
+    font-weight: 900;
 }
 </style>
