@@ -114,7 +114,7 @@ h6 {
 }
 
 .navbar-nav .nav-item {
-  border-right: 1px solid #ccc;
+  border-right: 2px solid #ccc;
   padding: 0 2px; /* Giảm khoảng cách ngang */
   margin-left: none;
 }
@@ -146,4 +146,131 @@ h6 {
     border: none;
   }
 }
+
+
+.row{
+    max-height: 600px;
+    padding-bottom: 0px;
+}
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+footer{
+    background-color: #222222;
+    display: flex;
+    flex-direction: row;
+}
+footer h5{
+    color: #D8D8D8;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+footer li{
+    padding-bottom: 4px;
+}
+footer li a{
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: none;
+}
+footer li a:hover{
+    color: #D8D8D8;
+}
+footer .copyright a{
+    color: black;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    margin: 0 5px;
+}
+footer .copyright a:hover{
+    color: white;
+    background-color: burlywood;
+}
+footer p{
+    color: white;
+    font-size: 0.8rem;
+}
+.copyright p {
+    margin-bottom: 0;
+    flex: 1;
+    text-align: center;
+    font-size: 14px; /* Giảm kích thước chữ nếu cần */
+    padding-right: 10px; /* Giảm khoảng cách giữa chữ và icon */
+}
+.copyright div {
+    display: flex;
+    align-items: center;
+}
+.copyright div a {
+    margin-left: 8px; /* Giảm khoảng cách giữa các icon */
+}
+footer .copyright img{
+    width: 40%;
+    padding: 0 20px;
+    background-color: white;
+    
+}
+.logo {
+    height: auto; 
+    width: auto; 
+    max-height: 50px;
+    background-color: #fff;
+}
+
+.navbar .brand{
+    color: burlywood;
+    margin: 3px 5px;
+    font-size: 1.3rem;
+}
+
+.small-img-group{
+    display: flex;
+    justify-content: space-between;
+}
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+}
+
+
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* phần nội dung chính chiếm hết phần còn lại */
+#app > *:first-child {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 20px;
+  flex-wrap: wrap; 
+}
+.footer-item {
+  margin: 0 15px;
+}
+#app > .footer {
+  flex-shrink: 0;
+}
+
+
 </style>
