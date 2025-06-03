@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Home />
+    <Navbar />
+    <PageFooter />
   </div>
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Navbar from './components/Navbar.vue'
+import PageFooter from './components/PageFooter.vue'
 
 export default {
   name: 'App',
   components: {
-    Home
+    Navbar,
+    PageFooter
   }
 }
 </script>
@@ -147,7 +150,7 @@ h6 {
   }
 }
 
-
+<!--footer-->
 .row{
     max-height: 600px;
     padding-bottom: 0px;
@@ -242,7 +245,6 @@ footer .copyright img{
     cursor: pointer;
 }
 
-
 #app {
   display: flex;
   flex-direction: column;
@@ -250,11 +252,6 @@ footer .copyright img{
   padding: 0;
   margin: 0;
   border: 0;
-}
-
-/* phần nội dung chính chiếm hết phần còn lại */
-#app > *:first-child {
-  flex: 1;
 }
 
 .footer {
@@ -270,6 +267,19 @@ footer .copyright img{
 }
 #app > .footer {
   flex-shrink: 0;
+}
+.main-content {
+  flex: 1;
+}
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 
