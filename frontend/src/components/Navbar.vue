@@ -36,7 +36,7 @@
                                 <a class="nav-link" href="#">Contact Us</a>
                             </li>
                             <li class="nav-item d-flex gap-1">
-                                <a class="nav-link d-flex align-items-center" href="#" style="padding: 0 5px;">
+                                <a class="nav-link d-flex align-items-center" href="#" style="padding: 0 8px 0 8px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 576 512"
                                         fill="currentColor">
                                         <path
@@ -44,7 +44,7 @@
                                     </svg>
                                 </a>
 
-                                <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+                                <a class="nav-link" href="#" style="padding: 0px;"><i class="fas fa-user"></i></a>
                             </li>
                         </ul>
                     </div>

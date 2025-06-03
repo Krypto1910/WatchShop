@@ -1,6 +1,6 @@
 <template>
     <!--Footer-->
-    <footer class="mt-5 py-5" style="font-weight: 400;">
+    <footer  class="mt-5 py-5" style="display: flex; flex-direction: column;">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-sm-12">
                 <img class="logo" :src="logoUrl" alt="NeoStyle Logo"
@@ -16,7 +16,7 @@
                     <li><a href="#">boys</a></li>
                     <li><a href="#">girls</a></li>
                     <li><a href="#">new arrivals</a></li>
-                    <li><a href="#">clothes</a></li>
+                    <li><a href="#">discount</a></li>
                 </ul>
             </div>
 
@@ -43,6 +43,7 @@
                     <img :src="watch2" class="img-fluid w-25 h-100 m-2">
                     <img :src="watch3" class="img-fluid w-25 h-100 m-2">
                     <img :src="watch4" class="img-fluid w-25 h-100 m-2">
+                    <img :src="watch3" class="img-fluid w-25 h-100 m-2">
                     <img :src="watch1" class="img-fluid w-25 h-100 m-2">
                 </div>
             </div>
@@ -64,6 +65,8 @@
             </div>
         </div>
     </footer>
+
+
 </template>
 
 <script>
@@ -77,12 +80,14 @@ import payment from '@/assets/payment.jpeg';
 export default {
     name: 'Home',
     data() {
-        return { logoUrl, 
-                 watch1, 
-                 watch2, 
-                 watch3, 
-                 watch4,
-                payment };
+        return {
+            logoUrl,
+            watch1,
+            watch2,
+            watch3,
+            watch4,
+            payment
+        };
     }
 }
 </script>
