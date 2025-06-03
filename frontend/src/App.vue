@@ -117,7 +117,7 @@ h6 {
 }
 
 .navbar-nav .nav-item {
-  border-right: 2px solid #ccc;
+  border-right: 1px solid #ccc;
   padding: 0 2px; /* Giảm khoảng cách ngang */
   margin-left: none;
 }
