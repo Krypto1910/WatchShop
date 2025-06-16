@@ -1,5 +1,6 @@
 const express = require('express');
 const productsController = require('../controllers/products.controller');
+const {methodNotAllowed} = require('../controllers/errors.controller');
 
 const router = express.Router();
 
@@ -12,4 +13,6 @@ module.exports.setup = (app) => {
   router.get('/:id', productsController.getProduct);
   router.put('/:id', productsController.updateProduct);
   router.delete('/:id', productsController.deleteProduct);
+  router.all('/',methodNotAllowed)
+  router.all('/:id',methodNotAllowed)
 };
