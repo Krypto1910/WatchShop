@@ -4,7 +4,7 @@ const orderitemsController = require('../controllers/orderitem.controller');
 const router = express.Router();
 
 module.exports.setup = (app) => {
-  app.use('/api/v1/orderitems', router);
+  app.use('/api/v1/orderitem', router);
 
   router.get('/', orderitemsController.getOrderItemsByFilter);
   router.post('/', orderitemsController.createOrderItem);

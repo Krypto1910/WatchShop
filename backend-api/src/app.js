@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const Jsend = require('./jsend')
 
 const cartRouter = require('./routes/cart.router');
 const customersRouter = require('./routes/customers.router');
@@ -15,9 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  return res.json({
-    message: 'ok'
-  });
+    return res.json(Jsend.success())
 });
 
 cartRouter.setup(app)
