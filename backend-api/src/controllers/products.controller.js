@@ -1,13 +1,15 @@
+const Jsend = require('../jsend');
+
 function createProduct(req, res) {
-    return res.status(201).json({ product: {} });
+    return res.status(201).json(Jsend.success({ product: {} }));
   }
   
   function getProductsByFilter(req, res) {
     const filters = [];
-    const { favorite, name } = req.query;
+    const { category, name } = req.query;
   
-    if (favorite !== undefined) {
-      filters.push(`favorite=${favorite}`);
+    if (category !== undefined) {
+      filters.push(`category=${category}`);
     }
     if (name) {
       filters.push(`name=${name}`);
@@ -15,27 +17,27 @@ function createProduct(req, res) {
   
     console.log(filters.join('&'));
   
-    return res.json({ product: [] });
+    return res.json(Jsend.success({ product: [] }));
   }
   
   function getProduct(req, res) {
-    return res.json({ product: {} });
+    return res.json(Jsend.success({ product: {} }));
   }
   
   function updateProduct(req, res) {
-    return res.json({ product: {} });
+    return res.json(Jsend.success({ product: {} }));
   }
   
   function deleteProduct(req, res) {
-    return res.json({
+    return res.json(Jsend.success({
       message: 'Product deleted',
-    });
+    }));
   }
   
   function deleteAllProducts(req, res) {
-    return res.json({
+    return res.json(Jsend.success({
       message: 'All products deleted',
-    });
+    }));
   }
   
   module.exports = {

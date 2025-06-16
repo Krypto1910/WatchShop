@@ -1,19 +1,21 @@
+const Jsend = require('../jsend');
+
 function createCart(req, res) {
-    return res.status(201).json({ cart: {} });
+    return res.status(201).json(Jsend.success({ cart: {} }));
   }
   
   function getCart(req, res) {
-    return res.json({ cart: {} });
+    return res.json(Jsend.success({ cart: {} }));
   }
   
   function updateCart(req, res) {
-    return res.json({ cart: {} });
+    return res.json(Jsend.success({ cart: {} }));
   }
   
   function deleteCart(req, res) {
-    return res.json({
+    return res.json(Jsend.success({
       message: 'Cart deleted',
-    });
+    }));
   }
   
   

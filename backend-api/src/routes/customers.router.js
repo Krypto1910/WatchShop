@@ -6,7 +6,7 @@ const router = express.Router();
 module.exports.setup = (app) => {
   app.use('/api/v1/customers', router);
 
-  router.get('/', customersController.getCustomersByFilter);
+
   router.post('/', customersController.createCustomer);
   router.delete('/', customersController.deleteAllCustomers);
   router.get('/:id', customersController.getCustomer);

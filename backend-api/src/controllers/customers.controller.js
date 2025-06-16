@@ -1,45 +1,31 @@
+const Jsend = require('../jsend');
+
+
 function createCustomer(req, res) {
-    return res.status(201).json({ customer: {} });
+    return res.status(201).json(Jsend.success({ customer: {} }));
   }
-  
-  function getCustomersByFilter(req, res) {
-    const filters = [];
-    const { favorite, name } = req.query;
-  
-    if (favorite !== undefined) {
-      filters.push(`favorite=${favorite}`);
-    }
-    if (name) {
-      filters.push(`name=${name}`);
-    }
-  
-    console.log(filters.join('&'));
-  
-    return res.json({ customer: [] });
-  }
-  
+
   function getCustomer(req, res) {
-    return res.json({ customer: {} });
+    return res.json(Jsend.success({ customer: {} }));
   }
   
   function updateCustomer(req, res) {
-    return res.json({ customer: {} });
+    return res.json(Jsend.success({ customer: {} }));
   }
   
   function deleteCustomer(req, res) {
-    return res.json({
+    return res.json(Jsend.success({
       message: 'Customer deleted',
-    });
+    }));
   }
   
   function deleteAllCustomers(req, res) {
-    return res.json({
+    return res.json(Jsend.success({
       message: 'All customers deleted',
-    });
+    }));
   }
   
   module.exports = {
-    getCustomersByFilter,
     deleteAllCustomers,
     getCustomer,
     createCustomer,
