@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const Jsend = require('./jsend');
 const path = require('path');
+const swaggerUI = require('swagger-ui-express')
 
 const cartRouter = require('./routes/cart.router');
 const customersRouter = require('./routes/customers.router');
@@ -12,7 +13,7 @@ const {
     resourceNotFound,
     handleError,
 } = require('./controllers/errors.controller');
-
+const swaggerDocument = require('../docs/openapiSpec.json');
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     return res.json(Jsend.success())
 });
-
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 
 cartRouter.setup(app)
