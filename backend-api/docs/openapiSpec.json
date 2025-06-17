@@ -1453,11 +1453,6 @@
             "type": "string",
             "description": "customer phone number"
           },
-          "favorite": {
-            "type": "boolean",
-            "default": false,
-            "description": "favorite customer"
-          },
           "avatar": {
             "type": "string",
             "readOnly": true,
