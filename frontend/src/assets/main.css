@@ -88,7 +88,7 @@ h6 {
 
 .navbar {
   font-size: 16px;
-  padding: 0.6rem 0 !important;
+  padding: 0.8rem 0 !important;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -154,29 +154,6 @@ h6 {
 .navbar-nav .nav-item:last-child:hover {
   border: none;
   background-color: transparent;
-}
-
-/*search box*/
-.navbar input[type="search"] {
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  margin: 0px !important;
-  width: 80%;
-}
-.navbar button {
-  background-color: rgba(0, 66, 37);
-  border-color: bisque;
-  border-radius: 20px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.navbar button:active {
-  border-color: black !important;
 }
 
 
