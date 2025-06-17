@@ -14,69 +14,6 @@
   ],
   "paths": {
     "/api/v1/customers": {
-      "get": {
-        "summary": "Get customers by filter",
-        "description": "Get customers by filter",
-        "operationId": "getCustomersByFilter",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "name",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Filter by customer name"
-          },
-          {
-            "$ref": "#/components/parameters/limitParam"
-          },
-          {
-            "$ref": "#/components/parameters/pageParam"
-          }
-        ],
-        "tags": [
-          "customers"
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of customers",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "description": "The response status",
-                      "enum": [
-                        "success"
-                      ]
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "customers": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/Customer"
-                          }
-                        },
-                        "metadata": {
-                          "$ref": "#/components/schemas/PaginationMetadata"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "$ref": "#/components/responses/400BadRequest"
-          }
-        }
-      },
       "post": {
         "summary": "Create a new customer",
         "description": "Create a new customer",
@@ -411,44 +348,6 @@
           "400": {
             "description": "Bad Request",
             "$ref": "#/components/responses/400BadRequest"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete all cart items",
-        "description": "Delete all cart items",
-        "operationId": "deleteCart",
-        "tags": [
-          "cart"
-        ],
-        "responses": {
-          "200": {
-            "description": "All cart items deleted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "description": "The response status",
-                      "enum": [
-                        "success"
-                      ]
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Cart deleted"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
