@@ -1,20 +1,20 @@
 <template>
     <!--Header-->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top shadow-sm"
-        style="background-color: #004225  !important;">
+        style="background-color: #004225  !important; padding: 0.5rem 0px !important;">
         <div class="container-fluid" style="padding-right: 0px;">
             <div class="row w-100 align-items-center">
                 <!-- Logo bên trái -->
-                <div class="col-4 d-flex align-items-center" style="padding-left: 5%; ">
-                    <img class="logo me-2" :src="logoUrl" alt="NeoStyle Logo"
-                        style="width: 4rem; height: auto; background-color: white;">
-                    <h2 style="color: white; font-size: 2.3rem;" class="brand mb-0">NeoStyle</h2>
+                <div class="col-4 d-flex align-items-center" style="padding: 0.1% 0 0.3% 5%;">
+                    <img id="logo-img-nav" class="logo me-2" :src="logoUrl" alt="NeoStyle Logo"
+                        style="width: 3.4rem; height: 5rem; background-color: white;">
+                    <h2 style="color: white; font-size: 2rem;" class="brand mb-0">NeoStyle</h2>
                 </div>
 
                 <!-- Search box giữa -->
                 <div class="col-4 d-flex justify-content-center">
                     <form class="d-flex" style="max-width: 100%; width: 100%; margin-left: 15%;">
-                        <div style="color: rgb(0, 0, 0, 0.5); font-size: 1.3rem; cursor: auto;" class="search-icon"
+                        <div style="padding-top: 0.1rem !important; padding-bottom: 0.1rem !important; color: rgb(0, 0, 0, 0.8); font-size: 1.2rem; cursor: auto;" class="search-icon"
                             type="button">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor"
@@ -24,7 +24,7 @@
                             </svg>
 
                         </div>
-                        <input style=" font-size: 1.3rem ; " class="form-control me-2" type="search" placeholder="Search"
+                        <input style="font-size: 1.2rem; padding-top: 0.1rem !important; padding-bottom: 0.1rem !important;" class="form-control me-2" type="search" placeholder="Search"
                             aria-label="Search">
                     </form>
                 </div>
@@ -43,7 +43,7 @@
                                     <span>Cart</span>
                                 </a>
 
-                                <a class="nav-link" href="#" style="padding: 10px 16px; margin-left: 1%;">
+                                <a class="nav-link" href="#" style="padding: 10px 16px; ">
                                     <i class="fas fa-user"></i>
                                     <span>Account</span>
                                 </a>
@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style scoped>
+
 .navbar-nav .nav-link {
     white-space: nowrap;
 }
@@ -82,7 +83,7 @@ export default {
 
 .navbar .nav-link span {
     font-weight: 600;
-    font-size: 1.35rem;
+    font-size: 1.2rem;
 }
 
 .site-footer {

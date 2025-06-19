@@ -1,17 +1,14 @@
 <template>
-    <!--Banner-->
     <div class="content">
         <div class="banner-container">
             <img :src="banner" alt="Banner Image">
         </div>
         <div id="featured" class="text-center my-5">
-                <h3>Best sale</h3>
-                <hr class="mx-auto">
-                <p>Check out our luxury watches</p>
-            </div>
-        <div class="product-container">     
+                <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best saler</h3>          
+        </div>
+        <div class="product-container">
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch1" alt="">
                     <div class="star">
@@ -26,7 +23,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch2" alt="">
                     <div class="star">
@@ -41,7 +38,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch3" alt="">
                     <div class="star">
@@ -56,7 +53,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch4" alt="">
                     <div class="star">
@@ -72,7 +69,7 @@
                 </div>
             </div>
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch1" alt="">
                     <div class="star">
@@ -87,7 +84,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch2" alt="">
                     <div class="star">
@@ -102,7 +99,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch3" alt="">
                     <div class="star">
@@ -117,7 +114,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch4" alt="">
                     <div class="star">
@@ -133,7 +130,7 @@
                 </div>
             </div>
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch1" alt="">
                     <div class="star">
@@ -148,7 +145,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch2" alt="">
                     <div class="star">
@@ -163,7 +160,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch3" alt="">
                     <div class="star">
@@ -178,7 +175,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </div>
 
-                <div onclick="window.location.href='single_product.html';"
+                <div onclick="window.location.href='#';"
                     class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <img :src="watch4" alt="">
                     <div class="star">
@@ -227,7 +224,7 @@ export default {
     width: 70%;
     height: fit-content;
     margin: 3% auto;
-    margin-top: 137rem;
+    margin-top: 138rem;
 }
 
 /* banner */
@@ -248,8 +245,8 @@ img {
     width: 100%;
     height: fit-content;
     background-color: white;
-    /* Thêm khoảng cách bên trong */
 }
+
 .row.mx-auto.container-fluid {
     display: flex;
     flex-wrap: wrap;
@@ -258,17 +255,18 @@ img {
     margin: 3.5rem 0;
 }
 
+
 .product {
     flex: 1;
     /* Chia đều không gian */
     max-width: 25%;
     /* Mỗi sản phẩm chiếm 25% chiều rộng */
-    padding: 10px;
+    padding: 0px;
     /* Thêm khoảng cách giữa các sản phẩm */
     box-sizing: border-box;
     cursor: pointer;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
+   
+    /* margin-top: 1.5rem; */
 }
 
 .star i {
@@ -278,15 +276,13 @@ img {
 }
 
 .product img {
-    width: 80%;
-    /* Đảm bảo ảnh đầy đủ chiều ngang */
-    height: 28.3rem;
-    /* Đặt chiều cao cố định */
+    width: 75%;
+    max-height: 22rem;
     object-fit: cover;
     /* Đảm bảo hình ảnh không bị méo */
     transition: 0.3s all;
 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .product:hover img {
