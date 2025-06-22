@@ -61,12 +61,9 @@
                     <a id="ig-icon" href="#"><i class="fab fa-instagram"></i></a>
                     <a id="tw-icon" href="#"><i class="fab fa-twitter"></i></a>
                 </div>
-                
-            </div>
+            </div>           
         </div>
     </footer>
-
-
 </template>
 
 <script>
@@ -270,7 +267,7 @@ footer {
 
 #fb-icon {
     color: #3b5998;
-    margin-left: 2.5rem;
+    margin-left: -0.1rem;
 }
 #ig-icon {
     color: #e1306c;

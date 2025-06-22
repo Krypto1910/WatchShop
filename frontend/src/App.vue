@@ -1,10 +1,7 @@
  <template>
   <div id="app" class="flex flex-col min-h-screen">
     <Navbar />
-    <!-- <main class="flex-grow">
-      <RouterView />
-    </main> -->
-    <Home />
+    <router-view />
     <PageFooter />
   </div>
 </template>
@@ -18,13 +15,13 @@ import Home from './components/Home.vue'
 
 
 
-
 export default {
   name: 'App',
   components: {
     Navbar,
     Home,
-    PageFooter
+    PageFooter,
+   
   }
 }
 </script>

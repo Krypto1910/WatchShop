@@ -191,7 +191,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -211,7 +210,7 @@ export default {
             watch3,
             watch4
         };
-    }
+    },
 }
 </script>
 
@@ -224,7 +223,7 @@ export default {
     width: 70%;
     height: fit-content;
     margin: 3% auto;
-    margin-top: 138rem;
+    margin-top: 121.5rem;
 }
 
 /* banner */
