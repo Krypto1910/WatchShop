@@ -98,7 +98,7 @@ export default {
 
 
 .navbar .nav-link span {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1rem;
 }
 

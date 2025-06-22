@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .form-control {
     font-weight: 400;
     font-size: medium;

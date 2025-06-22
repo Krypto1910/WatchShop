@@ -65,6 +65,7 @@ export default {
    
 }
 /*Register*/
+
 #register-form{
     width: 50%;
     margin: 5px auto;
