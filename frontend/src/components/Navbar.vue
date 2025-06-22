@@ -21,7 +21,7 @@
                 <!-- Search box giữa -->
                 <div class="col-4 d-flex justify-content-center">
                     <form class="d-flex" style="max-width: 100%; width: 100%; margin-left: 15%;">
-                        <div style="padding-top: 0 !important; padding-bottom: 0.1rem !important; color: rgb(0, 0, 0, 0.8); font-size: 1.2rem; cursor: auto;"
+                        <div style="padding-top: 0 !important; padding-bottom: 0.2rem !important; padding-left: 0.88rem; color: rgb(0, 0, 0, 0.8); font-size: 1.2rem; cursor: auto;"
                             class="search-icon" type="button">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor"
