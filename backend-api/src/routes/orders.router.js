@@ -15,7 +15,7 @@ module.exports.setup = (app) => {
     '/',
     validateRequest(
       z.object({
-        input: ordersSchema.omit({ id: true, CustomerId: true , Date: true,TotalAmount: true}).strict()
+        input: ordersSchema.pick({ CustomerId: true }).strict()
       }),
     ),
     ordersController.createOrder,

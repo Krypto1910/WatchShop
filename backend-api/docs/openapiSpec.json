@@ -252,6 +252,104 @@
             "description": "customer avatar file"
           }
         }
+      },
+      "Cart":{
+        "type":"object",
+        "properties": {
+          "id":{
+            "type": "integer",
+            "readOnly": true
+          },
+          "CustomerId":{
+            "type": "integer",
+            "description": "Id of the customer"
+          }
+        }
+      },
+      "OrderItem":{
+        "type": "object",
+        "properties": {
+          "id":{
+            "type": "integer",
+            "readOnly": true
+          },
+          "ProductId":{
+            "type": "integer",
+            "readOnly": true
+          },
+          "OrderId":{
+            "type": "integer"
+          },
+          "Quantity":{
+            "type":"integer",
+            "description": "Number of current item"
+          },
+          "Price":{
+            "type":"string",
+            "description": "Price of a single item of the product"
+          }
+        }
+      },
+      "Orders":{
+        "type":"object",
+        "properties": {
+          "id":{
+            "type":"integer",
+            "readOnly": true
+          },
+          "CustomerId":{
+            "type":"integer"
+          },
+          "date":{
+            "type": "string",
+            "format": "date-time",
+            "description": "date create order"
+          },
+          "totalAmount":{
+            "type":"string",
+            "description": "the total amount of the order"
+          }
+        }
+      },
+      "Products":{
+        "type":"object",
+        "properties": {
+          "id":{
+            "type":"integer",
+            "readOnly": true
+          },
+          "Name":{
+            "type":"string",
+            "description": "Name of the product"
+          },
+          "Category":{
+            "type": "string",
+            "description": "category of the product"
+          },
+          "Description":{
+            "type": "string",
+            "description": "Short summary of the product"
+          },
+          "Price":{
+            "type":  "string",
+            "description": "product price"
+          },
+          "QuantityAvailable":{
+            "type": "integer",
+            "description": "Number of stock available"
+          },
+          "image": {
+            "type": "string",
+            "readOnly": true,
+            "description": "product image file path"
+          },
+          "imageFile": {
+            "type": "string",
+            "format": "binary",
+            "writeOnly": true,
+            "description": "product image file"
+          }
+        }
       }
     },
     "responses": {
@@ -329,13 +427,65 @@
         "schema": {
           "type": "integer"
         }
+      },
+      "cartIdParam": {
+        "name": "id",
+        "description": "Cart ID",
+        "required": true,
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "orderItemIdParam": {
+        "name": "id",
+        "description": "Order Item ID",
+        "required": true,
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "orderIdParam": {
+        "name": "id",
+        "description": "Order ID",
+        "required": true,
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "productIdParam": {
+        "name": "id",
+        "description": "Product ID",
+        "required": true,
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        }
       }
     }
   },
   "tags": [
     {
       "name": "customers",
-      "description": "Customers operations"
+      "description": "Customer operations"
+    },
+    {
+      "name": "carts",
+      "description": "Cart operations"
+    },
+    {
+      "name": "orderitems",
+      "description": "Order item operations"
+    },
+    {
+      "name": "orders",
+      "description": "Order operations"
+    },
+    {
+      "name": "products",
+      "description": "Product operations"
     }
   ]
 }

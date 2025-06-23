@@ -6,6 +6,7 @@ const productsSchema = z.object({
     Category: z.string().max(255),
     Description: z.string().max(255),
     Price: z.coerce.number(),
+    Quantaty: z.coerce.number(),
     image: z.string().max(255).optional(),
     imageFile: z
     .instanceof(Object)

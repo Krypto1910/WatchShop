@@ -51,8 +51,8 @@ module.exports.setup = (app) => {
       .omit({ avatar: true })
       .strict()
       .refine(
-    ({ Name, Category, Description, Price, imageFile }) => {
-      return Name || Category || Description || Price   !== undefined || imageFile;
+    ({ Name, Category, Description, Price, Quantity, imageFile }) => {
+      return Name || Category || Description || Price || Quantity   !== undefined || imageFile;
           },
             {
               message: 'At least one field is required',

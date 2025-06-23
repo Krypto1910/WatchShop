@@ -6,7 +6,7 @@ const ordersSchema = z.object({
     id: z.coerce.number().int().nonnegative(),
     CustomerId: z.coerce.number().int().nonnegative(),
     Date: z.coerce.date().default(() => getCurrentDate()),
-    TotalAmount: z.number().nonnegative(),
+    TotalAmount: z.coerce.number().nonnegative(),
 });
 
 
