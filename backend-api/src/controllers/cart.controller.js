@@ -8,10 +8,6 @@ function createCart(req, res) {
     return res.json(Jsend.success({ cart: {} }));
   }
   
-  function updateCart(req, res) {
-    return res.json(Jsend.success({ cart: {} }));
-  }
-  
   function deleteCart(req, res) {
     return res.json(Jsend.success({
       message: 'Cart deleted',
@@ -22,6 +18,5 @@ function createCart(req, res) {
   module.exports = {
     getCart,
     createCart,
-    updateCart,
     deleteCart,
   };
