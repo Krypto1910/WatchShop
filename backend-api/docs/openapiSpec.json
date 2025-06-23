@@ -178,7 +178,8 @@
                 }
               }
             }
-          },
+          }
+          ,
           "400": {
             "description": "Bad Request",
             "$ref": "#/components/responses/400BadRequest"
@@ -204,6 +205,475 @@
           },
           "400": {
             "description": "Bad Request",
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      }
+    },
+    "/api/v1/carts": {
+      "post": {
+        "summary": "Create a new cart",
+        "operationId": "createCart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Cart"
+              }
+            }
+          }
+        },
+        "tags": ["carts"],
+        "responses": {
+          "201": {
+            "description": "Cart created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      }
+    },
+    "/api/v1/carts/{id}": {
+      "get": {
+        "summary": "Get cart by ID",
+        "operationId": "getCartById",
+        "parameters": [{ "$ref": "#/components/parameters/cartIdParam" }],
+        "tags": ["carts"],
+        "responses": {
+          "200": {
+            "description": "Cart retrieved",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Cart" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/400BadRequest" }
+        }
+      },
+      "delete": {
+        "summary": "Delete cart by ID",
+        "operationId": "deleteCart",
+        "parameters": [
+          { "$ref": "#/components/parameters/cartIdParam" }
+        ],
+        "tags": ["carts"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NoData"
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      }
+    },
+    "/api/v1/orders": {
+      "post": {
+        "summary": "Create a new order",
+        "operationId": "createOrder",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Orders"
+              }
+            }
+          }
+        },
+        "tags": ["orders"],
+        "responses": {
+          "201": {
+            "description": "Order created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orders"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete all orders",
+        "operationId": "deleteOrders",
+        "tags": ["orders"],
+        "responses": {
+          "200": { "$ref": "#/components/responses/200NoData" }
+        }
+      }
+    },
+    "/api/v1/orders/{id}": {
+      "get": {
+        "summary": "Get Order by ID",
+        "description": "Get Order by ID",
+        "operationId": "getOrdersById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orderIdParam"
+          }
+        ],
+        "tags": ["orders"],
+        "responses": {
+          "200": {
+            "description": "An order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["success"] },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orders": { "$ref": "#/components/schemas/Orders" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/400BadRequest" }
+        }
+      },
+      "put": {
+        "summary": "Update Order by ID",
+        "description": "Update Order by ID",
+        "operationId": "updateOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orderIdParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Orders"
+              }
+            }
+          }
+        },
+        "tags": ["orders"],
+        "responses": {
+          "200": {
+            "description": "An order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["success"] },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orders": { "$ref": "#/components/schemas/Orders" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/400BadRequest" }
+        }
+      },
+      "delete": {
+        "summary": "Delete order by ID",
+        "operationId": "deleteOrder",
+        "parameters": [
+          { "$ref": "#/components/parameters/orderIdParam" }
+        ],
+        "tags": ["orders"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NoData"
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      }
+    },
+    "/api/v1/orderitems": {
+      "post": {
+        "summary": "Create a new order item",
+        "operationId": "createOrderItem",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              }
+            }
+          }
+        },
+        "tags": ["orderitems"],
+        "responses": {
+          "201": {
+            "description": "Order item created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete all order items",
+        "operationId": "deleteOrderItems",
+        "tags": ["orderitems"],
+        "responses": {
+          "200": { "$ref": "#/components/responses/200NoData" }
+        }
+      }
+    },
+    "/api/v1/orderitems/{id}": {
+      "get": {
+        "summary": "Get OrderItem by ID",
+        "description": "Get OrderItem by ID",
+        "operationId": "getOrderItemById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orderItemIdParam"
+          }
+        ],
+        "tags": ["orderitems"],
+        "responses": {
+          "200": {
+            "description": "An OrderItem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["success"] },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orderitem": { "$ref": "#/components/schemas/OrderItem" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/400BadRequest" }
+        }
+      },
+      "put": {
+        "summary": "Update OrderItem by ID",
+        "description": "Update OrderItem by ID",
+        "operationId": "updateOrderItem",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/orderItemIdParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderItem"
+              }
+            }
+          }
+        },
+        "tags": ["orderitems"],
+        "responses": {
+          "200": {
+            "description": "An OrderItem",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["success"] },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orderitem": { "$ref": "#/components/schemas/OrderItem" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/400BadRequest" }
+        }
+      },
+      "delete": {
+        "summary": "Delete order item by ID",
+        "operationId": "deleteOrderItem",
+        "parameters": [
+          { "$ref": "#/components/parameters/orderItemIdParam" }
+        ],
+        "tags": ["orderitems"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NoData"
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "post": {
+        "summary": "Create a new product",
+        "operationId": "createProduct",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Products"
+              }
+            }
+          }
+        },
+        "tags": ["products"],
+        "responses": {
+          "201": {
+            "description": "Product created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete all products",
+        "operationId": "deleteProducts",
+        "tags": ["products"],
+        "responses": {
+          "200": { "$ref": "#/components/responses/200NoData" }
+        }
+      }
+    },
+    "/api/v1/products/{id}": {
+"get": {
+    "summary": "Get Product by ID",
+    "description": "Get Product by ID",
+    "operationId": "getProductsById",
+    "parameters": [
+      {
+        "$ref": "#/components/parameters/productIdParam"
+      }
+    ],
+    "tags": ["products"],
+    "responses": {
+      "200": {
+        "description": "A product",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "string", "enum": ["success"] },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "products": { "$ref": "#/components/schemas/Products" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": { "$ref": "#/components/responses/400BadRequest" }
+    }
+  },
+  "put": {
+    "summary": "Update Product by ID",
+    "description": "Update Product by ID",
+    "operationId": "updateProducts",
+    "parameters": [
+      {
+        "$ref": "#/components/parameters/productIdParam"
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "multipart/form-data": {
+          "schema": {
+            "$ref": "#/components/schemas/Products"
+          }
+        }
+      }
+    },
+    "tags": ["products"],
+    "responses": {
+      "200": {
+        "description": "A product",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "string", "enum": ["success"] },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "products": { "$ref": "#/components/schemas/Products" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": { "$ref": "#/components/responses/400BadRequest" }
+    }
+  },
+      "delete": {
+        "summary": "Delete product by ID",
+        "operationId": "deleteProduct",
+        "parameters": [
+          { "$ref": "#/components/parameters/productIdParam" }
+        ],
+        "tags": ["products"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NoData"
+          },
+          "400": {
             "$ref": "#/components/responses/400BadRequest"
           }
         }
@@ -302,7 +772,7 @@
           },
           "date":{
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "description": "date create order"
           },
           "totalAmount":{
