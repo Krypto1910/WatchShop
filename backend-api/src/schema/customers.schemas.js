@@ -19,9 +19,9 @@ const customersSchema = z.object({
 /**
  * Mostly used for JSdoc annotations
  */
-const partialContactSchema = customersSchema.partial();
+const partialCustomersSchema = customersSchema.partial();
 
 module.exports = {
     customersSchema,
-    partialContactSchema,
+    partialCustomersSchema,
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const customersController = require('../controllers/customers.controller');
 const { methodNotAllowed } = require('../controllers/errors.controller');
 const { customersSchema,
-        partialContactSchema,
+        partialCustomersSchema,
  } = require('../schema/customers.schemas')
 const { z } = require('zod');
 
@@ -42,7 +42,7 @@ module.exports.setup = (app) => {
     [
     validateRequest(
       z.object({
-        input: partialContactSchema
+        input: partialCustomersSchema
       .omit({ avatar: true })
       .strict()
       .refine(

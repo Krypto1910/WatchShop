@@ -1,0 +1,10 @@
+CREATE TABLE Customer (
+    CustomerID SERIAL PRIMARY KEY,
+    ContactName VARCHAR(30),
+    Password VARCHAR(24),
+    ContactNumber VARCHAR(11),
+    Email VARCHAR(60),
+    Address VARCHAR(255),
+	Avatar TEXT
+);
+
