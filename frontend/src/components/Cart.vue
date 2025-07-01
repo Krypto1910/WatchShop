@@ -190,7 +190,7 @@ export default {
 }
 
 .cart .remove-btn{
-    color: #006b3d;
+    color: rgb(230, 15, 15);
     text-decoration: none;
     font-size: 0.92rem;
     background-color: transparent;
