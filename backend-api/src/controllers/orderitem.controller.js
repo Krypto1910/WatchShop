@@ -8,10 +8,10 @@ function createOrderItem(req, res) {
   
   function getOrderItemsByFilter(req, res) {
     const filters = [];
-    const { CustomerName } = req.query;
+    const { OrderId } = req.query;
   
-    if (CustomerName !== undefined) {
-      filters.push(`CustomerName=${CustomerName}`);
+    if (OrderId !== undefined) {
+      filters.push(`OrderId=${OrderId}`);
     }
   
     return res.json(Jsend.success({ orderitem: [] }));
