@@ -1,5 +1,4 @@
 <template>
-    <Navbar />
     <div class="content">
         
         <div class="banner-container">
@@ -183,7 +182,6 @@
         </div>
         
     </div>
-    <PageFooter />
 </template>
 
 <script>
