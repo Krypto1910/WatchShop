@@ -1,6 +1,6 @@
 <template>
     <!--Register-->
-    <section class="my-5 py-5">
+    <section style="padding-top: 12rem !important;" class="my-5 py-5">
         <div class="container text-center mt-3 pt-5">
             <h2 style="color: rgb(0, 66, 37);" class="form-weight-bold">Register</h2>
             
@@ -51,21 +51,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /*adjust for login and register page*/
 .form-control {
     font-weight: 400;
     font-size: medium;
 }
 .form-control::placeholder {
-    color: #dbdbdb;
+    color: rgb(155, 155, 155);
 }
 .form-group{
     margin-bottom: 8px;
    
 }
 /*Register*/
-
 #register-form{
     width: 50%;
     margin: 5px auto;

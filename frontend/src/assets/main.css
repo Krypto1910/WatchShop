@@ -32,7 +32,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
-    background-color:  rgba(255, 228, 196, 0.3);
+    background-color: rgba(255, 228, 196, 0.3);
   }
 }
 
@@ -118,7 +118,7 @@ h6 {
   padding-left: 10px;
 }
 
-.navbar-nav .nav-link span{
+.navbar-nav .nav-link span {
   font-size: 1.0rem;
   font-weight: 500;
   margin-left: 8px;
@@ -127,20 +127,21 @@ h6 {
 .navbar-nav .nav-link {
   background-color: transparent;
   border: 2px solid transparent;
-  padding: 8px 12px !important; /* Giảm khoảng cách ngang */
+  padding: 8px 12px !important;
+  /* Giảm khoảng cách ngang */
   margin-right: 20px;
   border-radius: 50px;
 }
 
 .navbar-nav .nav-link:nth-child(1) {
-  margin-right: 5px; 
+  margin-right: 5px;
   padding: 8px 26px !important;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:active,
-.navbar-nav .nav-item:hover, 
-.navbar-nav .nav-item:active{
+.navbar-nav .nav-item:hover,
+.navbar-nav .nav-item:active {
 
   background-color: rgba(255, 228, 196, 0.178);
   cursor: pointer;
@@ -151,6 +152,7 @@ h6 {
 .navbar-nav .nav-item:last-child {
   border: none;
 }
+
 .navbar-nav .nav-item:last-child:hover {
   border: none;
   background-color: transparent;
@@ -181,7 +183,8 @@ h6 {
 
 
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -191,8 +194,6 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: rgba(255, 228, 196, 0.178); 
+  background-color: rgba(255, 228, 196, 0.178);
+  padding-top: 8rem !important;
 }
-
-
-
