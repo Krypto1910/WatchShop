@@ -5,6 +5,7 @@ import Cart from '../components/Cart.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import SingleProduct from '@/components/SingleProduct.vue'
+import Account from '@/components/Account.vue'
 
 const routes = [
     {
@@ -32,20 +33,17 @@ const routes = [
         name: 'SingleProduct',
         component: SingleProduct
         // props: true
+    },
+    {
+        path: '/account',
+        name: 'Account',
+        component: Account
     }
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    //   scrollBehavior(to, from, savedPosition) {
-    //      // Don't scroll on Home page
-    //     if (to.name === 'Home') {
-    //       return false
-    //     }
-    //     // Always scroll to top
-    //     return { top: 0 }
-    //   }
     scrollBehavior(to, from, savedPosition) {
         // If coming **from Home**, save position
         if (from.name === 'Home' && savedPosition) {
