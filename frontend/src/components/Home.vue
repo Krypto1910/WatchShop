@@ -1,15 +1,14 @@
 <template>
     <div class="content">
-        
         <div class="banner-container">
             <img :src="banner" alt="Banner Image">
         </div>
         <div id="featured" class="text-center my-5">
-            <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best saler</h3>
+            <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best Seller</h3>
         </div>
         <div class="product-container">
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch1" alt="">
                     <div class="star">
                         <i class="far fa-star"></i>
@@ -21,166 +20,160 @@
                     <h5 class="p-name">Watch 1</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch2" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 2</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
+                    :to="{ name: 'SingleProduct' }">
                     <img :src="watch3" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 3</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch4" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 4</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
+                </router-link>
             </div>
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch1" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 1</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch2" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 2</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
+                    :to="{ name: 'SingleProduct' }">
                     <img :src="watch3" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 3</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch4" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 4</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
+                </router-link>
             </div>
             <div class="row mx-auto container-fluid">
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch1" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 1</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch2" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 2</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
+                    :to="{ name: 'SingleProduct' }">
                     <img :src="watch3" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 3</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
-
-                <div onclick="window.location.href='#';" class="product text-center col-lg-3 col-md-4 col-sm-12">
+                </router-link>
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch4" alt="">
                     <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name">Watch 4</h5>
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
-                </div>
+                </router-link>
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -192,6 +185,14 @@ import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function goToProduct() {
+    router.push({ name: 'SingleProduct' /*, params: { id }*/ })
+}
+
 export default {
     name: 'Home',
     data() {
@@ -215,10 +216,9 @@ export default {
     background-color: transparent;
     color: black;
     width: 70%;
-    height: fit-content;
+    height: max-content;
     margin: 3% auto;
-    /* margin-top: 20rem; */
-    padding-top: 112rem; /* đúng bằng chiều cao navbar */
+    padding-top: 112rem;
     box-sizing: border-box;
 }
 
@@ -226,18 +226,26 @@ export default {
 .banner-container {
     width: 100%;
     overflow: hidden;
+    object-fit: cover;
 }
 
- img {
+.banner-container img {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 6;
-    /* Hoặc 3 / 1 tuỳ hình ảnh bạn đang dùng */
     object-fit: cover;
-    /* Giúp ảnh bao phủ khung không méo */
+    display: block;
+    max-height: 23rem;
+    border-radius: 12px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 6;
+    object-fit: cover;
     display: block;
     max-height: 20rem;
-    /* Hoặc 400px nếu bạn muốn cao hơn */
     border-radius: 12px;
 }
 
@@ -263,6 +271,8 @@ export default {
     padding: 0;
     box-sizing: border-box;
     cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 .star i {
@@ -280,7 +290,8 @@ export default {
     object-fit: cover;
     transition: 0.3s all;
     box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto 0.5rem; /* Căn giữa ngang và tạo khoảng cách trên/dưới */
+    margin: 0 auto 0.5rem;
+    /* Căn giữa ngang và tạo khoảng cách trên/dưới */
 }
 
 

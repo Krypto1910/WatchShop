@@ -2,7 +2,7 @@
      <!--Cart-->
     <section style="padding-top: 18rem !important;" class="cart container my-5 py-5">
         <div class="container" mt-5>
-            <h2 class="font-weight-bolde">Your Cart</h2>
+            <h2 class="font-weight-bold">Your Cart</h2>
             <hr>
         </div>
 
@@ -137,8 +137,7 @@ export default {
 
     name: 'Cart',
     data() {
-        return {
-           
+        return {         
             watch1,
             watch2,
             watch3,
