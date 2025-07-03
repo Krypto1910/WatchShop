@@ -4,7 +4,7 @@
         <div class="row container mx-auto">
             <div class="text-center mt-3 pt-5 col-lg-6 col-md-12 col-sm-12">
                 <h3 class="font-weight-bold">Account Info</h3>
-                <hr class="mx-auto">
+                <hr class="mx-auto" width="400rem">
                 <div class="account-info">
                     <div class="info">
                         <p>Name: <strong>Michael James</strong></p>
@@ -12,8 +12,8 @@
                     </div>
 
                     <div class="flex items-center gap-4 mt-6">
-                        <a class="btn-primary">Orders</a>
-                        <a class="btn-secondary">Logout</a>
+                        <button class="btn btn-primary">Orders</button>
+                        <button class="btn btn-secondary">Logout</button>
                     </div>
                 </div>
             </div>
@@ -86,12 +86,7 @@
     margin: auto;
     /* adds space between buttons */
 }
-a {
-    
-    color: #006b3d;
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1rem;
+.btn {
+    background-color: #006b3d;
 }
 </style>
