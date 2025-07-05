@@ -143,9 +143,6 @@ export default {
     width: 70%;
     height: fit-content;
     margin: 3% auto;
-    /* margin-top: 20rem; */
-    padding-top: 70rem;
-    /* đúng bằng chiều cao navbar */
     box-sizing: border-box;
 }
 

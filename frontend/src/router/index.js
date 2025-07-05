@@ -6,38 +6,24 @@ import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import SingleProduct from '@/components/SingleProduct.vue'
 import Account from '@/components/Account.vue'
+import Checkout from '@/components/Checkout.vue'
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/cart',
-        name: 'Cart',
-        component: Cart
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/register',
-        name: 'Register',
-        component: Register
-    },
-    {
-        path: '/product',
-        name: 'SingleProduct',
-        component: SingleProduct
-        // props: true
-    },
+    { path: '/', name: 'Home', component: Home },
+    { path: '/cart', name: 'Cart', component: Cart },
+    { path: '/login', name: 'Login', component: Login },
+    { path: '/register', name: 'Register', component: Register },
+    { path: '/product', name: 'SingleProduct', component: SingleProduct },
+    { path: '/checkout', name: 'Checkout', component: Checkout },
     {
         path: '/account',
         name: 'Account',
-        component: Account
+        component: Account,
+        beforeEnter: (to, from, next) => {
+            const isLoggedIn = localStorage.getItem('auth') === 'true';
+            if (isLoggedIn) next();
+            else next('/login');
+        }
     }
 ]
 
@@ -57,7 +43,18 @@ const router = createRouter({
 
         // Default: scroll to top
         return { top: 0 }
-    }
+    }   
 })
+
+// check if user is authenticated before accessing the Account page
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = localStorage.getItem('auth') === 'true'
+
+//   if (to.name === 'Account' && !isAuthenticated) {
+//     next('/login')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

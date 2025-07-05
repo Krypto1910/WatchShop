@@ -7,13 +7,13 @@
                 <hr class="mx-auto" width="400rem">
                 <div class="account-info">
                     <div class="info">
-                        <p>Name: <strong>Michael James</strong></p>
-                        <p>Email: <strong>michael1997@gmail.com</strong></p>
+                        <p>Name: <span>Michael James</span></p>
+                        <p>Email: <span>michael1997@gmail.com</span></p>
                     </div>
 
                     <div class="flex items-center gap-4 mt-6">
-                        <button class="btn btn-primary">Orders</button>
-                        <button class="btn btn-secondary">Logout</button>
+                        <a >Orders</a>
+                        <a @click="handleLogout">Logout</a>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,65 @@
             </div>
         </div>
     </section>
+
+    <!--Orders-->
+    <section class="orders container my-5 py-3">
+        <div class="container" mt-5>
+            <h2 class="font-weight-bold text-center">Your Orders</h2>
+            <hr class="mx-auto">
+        </div>
+
+        <table class="mt-5 pt-5">
+            <tr>
+                <th>Product</th>
+                <th>Date</th>
+            </tr>
+            <!--1-->
+            <tr>
+                <td>
+                    <div class="product-info">
+                        <img :src="watch1" alt="">
+                        <div>
+                            <p class="mt-3">Premium Watch</p>
+                        </div>
+                    </div>
+                </td>  
+
+                <td>
+                    <span>2025-07-05</span>
+                </td>
+               
+            </tr>
+   
+           
+        </table>
+
+    </section>
 </template>
 
+<script >
+import watch1 from '@/assets/watch1.jpeg';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function handleLogout() {
+  localStorage.removeItem('auth');
+  router.push('/login');
+}
+
+export default {
+    name: 'Account',
+    data() {
+        return {
+            watch1,
+        };
+    },
+}
+</script>
+
 <style scoped>
+/*Account*/ 
 #account-form {
     width: 50%;
     margin: 35px auto;
@@ -86,7 +142,57 @@
     margin: auto;
     /* adds space between buttons */
 }
-.btn {
-    background-color: #006b3d;
+a {
+    color: #029455 !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: transparent;
+    cursor: pointer;
+   
 }
+a:nth-child(2) {
+    color: #E60F0F !important;
+   
+}
+/* .btn, .btn:hover, .btn:active {
+    background-color: #006b3d !important;
+}
+.btn.btn-primary, .btn.btn-secondary {
+    margin-top: 0.5rem;
+    border: none;
+} */
+
+
+/*Orders*/
+.orders table {  
+    width: 100%;  
+    border-collapse: collapse;  
+}  
+
+.orders .product-info {  
+    display: flex;  
+    flex-wrap: wrap;  
+}  
+
+.orders th {  
+    text-align: left;  
+    padding: 5px 10px;  
+    color: #fff;  
+    background-color: #006b3d;  
+}   
+.orders th:nth-child(2) {  
+    text-align: right;  
+} 
+.orders td {  
+    padding: 10px 0px;  
+}  
+.orders td:nth-child(2) {  
+    text-align: right; 
+}  
+.orders td img {  
+    width: 4.5rem;  
+    height: 4.5rem;  
+    margin-right: 10px;  
+}  
 </style>

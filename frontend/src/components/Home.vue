@@ -172,6 +172,7 @@
                     <button class="buy-btn">Buy Now</button>
                 </router-link>
             </div>
+            
         </div>
 
     </div>
@@ -216,12 +217,18 @@ export default {
     background-color: transparent;
     color: black;
     width: 70%;
-    height: max-content;
-    margin: 3% auto;
-    padding-top: 112rem;
+    height: min-content;
+    margin: 10% auto; 
     box-sizing: border-box;
 }
-
+@media (min-width: 1024px) {
+  #app {
+    padding-top: 10rem !important;
+  }
+  .content {
+     margin: 5% auto;
+  }
+}
 /* banner */
 .banner-container {
     width: 100%;
@@ -308,6 +315,7 @@ img {
     opacity: 0;
     transition: 0.3s all;
     font-size: 1.05rem;
+    border: none;
 }
 
 .product:hover .buy-btn {

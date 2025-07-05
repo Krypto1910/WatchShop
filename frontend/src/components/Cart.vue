@@ -1,6 +1,6 @@
 <template>
      <!--Cart-->
-    <section style="padding-top: 18rem !important;" class="cart container my-5 py-5">
+    <section class="cart container my-5 py-5">
         <div class="container" mt-5>
             <h2 class="font-weight-bold">Your Cart</h2>
             <hr>
@@ -104,7 +104,8 @@
         </div>
 
         <div class="checkout-container">
-            <button class="btn checkout-btn">Checkout</button>
+            <!-- <button class="btn checkout-btn">Checkout</button> -->
+            <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link>
         </div>
     </section>
 </template>
@@ -114,6 +115,7 @@ import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
+import router from '@/router';
 
 export default {
     // name: 'Cart',
@@ -148,6 +150,12 @@ export default {
 </script>
 
 <style scoped>
+.content {
+   padding-top: 0px !important;
+    padding-bottom: 0px !important; 
+    margin-top: 2000px !important;
+}
+
 /*Cart*/
 .cart table{
     width: 100%;
@@ -168,7 +176,7 @@ export default {
 }
 
 .cart td{
-    padding: 10px 20px;
+    padding: 10px 0px;
     font-size: 1rem;
 }
 

@@ -1,18 +1,18 @@
 <template>
     <!--Login-->
-    <section style="padding-top: 12rem !important;" class="my-5 py-5">
+    <section class="my-5 py-5">
         <div class="container text-center mt-3 pt-5" id="container">
             <h2 style="color: rgb(0, 66, 37);" class="form-weight-bold">Login</h2>
+            <hr class="mx-auto">
         </div>
 
         <div class="mx-auto container">
-            <form id="login-form">
+            <form id="login-form" @submit.prevent="handleLogin">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="login-email" name="email" placeholder="Email">
+                    <input type="email" v-model="email" class="form-control" id="login-email" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="login-password" name="password"
-                        placeholder="Password">
+                    <input type="password" v-model="password" class="form-control" id="login-password" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn" id="login-btn" value="Submit">
@@ -24,24 +24,29 @@
                     </router-link>
                 </div>
             </form>
+            <p v-if="error" style="color:red">{{ error }}</p>
         </div>
     </section>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const email = ref('');
+const password = ref('');
+const error = ref('');
+const router = useRouter();
 
-export default {
-    name: 'Login',
-    data() {
-        return {
-            email: ref(''),
-            password: ref('')
-        };
-    },
-   
+function handleLogin() {
+  if (email.value === 'test@example.com' && password.value === '123456') {
+    localStorage.setItem('auth', 'true');
+    router.push('/account');
+  } else {
+    error.value = 'Email or password is incorrect';
+  }
 }
+
 </script>
 
 <style scoped>
@@ -62,7 +67,7 @@ export default {
     margin: 5px auto;
     text-align: center;
     padding: 20px;
-    border-top: 1px solid rgb(0, 66, 37, 0.3);
+
 }
 
 #login-form input {

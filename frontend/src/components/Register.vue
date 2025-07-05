@@ -1,9 +1,9 @@
 <template>
     <!--Register-->
-    <section style="padding-top: 12rem !important;" class="my-5 py-5">
+    <section class="my-5 py-5">
         <div class="container text-center mt-3 pt-5">
             <h2 style="color: rgb(0, 66, 37);" class="form-weight-bold">Register</h2>
-            
+            <hr class="mx-auto">
         </div>
 
         <div class="mx-auto container">
@@ -70,7 +70,6 @@ export default {
     margin: 5px auto;
     text-align: center;
     padding: 20px;
-    border-top: 1px solid rgb(0, 66, 37, 0.3);
 }
 #register-form input{
     width: 50%;

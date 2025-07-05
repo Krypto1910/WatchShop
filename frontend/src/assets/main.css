@@ -1,28 +1,13 @@
 @import './base.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 
-#app {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
-/* a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-} */
-
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
@@ -34,7 +19,7 @@
     padding: 0 2rem;
     background-color: rgba(255, 228, 196, 0.3);
   }
-}
+} */
 
 
 * {
@@ -74,6 +59,13 @@ h6 {
   color: #D8D8D8;
 }
 
+hr {
+    width: 3rem;
+    height: 3px !important;
+    opacity: 1 !important;
+    background-color: #029455 !important;
+    border: none;
+}
 
 .nav-buttons {
   margin-left: 50%;
@@ -195,5 +187,5 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: rgba(255, 228, 196, 0.178);
-  padding-top: 8rem !important;
+  padding-top: 0rem !important;
 }
