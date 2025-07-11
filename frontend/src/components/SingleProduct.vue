@@ -5,7 +5,7 @@
             <div class="row mt-5">
                 <!--Images-->
                 <div class="col-lg-5 col-md-6 col-sm-12" style="padding-left: 100px; padding-right: 50px;">
-                    <img id="mainImg" class="img-fluid w-100 pb-2" :src="watch3">
+                    <img id="mainImg" class="img-fluid w-100 pb-2" :src="`/images/${product.Image}`">
                     <div class="small-img-group">
                         <div class="small-img-col">
                             <img class="small-img" :src="watch3" width="100%">
@@ -24,19 +24,13 @@
 
                 <!--Info-->
                 <div class="col-lg-6 col-md-12 col-12">
-                    <h6>Men/Watch</h6>
-                    <h3 class="py-4">Men's Fashion</h3>
-                    <h2>$999.9</h2>
+                    <h6>{{ product.Category }}</h6>
+                    <h3 class="py-4">{{ product.Name }}</h3>
+                    <h2>${{ product.Price }}</h2>
                     <input type="number" value="1">
                     <button class="buy-btn">Add To Cart</button>
                     <h4 class="mt-5 mb-5">Product details</h4>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda iusto aperiam minus itaque
-                        soluta impedit quasi sit temporibus quae magnam. Beatae harum fugiat eveniet veritatis! Iure
-                        maiores doloribus asperiores quas?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda iusto aperiam minus itaque
-                        soluta impedit quasi sit temporibus quae magnam. Beatae harum fugiat eveniet veritatis! Iure
-                        maiores doloribus asperiores quas?
-                    </span>
+                    <span>{{ product.Description }}</span>
                 </div>
             </div>
         </section>
@@ -108,6 +102,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import watch from '@/assets/watch.jpeg';
 import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
@@ -122,12 +117,29 @@ export default {
             watch1,
             watch2,
             watch3,
-            watch4
+            watch4,
+            product: {}
         };
+    },
+    mounted() {
+        this.productId = this.$route.params.id;
+        // Gọi API hoặc tìm sản phẩm theo ID:
+        this.fetchProductById(this.productId);
     },
     methods: {
         changeImage(index) {
             this.mainImg = this.smallImgs[index];
+        },
+        async fetchProductById(id) {
+            try {
+                const response = await axios.get(
+                    `http://127.0.0.1:3000/products/${id}`
+                );
+                this.product = response.data.product;
+
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
         }
     }
 };

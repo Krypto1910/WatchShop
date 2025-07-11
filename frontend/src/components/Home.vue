@@ -7,9 +7,10 @@
             <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best Seller</h3>
         </div>
         <div class="product-container">
-            <div class="row mx-auto container-fluid">
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch1" alt="">
+            <div class="mx-auto container-fluid">
+                <router-link v-for="product in products" :key="product.ProductID"
+                    class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
+                    <img :src="`/images/${product.Image}`" alt="">
                     <div class="star">
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
@@ -17,162 +18,13 @@
                         <i class="far fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h5 class="p-name">Watch 1</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch2" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 2</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
-                    :to="{ name: 'SingleProduct' }">
-                    <img :src="watch3" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 3</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch4" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 4</h5>
-                    <h4 class="p-price">$999.9</h4>
+                    <h5 class="p-name">{{ product.Name }}</h5>
+                    <h4 class="p-price">${{ product.Price }}</h4>
                     <button class="buy-btn">Buy Now</button>
                 </router-link>
             </div>
-            <div class="row mx-auto container-fluid">
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch1" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 1</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch2" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 2</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
-                    :to="{ name: 'SingleProduct' }">
-                    <img :src="watch3" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 3</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch4" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 4</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-            </div>
-            <div class="row mx-auto container-fluid">
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch1" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 1</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch2" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 2</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
-                    :to="{ name: 'SingleProduct' }">
-                    <img :src="watch3" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 3</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch4" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 4</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-            </div>
-            
+
+
         </div>
 
     </div>
@@ -181,6 +33,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import PageFooter from '@/components/PageFooter.vue'
+import axios from 'axios';
 import banner from '@/assets/banner.jpeg';
 import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
@@ -190,9 +43,9 @@ import watch4 from '@/assets/watch4.jpeg';
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-function goToProduct() {
-    router.push({ name: 'SingleProduct' /*, params: { id }*/ })
-}
+// function goToProduct() {
+//     router.push({ name: 'SingleProduct' /*, params: { id }*/ })
+// }
 
 export default {
     name: 'Home',
@@ -204,9 +57,27 @@ export default {
             watch1,
             watch2,
             watch3,
-            watch4
+            watch4,
+            products: []
         };
     },
+    mounted() {
+        this.fetchProducts();
+    },
+    methods: {
+        async fetchProducts() {
+            try {
+                const response = await axios.get(
+                    "http://127.0.0.1:3000/products"
+                );
+                this.products = response.data.products;
+                
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        }
+
+    }
 }
 </script>
 
@@ -218,17 +89,20 @@ export default {
     color: black;
     width: 70%;
     height: min-content;
-    margin: 10% auto; 
+    margin: 10% auto;
     box-sizing: border-box;
 }
+
 @media (min-width: 1024px) {
-  #app {
-    padding-top: 10rem !important;
-  }
-  .content {
-     margin: 5% auto;
-  }
+    #app {
+        padding-top: 10rem !important;
+    }
+
+    .content {
+        margin: 5% auto;
+    }
 }
+
 /* banner */
 .banner-container {
     width: 100%;
@@ -263,18 +137,19 @@ img {
     background-color: white;
 }
 
-.row.mx-auto.container-fluid {
+.mx-auto.container-fluid {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* Chia đều các phần tử */
     margin: 3.5rem 0;
 }
 
 
 .product {
-    flex: 1;
-    max-width: 25%;
+    /* flex: 1; */
+    width: 25%;
     padding: 0;
     box-sizing: border-box;
     cursor: pointer;
@@ -310,12 +185,15 @@ img {
     color: white;
     background-color: black;
     padding: 0.5rem 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
+    margin-bottom: 3rem;
     transform: translateY(30px);
     opacity: 0;
     transition: 0.3s all;
     font-size: 1.05rem;
     border: none;
+    max-width: 80%;
+
 }
 
 .product:hover .buy-btn {
