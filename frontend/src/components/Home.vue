@@ -1,7 +1,17 @@
 <template>
     <div class="content">
-        <div class="banner-container">
-            <img :src="banner" alt="Banner Image">
+        <div class="carousel">
+            <VSlickCarousel v-bind="settings">
+                <div class="banner-container">
+                    <img :src="banner" alt="Banner Image">
+                </div>
+                <div class="banner-container">
+                    <img :src="banner" alt="Banner Image">
+                </div>
+                <div class="banner-container">
+                    <img :src="banner" alt="Banner Image">
+                </div>
+            </VSlickCarousel>
         </div>
         <div id="featured" class="text-center my-5">
             <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best Seller</h3>
@@ -9,7 +19,8 @@
         <div class="product-container">
             <div class="mx-auto container-fluid">
                 <router-link v-for="product in products" :key="product.ProductID"
-                    class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
+                    class="product text-center col-lg-3 col-md-4 col-sm-12"
+                    :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
                     <img :src="`/images/${product.Image}`" alt="">
                     <div class="star">
                         <i class="far fa-star"></i>
@@ -42,13 +53,14 @@ import watch4 from '@/assets/watch4.jpeg';
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
-// function goToProduct() {
-//     router.push({ name: 'SingleProduct' /*, params: { id }*/ })
-// }
+import 'v-slick-carousel/style.css'
+import { VSlickCarousel } from 'v-slick-carousel'
 
 export default {
-    name: 'Home',
+    name: 'Home', 
+    components: {
+        VSlickCarousel, // ← thêm dòng này
+    },
     data() {
         return {
             Navbar,
@@ -58,6 +70,16 @@ export default {
             watch2,
             watch3,
             watch4,
+            settings: {
+                slidesToShow: 1,
+                dots: true,
+                arrows: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                infinite: true,
+                speed: 500,
+                slidesToScroll: 1,
+            },
             products: []
         };
     },
@@ -71,7 +93,7 @@ export default {
                     "http://127.0.0.1:3000/products"
                 );
                 this.products = response.data.products;
-                
+
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
@@ -82,6 +104,37 @@ export default {
 </script>
 
 <style scoped>
+.carousel {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Slick arrow custom style */
+.slick-arrow {
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Left arrow */
+.slick-prev {
+    left: 10px;
+}
+
+/* Right arrow */
+.slick-next {
+    right: 10px;
+}
+
 .content {
     display: flex;
     flex-direction: column;
