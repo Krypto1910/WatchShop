@@ -6,15 +6,15 @@
                     <img :src="banner" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="banner" alt="Banner Image">
+                    <img :src="watch" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="banner" alt="Banner Image">
+                    <img :src="watch4" alt="Banner Image">
                 </div>
             </VSlickCarousel>
         </div>
         <div id="featured" class="text-center my-5">
-            <h3 style="font-size: 2rem; color: #708090; text-align: left; margin-bottom: 0;">Best Seller</h3>
+            <h3 style="font-size: 2rem; color: rgb(155, 155, 155); text-align: left; margin-bottom: 0;">Best Seller</h3>
         </div>
         <div class="product-container">
             <div class="mx-auto container-fluid">
@@ -46,6 +46,8 @@ import Navbar from '@/components/Navbar.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import axios from 'axios';
 import banner from '@/assets/banner.jpeg';
+import banner2 from '@/assets/banner2.jpg'
+import watch from '@/assets/watch.jpeg';
 import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
@@ -66,10 +68,12 @@ export default {
             Navbar,
             PageFooter,
             banner,
+            watch,
             watch1,
             watch2,
             watch3,
             watch4,
+            banner2,
             settings: {
                 slidesToShow: 1,
                 dots: true,
@@ -90,10 +94,9 @@ export default {
         async fetchProducts() {
             try {
                 const response = await axios.get(
-                    "http://127.0.0.1:3000/products"
+                    `${import.meta.env.VITE_API_URI}/products`
                 );
-                this.products = response.data.products;
-
+                this.products = response.data;
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
@@ -238,7 +241,7 @@ img {
     color: white;
     background-color: black;
     padding: 0.5rem 1rem;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
     margin-bottom: 3rem;
     transform: translateY(30px);
     opacity: 0;
@@ -270,13 +273,13 @@ p {
 
 .product .p-name {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: rgb(0, 0, 0, 0.8);
 }
 
 .product .p-price {
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1.15rem;
     color: rgb(0, 0, 0, 0.8);
 }
 </style>

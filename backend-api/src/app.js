@@ -3,6 +3,9 @@ const cors = require("cors");
 const Jsend = require("./jsend");
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
+const knex = require("../knexfile");
+const bcrypt = require("bcrypt"); // npm i bcrypt
+const SALT_ROUNDS = 10;
 
 const cartRouter = require("./routes/cart.router");
 const customersRouter = require("./routes/customers.router");
@@ -89,17 +92,129 @@ const products = [
     QuantityAvailable: 20,
   },
 ];
-  
-app.get("/products/:id", (req, res) => {
+
+app.get("/products/:id", async (req, res) => {
   const { id } = req.params;
-  const product = products.find((item) => item.ProductID === +id);
-  return res.status(200).json({ product });
-});
-app.get("/products", (req, res) => {
-  return res.status(200).json({ products });
+
+  try {
+    const product = await knex("Product").where("ProductID", id).first();
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    return res.status(200).json({ product });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
 });
 
+app.get("/products", async (req, res) => {
+  try {
+    const products = await knex.select("*").from("Product");
+    return res.status(200).json(products);
+  } catch (error) {
+    console.log("Error", error);
+    return res.json({ message: "Error" });
+  }
+});
 
+// POST /customer/register
+app.post("/customer/register", async (req, res) => {
+  try {
+    const { name, email, password, phone = null, address = null } = req.body;
+    console.log({ name, email, password });
+
+    // 1) Validate cơ bản
+    if (!name || !email || !password)
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required fields" });
+
+    // 2) Check email trùng
+    const existing = await knex("Customer").where("Email", email).first();
+    if (existing)
+      return res
+        .status(400)
+        .json({ success: false, message: "Customer already exists" });
+
+    // 3) Hash password
+    const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+
+    // 4) Insert vào DB – trả lại cột cần thiết
+    const [newCustomer] = await knex("Customer")
+      .insert({
+        Name: name,
+        Email: email,
+        Password: hashed,
+        Phone: phone,
+        Address: address,
+      })
+      .returning(["CustomerID", "Name", "Email"]); // PostgreSQL >= v10
+
+    // 5) Trả về
+    return res.status(201).json({
+      success: true,
+      message: "Register successfully",
+      customer: newCustomer,
+    });
+  } catch (error) {
+    console.error("Register error:", error);
+    // Unique‑violation chẳng hạn (trường hợp race condition)
+    if (error.code === "23505")
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already exists" });
+
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// POST /customer/register
+app.post("/customer/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1) Validate input
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email and password are required." });
+    }
+
+    // 2) Tìm khách hàng theo email
+    const customer = await knex("Customer").where("Email", email).first();
+    if (!customer) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid email or password." });
+    }
+
+    // 3) So sánh mật khẩu với hash
+    const match = await bcrypt.compare(password, customer.Password);
+    if (!match) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid email or password." });
+    }
+
+    // 4) Trả về thông tin khách hàng (không gửi password)
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      customer: {
+        CustomerID: customer.CustomerID,
+        Name: customer.Name,
+        Email: customer.Email,
+        Phone: customer.Phone,
+        Address: customer.Address,
+      },
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 
 app.use(resourceNotFound);
 app.use(handleError);

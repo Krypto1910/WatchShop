@@ -1,0 +1,33 @@
+// stores/app.js
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
+
+export const useAppStore = defineStore("app", () => {
+  const cart = ref(JSON.parse(localStorage.getItem("cart")) || []);
+
+  const cartAmount = computed(() =>
+    cart.value.reduce((sum, i) => sum + (i.Quantity || 1), 0)
+  );
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart.value));
+  }
+
+  /** Add or update one item */
+  function addToCart(item) {
+    const idx = cart.value.findIndex((p) => p.ProductID === item.ProductID);
+    if (idx !== -1) {
+      cart.value[idx].Quantity += item.Quantity;
+    } else {
+      cart.value.push(item);
+    }
+    saveCart(); // persist once
+  }
+
+  function updateCart(newCart) {
+    cart.value = newCart;
+    saveCart();
+  }
+
+  return { cart, cartAmount, addToCart, updateCart };
+});

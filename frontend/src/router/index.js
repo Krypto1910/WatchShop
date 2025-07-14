@@ -20,7 +20,7 @@ const routes = [
         name: 'Account',
         component: Account,
         beforeEnter: (to, from, next) => {
-            const isLoggedIn = localStorage.getItem('auth') === 'true';
+            const isLoggedIn = !!localStorage.getItem('customer');
             if (isLoggedIn) next();
             else next('/login');
         }
@@ -45,16 +45,5 @@ const router = createRouter({
         return { top: 0 }
     }   
 })
-
-// check if user is authenticated before accessing the Account page
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = localStorage.getItem('auth') === 'true'
-
-//   if (to.name === 'Account' && !isAuthenticated) {
-//     next('/login')
-//   } else {
-//     next()
-//   }
-// })
 
 export default router

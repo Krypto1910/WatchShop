@@ -7,12 +7,12 @@
                 <hr class="mx-auto" width="400rem">
                 <div class="account-info">
                     <div class="info">
-                        <p>Name: <span>Michael James</span></p>
-                        <p>Email: <span>michael1997@gmail.com</span></p>
+                        <p>Name: <span>{{ customer.Name }}</span></p>
+                        <p>Email: <span>{{ customer.Email }}</span></p>
                     </div>
 
                     <div class="flex items-center gap-4 mt-6">
-                        <a >Orders</a>
+                        <a>Orders</a>
                         <a @click="handleLogout">Logout</a>
                     </div>
                 </div>
@@ -59,43 +59,45 @@
                             <p class="mt-3">Premium Watch</p>
                         </div>
                     </div>
-                </td>  
+                </td>
 
                 <td>
                     <span>2025-07-05</span>
                 </td>
-               
+
             </tr>
-   
-           
+
+
         </table>
 
     </section>
 </template>
 
-<script >
+<script>
 import watch1 from '@/assets/watch1.jpeg';
 import { useRouter } from 'vue-router';
-
 const router = useRouter();
 
-function handleLogout() {
-  localStorage.removeItem('auth');
-  router.push('/login');
-}
 
 export default {
     name: 'Account',
     data() {
         return {
             watch1,
+            customer: JSON.parse(localStorage.getItem("customer")) || {}
         };
     },
+    methods: {
+        handleLogout() {
+            localStorage.removeItem('customer');
+            this.$router.push('/login');
+        }
+    }
 }
 </script>
 
 <style scoped>
-/*Account*/ 
+/*Account*/
 #account-form {
     width: 50%;
     margin: 35px auto;
@@ -134,6 +136,7 @@ export default {
     align-items: center;
     justify-content: center;
 }
+
 .flex {
     display: flex;
     align-items: center;
@@ -142,6 +145,7 @@ export default {
     margin: auto;
     /* adds space between buttons */
 }
+
 a {
     color: #029455 !important;
     text-decoration: none;
@@ -149,12 +153,14 @@ a {
     font-size: 1rem;
     background-color: transparent;
     cursor: pointer;
-   
+
 }
+
 a:nth-child(2) {
     color: #E60F0F !important;
-   
+
 }
+
 /* .btn, .btn:hover, .btn:active {
     background-color: #006b3d !important;
 }
@@ -165,34 +171,38 @@ a:nth-child(2) {
 
 
 /*Orders*/
-.orders table {  
-    width: 100%;  
-    border-collapse: collapse;  
-}  
+.orders table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-.orders .product-info {  
-    display: flex;  
-    flex-wrap: wrap;  
-}  
+.orders .product-info {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-.orders th {  
-    text-align: left;  
-    padding: 5px 10px;  
-    color: #fff;  
-    background-color: #006b3d;  
-}   
-.orders th:nth-child(2) {  
-    text-align: right;  
-} 
-.orders td {  
-    padding: 10px 0px;  
-}  
-.orders td:nth-child(2) {  
-    text-align: right; 
-}  
-.orders td img {  
-    width: 4.5rem;  
-    height: 4.5rem;  
-    margin-right: 10px;  
-}  
+.orders th {
+    text-align: left;
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #006b3d;
+}
+
+.orders th:nth-child(2) {
+    text-align: right;
+}
+
+.orders td {
+    padding: 10px 0px;
+}
+
+.orders td:nth-child(2) {
+    text-align: right;
+}
+
+.orders td img {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-right: 10px;
+}
 </style>

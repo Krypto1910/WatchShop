@@ -8,7 +8,7 @@
                     <img id="mainImg" class="img-fluid w-100 pb-2" :src="`/images/${product.Image}`">
                     <div class="small-img-group">
                         <div class="small-img-col">
-                            <img class="small-img" :src="watch3" width="100%">
+                            <img class="small-img" :src="`/images/${product.Image}`" width="100%">
                         </div>
                         <div class="small-img-col">
                             <img class="small-img" :src="watch2" width="100%">
@@ -28,7 +28,7 @@
                     <h3 class="py-4">{{ product.Name }}</h3>
                     <h2>${{ product.Price }}</h2>
                     <input type="number" value="1">
-                    <button class="buy-btn">Add To Cart</button>
+                    <button class="buy-btn" @click="addToCart">Add To Cart</button>
                     <h4 class="mt-5 mb-5">Product details</h4>
                     <span>{{ product.Description }}</span>
                 </div>
@@ -41,7 +41,7 @@
                 <h3>Related Products</h3>
                 <hr width="150rem" class=" mx-auto">
             </div>
-           <div class="row mx-auto container-fluid">
+            <div class="row mx-auto container-fluid">
                 <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch1" alt="">
                     <div class="star">
@@ -68,8 +68,7 @@
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
                 </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12"
-                    :to="{ name: 'SingleProduct' }">
+                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch3" alt="">
                     <div class="star">
                         <i class="far fa-star"></i>
@@ -108,6 +107,7 @@ import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
+import { useAppStore } from '@/stores/app'
 
 export default {
     name: 'SingleProduct',
@@ -133,13 +133,49 @@ export default {
         async fetchProductById(id) {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:3000/products/${id}`
+                    `${import.meta.env.VITE_API_URI}/products/${id}`
                 );
                 this.product = response.data.product;
 
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
+        },
+        // addToCart() {
+        //     const store = useAppStore()
+        //     const productCart = JSON.parse(localStorage.getItem("cart")) || []
+        //     const existProduct = productCart.find((item) => item.ProductID == this.product.ProductID)
+        //     console.log(existProduct)
+        //     if (existProduct) {
+        //         existProduct.Quantity += 1
+        //     }
+        //     else {
+        //         const product = {
+        //             ProductID: this.product.ProductID,
+        //             Name: this.product.Name,
+        //             Price: this.product.Price,
+        //             Image: this.product.Image,
+        //             Quantity: 1
+        //         }
+        //         store.updateCart([...store.cart, product])
+        //         productCart.push(product)
+        //     }
+        //     localStorage.setItem("cart", JSON.stringify(productCart))
+
+        // }
+        async addToCart() {
+            const store = useAppStore()
+
+            store.addToCart({
+                ProductID: this.product.ProductID,
+                Name: this.product.Name,
+                Price: this.product.Price,
+                Image: this.product.Image,
+                Quantity: 1
+            })
+
+            // optional toast
+            // this.$toast.success('Added to cart')
         }
     }
 };
@@ -261,13 +297,21 @@ h2 {
     font-size: 1.25rem;
     color: rgb(0, 0, 0, 0.8);
 }
+
 .product .p-price {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: rgb(0, 0, 0, 0.8);
-} 
+}
+
 .relate-products img {
     max-height: 20rem;
     border-radius: 12px;
 }
+
+.small-img {
+    height: 100%;
+    object-fit: cover;
+}
+
 </style>
