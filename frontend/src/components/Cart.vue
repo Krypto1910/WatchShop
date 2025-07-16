@@ -9,8 +9,6 @@
                 style="font-size: 1.2rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 1rem;">You don't
                 have any items</span></div>
         <div v-if="productCart.length">
-
-
             <table class="mt-5 pt-5">
                 <tr>
                     <th>Product</th>
@@ -65,7 +63,7 @@
             </div>
 
             <div class="checkout-container">
-                <!-- <button class="btn checkout-btn">Checkout</button> -->
+                
                 <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link>
             </div>
         </div>
@@ -73,20 +71,11 @@
 </template>
 
 <script>
-import watch1 from '@/assets/watch1.jpeg';
-import watch2 from '@/assets/watch2.jpeg';
-import watch3 from '@/assets/watch3.jpeg';
-import watch4 from '@/assets/watch4.jpeg';
-
 export default {
-
     name: 'Cart',
     data() {
         return {
-            watch1,
-            watch2,
-            watch3,
-            watch4,
+          
             productCart: JSON.parse(localStorage.getItem("cart")) || []
         };
     },
