@@ -1,13 +1,14 @@
 <template>
     <!--Cart-->
     <section class="cart container my-5 py-5">
-        <div class="container" mt-5>
+        <div class="container mt-3" style="padding-left: 0;">
             <h2 class="font-weight-bold">Your Cart</h2>
             <hr>
         </div>
-        <div v-if="!productCart.length"><span
-                style="font-size: 1.2rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 1rem;">You don't
-                have any items</span></div>
+        <div v-if="!productCart.length">
+            <span style="font-size: 1.2rem; font-weight: 400; color: rgb(155, 155, 155); padding: 0.5rem 0 0 0.5rem;">No
+                selected items</span>
+        </div>
         <div v-if="productCart.length">
             <table class="mt-5 pt-5">
                 <tr>
@@ -63,7 +64,7 @@
             </div>
 
             <div class="checkout-container">
-                
+
                 <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link>
             </div>
         </div>
@@ -75,7 +76,7 @@ export default {
     name: 'Cart',
     data() {
         return {
-          
+
             productCart: JSON.parse(localStorage.getItem("cart")) || []
         };
     },
@@ -269,17 +270,19 @@ th:last-child {
     background-color: #006b3d;
     color: white;
     font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
+ 
+    margin-top: 1rem;
 }
 
 .checkout-btn:hover {
-    background-color: #004225;
+    background-color: #004d2f;
     color: white;
-    transition: 0.1s ease-in-out;
 }
 
 .checkout-btn:active {
     background-color: #006b3d !important;
     color: white !important;
-    transition: 0.1s ease-out;
+    transform: scale(0.98);
 }
 </style>

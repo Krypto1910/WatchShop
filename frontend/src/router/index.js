@@ -7,25 +7,27 @@ import Register from '../components/Register.vue'
 import SingleProduct from '@/components/SingleProduct.vue'
 import Account from '@/components/Account.vue'
 import Checkout from '@/components/Checkout.vue'
+import ShipInfo from '@/components/ShipInfo.vue'
 
 const routes = [
-    { path: '/', name: 'Home', component: Home },
-    { path: '/cart', name: 'Cart', component: Cart },
-    { path: '/login', name: 'Login', component: Login },
-    { path: '/register', name: 'Register', component: Register },
-    { path: '/product/:id', name: 'SingleProduct', component: SingleProduct },
-    { path: '/checkout', name: 'Checkout', component: Checkout },
-    {
-        path: '/account',
-        name: 'Account',
-        component: Account,
-        beforeEnter: (to, from, next) => {
-            const isLoggedIn = !!localStorage.getItem('customer');
-            if (isLoggedIn) next();
-            else next('/login');
-        }
-    }
-]
+  { path: "/", name: "Home", component: Home },
+  { path: "/cart", name: "Cart", component: Cart },
+  { path: "/login", name: "Login", component: Login },
+  { path: "/register", name: "Register", component: Register },
+  { path: "/product/:id", name: "SingleProduct", component: SingleProduct },
+  { path: "/checkout", name: "Checkout", component: Checkout },
+  { path: "/shipinfo", name: "ShipInfo", component: ShipInfo },
+  {
+    path: "/account",
+    name: "Account",
+    component: Account,
+    beforeEnter: (to, from, next) => {
+      const isLoggedIn = !!localStorage.getItem("customer");
+      if (isLoggedIn) next();
+      else next("/login");
+    },
+  },
+];
 
 const router = createRouter({
     history: createWebHistory(),

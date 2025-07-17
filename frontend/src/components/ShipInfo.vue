@@ -29,6 +29,13 @@
     </section>
 </template>
 
+<script>
+export default {
+    name: 'ShipInfo',
+}
+
+</script>
+
 <style scoped>
 /* Checkout */
 #checkout-form .checkout-small-element {
@@ -59,13 +66,22 @@
 #checkout-form #checkout-btn {
     color: #fff;
     background-color: #006b3d;
+    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    transition: all 0.2s ease-in-out;
+
 }
 
 #checkout-form #checkout-btn:hover {
-    color: #fff;
-    background-color: #004225;
-    transition: 0.1s all;
+    background-color: #004d2f;
+    box-shadow: 0 5px 10px rgba(0, 107, 61, 0.3);
 }
+
+#checkout-form #checkout-btn:active {
+    background-color: #006b3d;
+    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
+    transform: scale(0.98);
+}
+
 
 #checkout-form input.form-control::placeholder {
     color: rgb(155, 155, 155) !important;

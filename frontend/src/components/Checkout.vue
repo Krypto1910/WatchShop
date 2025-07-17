@@ -1,17 +1,33 @@
 <template>
     <!--Cart-->
     <section class="cart container my-5 py-5">
-        <div class="container" mt-5>
+        <div class="container mt-3" style="padding-left: 0;">
             <h2 class="font-weight-bold">Check Out</h2>
             <hr>
         </div>
 
         <!--Ship info-->
-        <table class="mt-5 pt-5">
-            <tr>
-                <th style="text-align: left;">Ship Info</th>
-            </tr>
-        </table>
+        <div class="ship-info">
+            <!-- <table class="mt-5 pt-5">
+                <tr>
+                    <th style="text-align: left;">Ship Info</th>
+                </tr>
+            </table> -->
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(200, 0, 0)"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-bottom: 5px;">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                </svg>
+                <span class="ship-address">Shipping Address</span>
+            </div>
+            <div>
+                <span style="font-size: 1rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
+                    No selected address
+                </span>
+            </div>
+            <router-link tag="button" id="add-new-one" class="btn checkout-btn" to="/shipinfo">Add new one</router-link>
+        </div>
+
 
         <!--Order detail-->
         <div v-if="productCart.length">
@@ -78,8 +94,7 @@
             </div>
 
             <div class="checkout-container">
-
-                <router-link tag="button" class="btn checkout-btn" to="/checkout">Order</router-link>
+                <router-link tag="button" class="btn checkout-btn" to="/checkout">Confirm Order</router-link>
             </div>
         </div>
     </section>
@@ -258,22 +273,6 @@ export default {
     color: #006b3d;
 }
 
-.cart .remove-btn {
-    color: rgb(230, 15, 15);
-    text-decoration: none;
-    font-size: 0.92rem;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.cart .edit-btn {
-    color: #006b3d;
-    text-decoration: none;
-    font-size: 1rem;
-    margin-left: 0.2rem;
-    background-color: transparent;
-}
-
 .cart .product-info p {
     margin-bottom: 1px;
 }
@@ -308,17 +307,76 @@ th:last-child {
     background-color: #006b3d;
     color: white;
     font-size: 1rem;
+    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    transition: all 0.2s ease-in-out;
+    margin-top: 1rem;
 }
 
 .checkout-btn:hover {
-    background-color: #004225;
+    background-color: #004d2f;
     color: white;
-    transition: 0.1s ease-in-out;
 }
 
 .checkout-btn:active {
     background-color: #006b3d !important;
     color: white !important;
-    transition: 0.1s ease-out;
 }
+
+.ship-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* #add-new-one {
+    width: fit-content;
+    background-color: black;
+    margin-left: auto;
+} */
+
+#add-new-one {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-left: auto;
+    margin-top: 0;
+    background-color: #006b3d;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 400;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+#add-new-one:hover {
+    background-color: #004d2f;
+    box-shadow: 0 5px 10px rgba(0, 107, 61, 0.3);
+}
+
+#add-new-one:active {
+    background-color: #006b3d;
+    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
+    transform: scale(0.98);
+}
+
+.ship-info {
+    display: flex;
+    flex-direction: column;
+    border: #006b3d 3px dashed;
+    box-shadow: 0 4px 8px rgba(0, 107, 61, 0.15);
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    margin-top: 2rem;
+    gap: 0.5rem;
+}
+
+.ship-address {
+    color: rgb(200, 0, 0);
+    font-size: 16.8px;
+    margin-left: 0.2rem;
+}
+
 </style>

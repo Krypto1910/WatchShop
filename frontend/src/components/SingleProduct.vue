@@ -207,17 +207,17 @@ export default {
 }
 
 .single-product .buy-btn {
-    background-color: black;
+    background-color: #006b3d;
     color: white;
     border: none;
     padding: 8px 10px;
     border: none;
+    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    transition: all 0.2s ease-in-out;
 }
 
 .single-product .buy-btn:hover {
-    background-color: #006b3d;
-    color: white;
-    transition: 0.1s all;
+    background-color: #004d2f;
 }
 
 h2 {
@@ -313,5 +313,4 @@ h2 {
     height: 100%;
     object-fit: cover;
 }
-
 </style>

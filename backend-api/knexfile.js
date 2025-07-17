@@ -28,7 +28,7 @@ const db = knex({
     port: 5432, // cổng mặc định PostgreSQL
     user: "postgres", // tài khoản PostgreSQL của bạn
     password: "1",
-    database: "WatchShop2",
+    database: "WatchShop",
   },
 });
 
