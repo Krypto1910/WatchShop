@@ -285,4 +285,17 @@ th:last-child {
     color: white !important;
     transform: scale(0.98);
 }
+
+@media (max-width: 1024px) {
+    p {
+        font-size: 0.9rem;
+    }
+    small {
+        font-size: 0.85rem;
+    }
+
+    .remove-btn {
+        font-size: 0.9rem !important;
+    }
+}
 </style>

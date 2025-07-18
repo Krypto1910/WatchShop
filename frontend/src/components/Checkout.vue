@@ -18,7 +18,7 @@
                     class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-bottom: 5px;">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
                 </svg>
-                <span class="ship-address">Shipping Address</span>
+                <span class="ship-address">Shipping Information</span>
             </div>
             <div>
                 <span style="font-size: 1rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
@@ -377,6 +377,16 @@ th:last-child {
     color: rgb(200, 0, 0);
     font-size: 16.8px;
     margin-left: 0.2rem;
+}
+
+@media (max-width: 1024px) {
+    p {
+        font-size: 1rem;
+    }
+
+    small {
+        font-size: 0.9rem;
+    }
 }
 
 </style>

@@ -7,7 +7,7 @@
                 <!-- Logo bên trái -->
                 <div class="col-4 d-flex align-items-center" style="padding: 0.1% 0 0.3% 5%;">
                     <img id="logo-img-nav" class="logo me-2" :src="logoUrl" alt="NeoStyle Logo"
-                        style="width: 3.4rem; height: 5rem; background-color: white;">
+                        style="width: 3.4rem; height: 3.2rem; background-color: white;">
 
                     <!-- Brand name -->
                     <router-link tag="a" id="brand" class="brand mb-0" to="/"
@@ -188,6 +188,24 @@ input:focus {
     padding: 1px 6px;
     border-radius: 50%;
     font-size: 12px !important;
+}
+
+@media (max-width: 1024px) {
+    #logo-img-nav {
+        width: 2.3rem !important; 
+        height: 2.1rem !important;
+    }
+
+    #brand {
+        font-size: 1.2rem !important;
+    }
+
+    .nav-link span {
+        font-size: 0.95rem !important;
+    }
+
+
+
 }
 
 </style>

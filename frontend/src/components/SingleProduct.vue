@@ -4,7 +4,7 @@
         <section class="single-product my-5 pt-2 pb-5">
             <div class="row mt-5">
                 <!--Images-->
-                <div class="col-lg-5 col-md-6 col-sm-12" style="padding-left: 100px; padding-right: 50px;">
+                <div class="col-lg-5 col-md-6 col-sm-12" style="padding: 0 30px">
                     <img id="mainImg" class="img-fluid w-100 pb-2" :src="`/images/${product.Image}`">
                     <div class="small-img-group">
                         <div class="small-img-col">
@@ -23,7 +23,7 @@
                 </div>
 
                 <!--Info-->
-                <div class="col-lg-6 col-md-12 col-12">
+                <div class="product-info col-lg-6 col-md-12 col-12">
                     <h6>{{ product.Category }}</h6>
                     <h3 class="py-4">{{ product.Name }}</h3>
                     <h2>${{ product.Price }}</h2>
@@ -312,5 +312,68 @@ h2 {
 .small-img {
     height: 100%;
     object-fit: cover;
+}
+
+.product-info h4 {
+    margin-top: 2rem !important;
+    margin-bottom: 0 !important;
+}
+
+.container {
+    padding-bottom: 0 !important;
+}
+
+/*mobile*/
+@media (max-width: 1024px) {
+    .product-info {
+        padding: 0 30px;
+    }
+
+    .product-info h3 {
+        padding: 0 !important;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    .product-info h6 {
+        margin-top: 1rem !important;
+    }
+
+    .product-info h2 {
+        margin-top: 0.5rem !important;
+        font-size: 1.2rem !important;
+    }
+
+    .product-info h4 {
+        margin-top: 2rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    .container {
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .star i {
+        font-size: 0.6rem;
+        margin: 0;
+    }
+
+    .product .p-name {
+        font-size: 0.8rem;
+    }
+
+    .product .p-price {
+        font-size: 0.8rem;
+    }
+
+    .product .buy-btn {
+        padding: 0.3rem 0.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 0.52rem;
+    }
+
 }
 </style>

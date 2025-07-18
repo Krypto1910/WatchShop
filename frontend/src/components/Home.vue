@@ -59,7 +59,7 @@ import 'v-slick-carousel/style.css'
 import { VSlickCarousel } from 'v-slick-carousel'
 
 export default {
-    name: 'Home', 
+    name: 'Home',
     components: {
         VSlickCarousel, // ← thêm dòng này
     },
@@ -140,23 +140,14 @@ export default {
 
 .content {
     display: flex;
+    gap: 0;
     flex-direction: column;
     background-color: transparent;
     color: black;
-    width: 70%;
+    width: 80%;
     height: min-content;
     margin: 10% auto;
     box-sizing: border-box;
-}
-
-@media (min-width: 1024px) {
-    #app {
-        padding-top: 10rem !important;
-    }
-
-    .content {
-        margin: 5% auto;
-    }
 }
 
 /* banner */
@@ -211,11 +202,12 @@ img {
     cursor: pointer;
     text-decoration: none;
     background-color: transparent;
+    margin-bottom: 3.5rem;
 }
 
 .star i {
     color: goldenrod;
-    margin: 0.5rem 0;
+    margin: 1rem 0 0.5rem;
     font-size: 1rem;
 }
 
@@ -228,7 +220,7 @@ img {
     object-fit: cover;
     transition: 0.3s all;
     box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto 0.5rem;
+    margin: 0 auto 0;
     /* Căn giữa ngang và tạo khoảng cách trên/dưới */
 }
 
@@ -241,8 +233,7 @@ img {
     color: white;
     background-color: black;
     padding: 0.5rem 1rem;
-    margin-top: 0.5rem;
-    margin-bottom: 3rem;
+    margin-top: 1rem;
     transform: translateY(30px);
     opacity: 0;
     transition: 0.3s all;
@@ -279,7 +270,58 @@ p {
 
 .product .p-price {
     font-weight: 500;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: rgb(0, 0, 0, 0.8);
+}
+
+/*desktop*/
+@media (min-width: 1024px) {
+    #app {
+        padding-top: 10rem !important;
+    }
+
+    .content {
+        margin: 7% auto;
+    }
+}
+
+/*mobile*/
+@media (max-width: 1024px) {
+    #app {
+        padding-top: 10rem !important;
+    }
+
+    .content {
+        margin-top: 10%;
+    }
+
+    #featured h3 {
+        font-size: 1.8rem !important;
+    }
+
+    .product {
+        margin-bottom: 0.3rem;
+    }
+
+    .product .p-name {
+        font-size: 0.8rem;
+    }
+
+    .product .p-price {
+        font-size: 0.8rem;
+    }
+
+    .star i {
+        font-size: 0.6rem;
+        margin: 0;
+    }
+
+    .product .buy-btn {
+        padding: 0.3rem 0.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 0.52rem;
+    }
+
 }
 </style>
