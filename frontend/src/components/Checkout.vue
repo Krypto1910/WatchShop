@@ -7,24 +7,33 @@
         </div>
 
         <!--Ship info-->
-        <div class="ship-info">
-            <!-- <table class="mt-5 pt-5">
-                <tr>
-                    <th style="text-align: left;">Ship Info</th>
-                </tr>
-            </table> -->
+        <div class="ship-container">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(200, 0, 0)"
                     class="bi bi-geo-alt-fill" viewBox="0 0 16 16" style="margin-bottom: 5px;">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
                 </svg>
-                <span class="ship-address">Shipping Information</span>
+                <span class="ship-title">Shipping Information</span>
             </div>
             <div>
-                <span style="font-size: 1rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
+                <span style="font-size: 1.05rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
                     No selected address
                 </span>
             </div>
+
+            <div class="ship-info-option">
+                <input type="radio" class="ship-option" name="shipOption" v-model="selectedAddress" :value="{
+                    name: 'Dong Quang',
+                    phone: '(+84)702831358',
+                    address: '70/24B CMT8, Cai Khe, Ninh Kieu, Can Tho'
+                }" />
+                <div class="ship-info">
+                    <span id="contact-name">Dong Quang</span>
+                    <span id="contact-number">(+84)702831358</span>
+                    <span id="ship-position">70/24B CMT8, Cai Khe, Ninh Kieu, Can Tho</span>
+                </div>
+            </div>
+
             <router-link tag="button" id="add-new-one" class="btn checkout-btn" to="/shipinfo">Add new one</router-link>
         </div>
 
@@ -71,11 +80,11 @@
                         <span style="font-weight: 500;">$</span>
                         <span class="product-price" style="font-weight: 500;">
                             {{
-                            (
-                            product.Quantity *
-                            product.Price *
-                            (1 - (product.Discount || 0) / 100)
-                            ).toFixed(2)
+                                (
+                                    product.Quantity *
+                                    product.Price *
+                                    (1 - (product.Discount || 0) / 100)
+                                ).toFixed(2)
                             }}
                         </span>
                     </td>
@@ -118,7 +127,7 @@ export default {
             return this.productCart.reduce((sum, item) => {
                 const priceAfterDiscount = item.Price * (1 - (item.Discount || 0) / 100);
                 return sum + item.Quantity * priceAfterDiscount;
-            }, 0).toFixed(2); // làm tròn 2 chữ số sau dấu thập phân
+            }, 0).toFixed(2); // làm tròn 2 chữ số
         }
 
     },
@@ -142,19 +151,6 @@ export default {
         removeCartItem(id) {
             this.productCart = this.productCart.filter((item) => item.ProductID != id)
             localStorage.setItem("cart", JSON.stringify(this.productCart))
-        },
-        // Giảm số lượng
-        decreaseQuantity(product) {
-            if (product.Quantity > 1) {
-                product.Quantity--;
-                this.saveCart();
-            }
-        },
-
-        // Tăng số lượng
-        increaseQuantity(product) {
-            product.Quantity++;
-            this.saveCart();
         },
 
         // Nhập trực tiếp và lọc
@@ -322,21 +318,11 @@ th:last-child {
     color: white !important;
 }
 
-.ship-info {
-    display: flex;
-    flex-direction: column;
-}
-
-/* #add-new-one {
-    width: fit-content;
-    background-color: black;
-    margin-left: auto;
-} */
-
 #add-new-one {
     display: inline-block;
     padding: 0.5rem 1rem;
     margin-left: auto;
+    margin-right: 1rem;
     margin-top: 0;
     background-color: #006b3d;
     color: white;
@@ -361,9 +347,10 @@ th:last-child {
     transform: scale(0.98);
 }
 
-.ship-info {
+.ship-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     border: #006b3d 3px dashed;
     box-shadow: 0 4px 8px rgba(0, 107, 61, 0.15);
     padding: 1rem;
@@ -371,13 +358,61 @@ th:last-child {
     background-color: #fdfdfd;
     margin-top: 2rem;
     gap: 0.5rem;
+
 }
 
-.ship-address {
+.ship-title {
     color: rgb(200, 0, 0);
     font-size: 16.8px;
     margin-left: 0.2rem;
 }
+
+#contact-name,
+#contact-number {
+    font-weight: bold;
+}
+
+#contact-name,
+#contact-number #ship-position {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.ship-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid #cfcfcf;
+    
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    transition: border-color 0.1s;
+}
+
+.ship-option:checked+.ship-info,
+.ship-info:hover {
+    border-color: #006b3d;
+    box-shadow: 5px 5px 8px 0px rgba(0, 107, 61, 0.15);
+    cursor: pointer;
+}
+
+.ship-option {
+    margin-left: 0.5rem;
+    accent-color: #006b3d;
+}
+
+.ship-info-option {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+}
+
 
 @media (max-width: 1024px) {
     p {
@@ -388,5 +423,4 @@ th:last-child {
         font-size: 0.9rem;
     }
 }
-
 </style>

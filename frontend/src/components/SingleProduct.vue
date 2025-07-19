@@ -361,7 +361,7 @@ h2 {
     }
 
     .product .p-name {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .product .p-price {
