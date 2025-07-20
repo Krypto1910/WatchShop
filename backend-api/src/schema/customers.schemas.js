@@ -7,13 +7,6 @@ const customersSchema = z.object({
   email: z.string().email().optional(),
   address: z.string().max(255).optional(),
   phone: z.string().max(15).optional(),
-  avatar: z.string().max(255).optional(),
-  avatarFile: z
-    .instanceof(Object)
-    .refine((file) => file && file.fieldname === 'avatarFile', {
-      message: 'Invalid file upload',
-    })
-    .optional(),
 });
 
 /**

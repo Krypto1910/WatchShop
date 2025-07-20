@@ -12,16 +12,7 @@ const { validateRequest } = require('../middlewares/validator.middleware')
 module.exports.setup = (app) => {
   app.use('/api/v1/customers', router);
 
-
-  router.post(
-    '/register',
-    validateRequest(
-        customersSchema.omit({ id: true, avatar: true }).strict()
-      
-    ),
-    customersController.createCustomer,
-  );
-
+  router.post('/register', customersController.createCustomer);
 
   router.post(
     '/login',
@@ -52,7 +43,7 @@ module.exports.setup = (app) => {
         input: partialCustomersSchema
           .omit({ avatar: true })
           .refine(
-            ({ name, password, email, address, phone, avatarFile }) =>
+            ({ name, password, email, address, phone}) =>
               Boolean(name || password || email || address || phone ),
             { message: 'At least one field is required' }
           )

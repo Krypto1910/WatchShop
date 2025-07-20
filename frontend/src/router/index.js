@@ -14,7 +14,7 @@ const routes = [
   { path: "/cart", name: "Cart", component: Cart },
   { path: "/login", name: "Login", component: Login },
   { path: "/register", name: "Register", component: Register },
-  { path: "/product/:id", name: "SingleProduct", component: SingleProduct },
+  { path: "/products/:id", name: "SingleProduct", component: SingleProduct },
   { path: "/checkout", name: "Checkout", component: Checkout },
   { path: "/shipinfo", name: "ShipInfo", component: ShipInfo },
   {

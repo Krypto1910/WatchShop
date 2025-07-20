@@ -26,7 +26,7 @@ module.exports.setup = (app) => {
 
 
   router.get('/', productsController.getProduct);
-
+  router.get('/:id', productsController.getProductById);
 
   router.put(
     '/:id',
@@ -62,15 +62,8 @@ module.exports.setup = (app) => {
 
   router.delete('/', productsController.deleteAllProducts);
 
-  router.get(
-    '/:id',
-    validateRequest(
-      z.object({
-        input: productsSchema.pick({ id: true }).strict(),
-      })
-    ),
-    productsController.getProductById
-  )
+ 
+  
   
   router.delete(
     '/:id',

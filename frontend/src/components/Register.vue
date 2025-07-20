@@ -74,7 +74,7 @@ export default {
             
             try {
                 // Gửi dữ liệu đến API đăng ký
-                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customer/register`, {
+                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/register`, {
                     name: name.value,
                     email: email.value,
                     password: password.value
