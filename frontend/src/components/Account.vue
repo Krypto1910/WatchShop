@@ -96,7 +96,6 @@ export default {
     methods: {
         handleLogout() {
             localStorage.removeItem('customer');
-<<<<<<< Updated upstream
             this.$router.push('/login');
         },
         async handleChangePassword() {
@@ -127,10 +126,6 @@ export default {
         } catch (error) {
             console.error("Error updating password:", error);
             alert('An error occurred while updating the password.');
-=======
-            window.location.href = "/login"
-            // this.$router.push('/login');
->>>>>>> Stashed changes
         }
     }
 

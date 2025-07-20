@@ -32,13 +32,9 @@ app.use("/public", express.static(path.resolve(__dirname, "../public")));
 customersRouter.setup(app)
 // orderitemRouter.setup(app)
 // ordersRouter.setup(app)
-<<<<<<< Updated upstream
 productsRouter.setup(app)
-=======
-// productsRouter.setup(app)
+shipInfoRouter.setup(app)
 
-app.use("/products", productsRouter);
->>>>>>> Stashed changes
 
 // POST /customer/register
 // app.post("/customer/register", async (req, res) => {
