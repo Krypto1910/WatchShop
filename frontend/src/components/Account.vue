@@ -19,15 +19,15 @@
             </div>
 
             <div class="col-lg-6 col-md-12 col-sm-12">
-                <form id="account-form">
+                <form id="account-form" @submit.prevent="handleChangePassword">
                     <h3>Change Password</h3>
                     <hr class="mx-auto">
                     <div class="form-group">
-                        <input type="password" class="form-control" id="account-password" name="password"
+                        <input type="password" class="form-control" id="account-password" name="password" v-model="form.password"
                             placeholder="Password" required>
                     </div>
                     <span class="form-group">
-                        <input type="password" class="form-control" id="account-confirm-password" name="confirmPassword"
+                        <input type="password" class="form-control" id="account-confirm-password" name="confirmPassword"  v-model="form.confirmPassword"
                             placeholder="Confirm Password" required>
                     </span>
                     <span class="form-group">
@@ -76,6 +76,8 @@
 <script>
 import watch1 from '@/assets/watch1.jpeg';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
+
 const router = useRouter();
 
 
@@ -84,15 +86,50 @@ export default {
     data() {
         return {
             watch1,
-            customer: JSON.parse(localStorage.getItem("customer")) || {}
+            customer: JSON.parse(localStorage.getItem("customer")) || {},
+            form: {
+                password: '',
+                confirmPassword: ''
+            }
         };
     },
     methods: {
         handleLogout() {
             localStorage.removeItem('customer');
             this.$router.push('/login');
+        },
+        async handleChangePassword() {
+        if (this.form.password !== this.form.confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            console.log("Submitting:", {
+            id: this.customer.CustomerID,
+            body: { password: this.form.password }
+            });
+            const response = await axios.put(
+                `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
+                {
+                    params: { id: this.customer.CustomerID },
+                    input: { password: this.form.password }
+                }
+            );
+            if (response.data.success) {
+                alert('Password updated successfully!');
+                this.form.password = '';
+                this.form.confirmPassword = '';
+            } else {
+                alert(response.data.message || 'Update failed');
+            }
+        } catch (error) {
+            console.error("Error updating password:", error);
+            alert('An error occurred while updating the password.');
         }
     }
+
+    },
 }
 </script>
 

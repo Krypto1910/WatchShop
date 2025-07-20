@@ -16,14 +16,13 @@
     "express": "^5.1.0",
     "knex": "^3.1.0",
     "multer": "^2.0.1",
+    "package.json": "^0.0.0",
     "pg": "^8.16.1",
     "swagger-ui-express": "^5.0.1",
     "vite": "^6.3.5",
     "zod": "^3.25.67"
   },
   "scripts": {
-    "start": "node --watch backend-api/server.js",
-    "dev": "vite frontend/",
-    "build": "vite build frontend/"
+    "start": "node --watch server.js"
   }
 }

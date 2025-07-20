@@ -14,48 +14,50 @@ module.exports.setup = (app) => {
 
 
   router.post(
-    '/',
+    '/register',
     validateRequest(
-      z.object({
-        input: customersSchema.omit({ id: true, avatar: true }).strict()
-      }),
+        customersSchema.omit({ id: true, avatar: true }).strict()
+      
     ),
     customersController.createCustomer,
   );
 
-  router.delete('/', customersController.deleteAllCustomers);
 
+  router.post(
+    '/login',
+    validateRequest(
+      z.object({
+        input: customersSchema.pick({ email: true, password: true }).strict()
+      })
+    ),
+    customersController.checkCustomer,
+  );
 
   router.get(
     '/:id',
     validateRequest(
       z.object({
-        input: customersSchema.pick({ id: true }).strict(),
+        params: customersSchema.pick({ id: true }).strict(),
       })
     ),
     customersController.getCustomer
-  )
+  );
 
 
   router.put(
     '/:id',
-    [
     validateRequest(
       z.object({
+        params: customersSchema.pick({ id: true }).strict(),
         input: partialCustomersSchema
-      .omit({ avatar: true })
-      .strict()
-      .refine(
-    ({ name, password, email, address, phone, avatarFile }) => {
-      return name || password || email || address || phone  !== undefined || avatarFile;
-          },
-            {
-              message: 'At least one field is required',
-            },
-          ),
-        }),
-      ),
-    ],
+          .omit({ avatar: true })
+          .refine(
+            ({ name, password, email, address, phone, avatarFile }) =>
+              Boolean(name || password || email || address || phone ),
+            { message: 'At least one field is required' }
+          )
+      }),
+    ),
     customersController.updateCustomer,
   );
   
@@ -64,10 +66,15 @@ module.exports.setup = (app) => {
     '/:id',
     validateRequest(
       z.object({
-        input: customersSchema.pick({ id: true }).strict(),
+        params: customersSchema.pick({ id: true }).strict(),
       })
     ),
     customersController.deleteCustomer
+  );
+
+    router.delete(
+    '/',
+    customersController.deleteAllCustomers
   );
 
   router.all('/',methodNotAllowed)

@@ -1,27 +1,35 @@
 const Jsend = require('../jsend');
+const knex = require("../../knexfile");
 
-function createProduct(req, res) {
+  function createProduct(req, res) {
     return res.status(201).json(Jsend.success({ product: {} }));
   }
   
-  function getProductsByFilter(req, res) {
-    const filters = [];
-    const { category, name } = req.query;
   
-    if (category !== undefined) {
-      filters.push(`category=${category}`);
-    }
-    if (name) {
-      filters.push(`name=${name}`);
-    }
-  
-    console.log(filters.join('&'));
-  
-    return res.json(Jsend.success({ product: [] }));
+  async function getProduct(req, res) {
+    try {
+    const products = await knex.select("*").from("Product");
+    return res.status(200).json(products);
+  } catch (error) {
+    console.log("Error", error);
+    return res.json({ message: "Error" });
+  };
   }
-  
-  function getProduct(req, res) {
-    return res.json(Jsend.success({ product: {} }));
+
+  async function getProductById(req, res) {
+  const { id } = req.params;
+
+  try {
+    const product = await knex("Product").where("ProductID", id).first();
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    return res.status(200).json({ product });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
   }
   
   function updateProduct(req, res) {
@@ -41,10 +49,10 @@ function createProduct(req, res) {
   }
   
   module.exports = {
-    getProductsByFilter,
     deleteAllProducts,
     getProduct,
     createProduct,
     updateProduct,
     deleteProduct,
+    getProductById,
   };
