@@ -9,16 +9,8 @@ const router = express.Router();
 module.exports.setup = (app) => {
   app.use('/api/v1/products', router);
 
-  router.get('/', productsController.getProductsByFilter);
-  router.get(
-    '/',
-    validateRequest(
-      z.object({
-        input: productsSchema.omit({ id:true }).strict(),
-      })
-    ),
-    productsController.getProductsByFilter
-  );
+  router.get('/', productsController.getProduct)
+
   
   router.post(
     '/',
@@ -32,16 +24,8 @@ module.exports.setup = (app) => {
 
   router.delete('/', productsController.deleteAllProducts);
 
-  router.get(
-    '/:id',
-    validateRequest(
-      z.object({
-        input: productsSchema.pick({ id: true }).strict(),
-      })
-    ),
-    productsController.getProduct
-  )
-  router.put('/:id', productsController.updateProduct);
+  router.get('/:id', productsController.getProductById);
+
   router.put(
     '/:id',
     [

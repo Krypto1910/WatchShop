@@ -62,7 +62,7 @@ export default {
             }
 
             try {
-                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customer/login`, {
+                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/login`, {
                     email: email.value,
                     password: password.value
                 });

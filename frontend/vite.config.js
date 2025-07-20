@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    
   ],
   server: {
     historyApiFallback: true

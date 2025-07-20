@@ -3,7 +3,7 @@ CREATE TABLE "Customer" (
     "CustomerID"    INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "Name"          VARCHAR(30)  NOT NULL,
     "Email"         VARCHAR(60)  NOT NULL UNIQUE,
-    "Password"      VARCHAR(24)  NOT NULL,
+    "Password"      VARCHAR(100)  NOT NULL,
     "Phone"         VARCHAR(11),
     "Address"       VARCHAR(255)
 );
