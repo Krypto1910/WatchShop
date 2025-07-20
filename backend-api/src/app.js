@@ -9,7 +9,7 @@ const customersRouter = require("./routes/customers.router");
 const orderitemRouter = require("./routes/orderitem.router");
 const ordersRouter = require("./routes/orders.router");
 const productsRouter = require("./routes/products.router");
-const shipInfoRouter = require("./routes/shipInfo.router");
+const shipInfoRouter = require("./routes/shipinfo.router");
 const {
   resourceNotFound,
   handleError,
@@ -87,7 +87,6 @@ shipInfoRouter.setup(app)
 //   }
 // });
 
-app.use("/ship-info", shipInfoRouter);
 
 app.use(resourceNotFound);
 app.use(handleError);
