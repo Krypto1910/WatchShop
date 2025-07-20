@@ -15,24 +15,24 @@
                 </svg>
                 <span class="ship-title">Shipping Information</span>
             </div>
-            <div>
+
+            <div v-if="!selectedAddress" class="ship-info-option">
                 <span style="font-size: 1.05rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
                     No selected address
                 </span>
             </div>
-
-            <div class="ship-info-option">
+            <label v-for="address in addressList" class="ship-info-option">
                 <input type="radio" class="ship-option" name="shipOption" v-model="selectedAddress" :value="{
-                    name: 'Dong Quang',
-                    phone: '(+84)702831358',
-                    address: '70/24B CMT8, Cai Khe, Ninh Kieu, Can Tho'
+                    name: address.ContactName,
+                    phone: address.ContactNumber,
+                    address: address.ShippingAddress
                 }" />
                 <div class="ship-info">
-                    <span id="contact-name">Dong Quang</span>
-                    <span id="contact-number">(+84)702831358</span>
-                    <span id="ship-position">70/24B CMT8, Cai Khe, Ninh Kieu, Can Tho</span>
+                    <span id="contact-name">{{ address.ContactName }}</span>
+                    <span id="contact-number">{{ address.ContactNumber }}</span>
+                    <span id="ship-position">{{ address.ShippingAddress }}</span>
                 </div>
-            </div>
+            </label>
 
             <router-link tag="button" id="add-new-one" class="btn checkout-btn" to="/shipinfo">Add new one</router-link>
         </div>
@@ -110,12 +110,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert2';
 export default {
     name: 'Cart',
     data() {
         return {
-            productCart: JSON.parse(localStorage.getItem("cart")) || []
+            productCart: JSON.parse(localStorage.getItem("cart")) || [],
+            selectedAddress: null,
+            addressList: []
         };
+    },
+    mounted() {
+        this.fetchAddressList();
     },
     computed: {
         // cartTotal() {
@@ -145,6 +152,24 @@ export default {
         localStorage.setItem("cart", JSON.stringify(cart));
     },
     methods: {
+        async fetchAddressList() {
+            const customer = JSON.parse(localStorage.getItem("customer"));
+            console.log(123)
+            if (!customer) {
+                return;
+            }
+            const customerId = customer.CustomerID;
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URI}/ship-info/${customerId}`);
+                if (response.data.success) {
+                    this.addressList = response.data.shipInfo;
+                } else {
+                    console.error("Failed to fetch addresses:", response.data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching addresses:", error);
+            }
+        },
         getRandomDiscount() {
             return Math.floor(Math.random() * 16); // 0 - 15
         },
@@ -388,17 +413,15 @@ th:last-child {
     overflow-x: hidden;
     padding-left: 0.5rem;
     margin-right: 1rem;
-    border: 1px solid #cfcfcf;
-    
+    border: 1px solid rgba(207, 207, 207, 0.6);
     padding: 0.75rem 1rem;
     background-color: #ffffff;
     transition: border-color 0.1s;
 }
 
-.ship-option:checked+.ship-info,
 .ship-info:hover {
-    border-color: #006b3d;
-    box-shadow: 5px 5px 8px 0px rgba(0, 107, 61, 0.15);
+    border-color: rgb(0, 107, 61, 0.3);
+    box-shadow: 5px 5px 8px 0px rgba(0, 107, 61, 0.1);
     cursor: pointer;
 }
 
@@ -412,7 +435,6 @@ th:last-child {
     align-items: stretch;
     gap: 0.75rem;
 }
-
 
 @media (max-width: 1024px) {
     p {

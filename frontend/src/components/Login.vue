@@ -78,9 +78,10 @@ export default {
 
                     // Save customer info (optional: token/localStorage)
                     localStorage.setItem('customer', JSON.stringify(response.data.customer));
-                    store.setCustomer(response.data.customer)
+                    // store.setCustomer(response.data.customer)
                     // Redirect to homepage or dashboard
-                    router.push('/');
+                    window.location.href = "/"
+                    // this.$router.push('/');
                 } else {
                     error.value = response.data.message || 'Login failed.';
                 }

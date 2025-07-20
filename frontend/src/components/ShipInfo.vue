@@ -6,34 +6,82 @@
         </div>
 
         <div class="mx-auto container">
-            <form id="checkout-form">
+            <form id="checkout-form" @submit.prevent="addNewInfo">
                 <div class="form-group checkout-small-element">
-                    <input type="text" class="form-control" id="checkout-name" name="contactName"
-                        placeholder="Contact name" required>
+                    <input type="text" class="form-control" id="checkout-name" name="contactName" v-model="contactName"
+                        placeholder="Contact name" required />
                 </div>
+
                 <div class="form-group checkout-small-element">
                     <input type="text" class="form-control" id="checkout-email" name="contactNumber"
-                        placeholder="Contact number" required>
+                        v-model="contactNumber" placeholder="Contact number" required />
                 </div>
+
                 <div class="form-group checkout-large-element">
                     <input type="text" class="form-control" id="checkout-address" name="shippingAddress"
-                        placeholder="Shipping address" required>
+                        v-model="shippingAddress" placeholder="Shipping address" required />
                 </div>
+
                 <div class="form-group checkout-btn-container">
-                    <input type="submit" class="btn" id="checkout-btn" value="Submit">
+                    <input type="submit" class="btn" id="checkout-btn" value="Submit" />
                 </div>
             </form>
         </div>
-
     </section>
 </template>
 
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
 export default {
     name: 'ShipInfo',
-}
+    data() {
+        return {
+            contactName: '',
+            contactNumber: '',
+            shippingAddress: ''
+        };
+    },
+    methods: {
+        async addNewInfo() {
+            try {
+                const payload = {
+                    name: this.contactName,
+                    phone: this.contactNumber,
+                    address: this.shippingAddress,
+                    customerID: JSON.parse(localStorage.getItem("customer"))?.CustomerID || null
+                };
 
+                const response = await axios.post(
+                    `${import.meta.env.VITE_API_URI}/ship-info`,
+                    payload
+                );
+                if (response.data.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "Add new shipping information successfully!"
+                    })
+                    this.$router.push('/checkout');
+                }
+                
+
+
+            } catch (error) {
+                console.error("Lỗi gửi thông tin:", error);
+                // alert("Đã xảy ra lỗi khi gửi thông tin.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Erorr",
+                    text: "Please login to continue"
+                })
+            }
+        }
+    }
+};
 </script>
+
 
 <style scoped>
 /* Checkout */

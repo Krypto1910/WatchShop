@@ -67,7 +67,7 @@
         </div>
     </nav>
 </template>
-
+<!-- 
 <script setup>
 import logoUrl from '@/assets/logo_removebg.png'
 import { useAppStore } from '@/stores/app'
@@ -76,30 +76,30 @@ const store = useAppStore()
 
 const customer = store.customer
 const cartAmount = store.cartAmount
-</script>
+</script> -->
 
 
-<!-- <script>
+<script>
 import logoUrl from '@/assets/logo_removebg.png';
 import { useAppStore } from '@/stores/app'
 export default {
     name: 'Home',
-    setup() {
-        const store = useAppStore()
+    // setup() {
+    //     const store = useAppStore()
 
-    return {
-            logoUrl,
-            customer: store.customer,
-            cartAmount: store.cartAmount
-        }
-    },
-    // data() {
-    //     return {
+    // return {
     //         logoUrl,
-    //         customer: JSON.parse(localStorage.getItem("customer")) || null,
-    //         cartAmount: JSON.parse(localStorage.getItem("cart")).length || 0
-    //     };
-    // }
+    //         customer: store.customer,
+    //         cartAmount: store.cartAmount
+    //     }
+    // },
+    data() {
+        return {
+            logoUrl,
+            customer: JSON.parse(localStorage.getItem("customer")) || null,
+            cartAmount: JSON.parse(localStorage.getItem("cart")).length || 0
+        };
+    },
     // data() {
     //     return {
     //         store: useAppStore()
@@ -112,7 +112,7 @@ export default {
     // }
 
 }
-</script> -->
+</script>
 
 <style scoped>
 .navbar {

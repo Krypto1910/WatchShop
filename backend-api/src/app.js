@@ -9,6 +9,7 @@ const customersRouter = require("./routes/customers.router");
 const orderitemRouter = require("./routes/orderitem.router");
 const ordersRouter = require("./routes/orders.router");
 const productsRouter = require("./routes/products.router");
+const shipInfoRouter = require("./routes/shipInfo.router");
 const {
   resourceNotFound,
   handleError,
@@ -31,7 +32,13 @@ app.use("/public", express.static(path.resolve(__dirname, "../public")));
 customersRouter.setup(app)
 // orderitemRouter.setup(app)
 // ordersRouter.setup(app)
+<<<<<<< Updated upstream
 productsRouter.setup(app)
+=======
+// productsRouter.setup(app)
+
+app.use("/products", productsRouter);
+>>>>>>> Stashed changes
 
 // POST /customer/register
 // app.post("/customer/register", async (req, res) => {
@@ -83,6 +90,8 @@ productsRouter.setup(app)
 //     return res.status(500).json({ success: false, message: "Server error" });
 //   }
 // });
+
+app.use("/ship-info", shipInfoRouter);
 
 app.use(resourceNotFound);
 app.use(handleError);
