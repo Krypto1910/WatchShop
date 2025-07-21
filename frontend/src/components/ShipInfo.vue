@@ -54,7 +54,7 @@ export default {
                 };
 
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_URI}/ship-info`,
+                    `${import.meta.env.VITE_API_URI}/shipinfo`,
                     payload
                 );
                 if (response.data.success) {
