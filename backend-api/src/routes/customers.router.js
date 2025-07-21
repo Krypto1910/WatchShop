@@ -35,22 +35,7 @@ module.exports.setup = (app) => {
   );
 
 
-  router.put(
-    '/:id',
-    validateRequest(
-      z.object({
-        params: customersSchema.pick({ id: true }).strict(),
-        input: partialCustomersSchema
-          .omit({ avatar: true })
-          .refine(
-            ({ name, password, email, address, phone}) =>
-              Boolean(name || password || email || address || phone ),
-            { message: 'At least one field is required' }
-          )
-      }),
-    ),
-    customersController.updateCustomer,
-  );
+  router.put('/:id',customersController.updateCustomer);
   
 
   router.delete(

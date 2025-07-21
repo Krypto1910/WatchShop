@@ -110,11 +110,13 @@ export default {
             id: this.customer.CustomerID,
             body: { password: this.form.password }
             });
+            console.log("PUT URL:", `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`);
+            console.log("PUT body:", { password: this.form.password });
+
             const response = await axios.put(
                 `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
                 {
-                    params: { id: this.customer.CustomerID },
-                    input: { password: this.form.password }
+                    password: this.form.password
                 }
             );
             if (response.data.success) {
@@ -125,8 +127,19 @@ export default {
                 alert(response.data.message || 'Update failed');
             }
         } catch (error) {
-            console.error("Error updating password:", error);
-            alert('An error occurred while updating the password.');
+            if (error.response) {
+                // The request was made and the server responded with a status code >= 400
+                console.error("Server responded with error:", error.response.data);
+                alert(error.response.data.message || 'Update failed from server');
+            } else if (error.request) {
+                // The request was made but no response received
+                console.error("No response from server:", error.request);
+                alert('No response from server');
+            } else {
+                // Something else
+                console.error("Error setting up request:", error.message);
+                alert('Request setup error');
+            }
         }
     }
 

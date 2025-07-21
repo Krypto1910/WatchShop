@@ -113,9 +113,9 @@ async function checkCustomer(req, res) {
 
 async function updateCustomer(req, res) {
   try {
-    const { id } = req.params;
-    const { name, email, password, phone, address } = req.body;
 
+    const { password, name, email, phone, address } = req.body;
+    const { id } = req.params;
     // Tìm thông tin khác hàng
     const customer = await knex("Customer").where("CustomerID", id).first();
     if (!customer) {
