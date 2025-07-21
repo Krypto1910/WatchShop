@@ -28,3 +28,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+../nginx-1.29.0/logs
