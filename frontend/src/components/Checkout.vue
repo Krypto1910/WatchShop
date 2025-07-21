@@ -125,11 +125,6 @@ export default {
         this.fetchAddressList();
     },
     computed: {
-        // cartTotal() {
-        //     return this.productCart.reduce(
-        //         (sum, item) => sum + item.Quantity * item.Price, 0
-        //     );
-        // }
         cartTotal() {
             return this.productCart.reduce((sum, item) => {
                 const priceAfterDiscount = item.Price * (1 - (item.Discount || 0) / 100);
@@ -173,50 +168,12 @@ export default {
         getRandomDiscount() {
             return Math.floor(Math.random() * 16); // 0 - 15
         },
-        removeCartItem(id) {
-            this.productCart = this.productCart.filter((item) => item.ProductID != id)
-            localStorage.setItem("cart", JSON.stringify(this.productCart))
-        },
-
-        // Nhập trực tiếp và lọc
-        onQuantityInput(event, product) {
-            let value = event.target.value.replace(/[^0-9]/g, '1');
-
-            if (parseInt(value) < 1 || !parseInt(value)) {
-                value = '1';
-            }
-
-            product.quantity = parseInt(value);
-            event.target.value = value;
-
-            this.saveCart();
-        },
 
         // Cập nhật localStorage
         saveCart() {
             localStorage.setItem('cart', JSON.stringify(this.productCart));
         },
-        onQuantityInput(event, product) {
-            let value = event.target.value;
-
-            // Chỉ giữ lại chữ số 0-9
-            value = value.replace(/[^0-9]/g, '1');
-
-            // Không cho phép rỗng hoặc 0
-            product.quantity = parseInt(value) || "";
-            event.target.value = value;
-
-            // Cập nhật vào localStorage
-            localStorage.setItem('cart', JSON.stringify(this.productCart));
-        },
-        updateQuantity(id, newQuantity) {
-            const index = this.productCart.findIndex(item => item.ProductID === id);
-            if (index !== -1) {
-                if (newQuantity < 1) newQuantity = 1; // Ngăn nhập số âm hoặc 0
-                this.productCart[index].Quantity = newQuantity;
-                localStorage.setItem("cart", JSON.stringify(this.productCart));
-            }
-        }
+        
     }
 };
 </script>

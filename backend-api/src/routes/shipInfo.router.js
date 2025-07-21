@@ -7,12 +7,8 @@ const router = express.Router();
 module.exports.setup = (app) => {
     app.use('/api/v1/shipinfo', router);
 
-
-
-
     router.post("/", shipInfoController.addNewShipInfo);
     router.get("/:customerId", shipInfoController.getShipInfoByCustomerId);
-
 
     router.all('/',methodNotAllowed)
     router.all('/:id',methodNotAllowed)
