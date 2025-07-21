@@ -50,18 +50,6 @@ const createOrder = async (req, res) => {
   }
 };
 
-
-function getOrdersByFilter(req, res) {
-  const filters = [];
-  const { CustomerName } = req.query;
-
-  if (favorite !== undefined) {
-    filters.push(`CustomerName=${CustomerName}`);
-  }
-
-  return res.json(Jsend.success({ order: [] }));
-}
-
 function getOrder(req, res) {
   return res.json(Jsend.success({ order: {} }));
 }
@@ -87,7 +75,6 @@ function deleteAllOrders(req, res) {
 }
 
 module.exports = {
-  getOrdersByFilter,
   deleteAllOrders,
   getOrder,
   createOrder,

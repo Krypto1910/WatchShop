@@ -11,15 +11,7 @@ module.exports.setup = (app) => {
 
   router.get('/', ordersController.getOrdersByFilter);
 
-  router.post(
-    '/',
-    // validateRequest(
-    //   z.object({
-    //     input: ordersSchema.pick({ CustomerId: true }).strict()
-    //   }),
-    // ),
-    ordersController.createOrder,
-  );
+  router.post('/',ordersController.createOrder,);
   
   router.delete('/', ordersController.deleteAllOrders);
 

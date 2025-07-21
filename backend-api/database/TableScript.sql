@@ -21,12 +21,17 @@ CREATE TABLE "Product" (
 
 -- TẠO BẢNG ShipInfo
 CREATE TABLE "ShipInfo" (
-    "ShipInfoID"     INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "ContactName"    VARCHAR(30)  NOT NULL,
-    "ContactNumber"  VARCHAR(11),
-    "ShippingAddress" VARCHAR(255) NOT NULL
+    "ShipInfoID"      INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "CustomerID"      INT NOT NULL,
+    "ContactName"     VARCHAR(30) NOT NULL,
+    "ContactNumber"   VARCHAR(11),
+    "ShippingAddress" VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_shipinfo_customer
+        FOREIGN KEY ("CustomerID")
+        REFERENCES "Customer"("CustomerID")
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
-
 -- TẠO BẢNG Cart
 CREATE TABLE "Cart" (
     "CartID"      INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -42,20 +47,16 @@ CREATE TABLE "Cart" (
 CREATE TABLE "Order" (
     "OrderID"     INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "CustomerID"  INT  NOT NULL,
-    "ShipInfoID"  INT,
     "Date"        DATE NOT NULL,
     "TotalAmount" NUMERIC(10,2) NOT NULL,
     "Status"      VARCHAR(50)   NOT NULL,
+    "Address"     VARCHAR(255),
+    "PaymentMethod" VARCHAR(20),
     CONSTRAINT fk_order_customer
         FOREIGN KEY ("CustomerID")
         REFERENCES "Customer" ("CustomerID")
         ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    CONSTRAINT fk_order_shipinfo
-        FOREIGN KEY ("ShipInfoID")
-        REFERENCES "ShipInfo" ("ShipInfoID")
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
+        ON DELETE CASCADE
 );
 
 -- TẠO BẢNG CartItem
@@ -103,44 +104,4 @@ CREATE INDEX idx_cartitem_cartid      ON "CartItem"("CartID");
 CREATE INDEX idx_order_customerid     ON "Order"("CustomerID");
 CREATE INDEX idx_order_date           ON "Order"("Date");
 
-
--- SỬA LẠI DB
--- DROP bảng ShipInfo cũ nếu đã tồn tại
-DROP TABLE IF EXISTS "ShipInfo" CASCADE;
-
--- Tạo lại bảng ShipInfo theo ERD mới
-CREATE TABLE "ShipInfo" (
-    "ShipInfoID"      INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "CustomerID"      INT NOT NULL,
-    "ContactName"     VARCHAR(30) NOT NULL,
-    "ContactNumber"   VARCHAR(11),
-    "ShippingAddress" VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_shipinfo_customer
-        FOREIGN KEY ("CustomerID")
-        REFERENCES "Customer"("CustomerID")
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
--- Xóa bảng Order cũ nếu đã tạo
-DROP TABLE IF EXISTS "Order" CASCADE;
-
--- Tạo lại bảng Order theo thứ tự và tên trường mới
-CREATE TABLE "Order" (
-    "OrderID"     INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "CustomerID"  INT  NOT NULL,
-    "Date"        DATE NOT NULL,
-    "TotalAmount" NUMERIC(10,2) NOT NULL,
-    "Status"      VARCHAR(50)   NOT NULL,
-    "Address"     VARCHAR(255),
-    CONSTRAINT fk_order_customer
-        FOREIGN KEY ("CustomerID")
-        REFERENCES "Customer" ("CustomerID")
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
--- Thêm cột PaymentMethod vào bảng Order
-ALTER TABLE "Order"
-ADD COLUMN "PaymentMethod" VARCHAR(20);
 
