@@ -160,7 +160,7 @@ export default {
             }
             const customerId = customer.CustomerID;
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URI}/ship-info/${customerId}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URI}/shipinfo/${customerId}`);
                 if (response.data.success) {
                     this.addressList = response.data.shipInfo;
                 } else {
