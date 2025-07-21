@@ -97,8 +97,16 @@ export default {
         return {
             logoUrl,
             customer: JSON.parse(localStorage.getItem("customer")) || null,
-            cartAmount: JSON.parse(localStorage.getItem("cart")).length || 0
+            cartAmount: JSON.parse(localStorage.getItem("cart"))?.length || 0
         };
+    },
+    mounted() {
+        // Update cart amount when component is mounted
+        (() => {
+            setInterval(() => {
+                this.cartAmount = JSON.parse(localStorage.getItem("cart"))?.length || 0;
+            }, 500);
+        })();
     },
     // data() {
     //     return {

@@ -27,7 +27,7 @@
                     <h6>{{ product.Category }}</h6>
                     <h3 class="py-4">{{ product.Name }}</h3>
                     <h2>${{ product.Price }}</h2>
-                    <input type="number" value="1">
+                    <input type="number" v-model.number="Quantity" min="1">
                     <button class="buy-btn" @click="addToCart">Add To Cart</button>
                     <h4 class="mt-5 mb-5">Product details</h4>
                     <span>{{ product.Description }}</span>
@@ -118,7 +118,8 @@ export default {
             watch2,
             watch3,
             watch4,
-            product: {}
+            product: {},
+            Quantity: 1,
         };
     },
     mounted() {
@@ -130,6 +131,7 @@ export default {
         changeImage(index) {
             this.mainImg = this.smallImgs[index];
         },
+        
         async fetchProductById(id) {
             try {
                 const response = await axios.get(
@@ -171,7 +173,7 @@ export default {
                 Name: this.product.Name,
                 Price: this.product.Price,
                 Image: this.product.Image,
-                Quantity: 1
+                Quantity: this.Quantity
             })
 
             // optional toast

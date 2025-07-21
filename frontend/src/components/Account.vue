@@ -96,7 +96,8 @@ export default {
     methods: {
         handleLogout() {
             localStorage.removeItem('customer');
-            this.$router.push('/login');
+            //this.$router.push('/login');
+            window.location.href = '/login';
         },
         async handleChangePassword() {
         if (this.form.password !== this.form.confirmPassword) {

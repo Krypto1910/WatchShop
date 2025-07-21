@@ -139,3 +139,8 @@ CREATE TABLE "Order" (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+-- Thêm cột PaymentMethod vào bảng Order
+ALTER TABLE "Order"
+ADD COLUMN "PaymentMethod" VARCHAR(20);
+

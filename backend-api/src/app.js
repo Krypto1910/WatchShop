@@ -9,7 +9,7 @@ const customersRouter = require("./routes/customers.router");
 const orderitemRouter = require("./routes/orderitem.router");
 const ordersRouter = require("./routes/orders.router");
 const productsRouter = require("./routes/products.router");
-const shipInfoRouter = require("./routes/shipinfo.router");
+const shipInfoRouter = require("./routes/shipInfo.router");
 const {
   resourceNotFound,
   handleError,
@@ -31,7 +31,7 @@ app.use("/public", express.static(path.resolve(__dirname, "../public")));
 // cartRouter.setup(app)
 customersRouter.setup(app)
 // orderitemRouter.setup(app)
-// ordersRouter.setup(app)
+ordersRouter.setup(app)
 productsRouter.setup(app)
 shipInfoRouter.setup(app)
 

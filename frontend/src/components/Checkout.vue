@@ -101,10 +101,38 @@
                     </tr>
                 </table>
             </div>
+        </div>
 
-            <div class="checkout-container">
-                <router-link tag="button" class="btn checkout-btn" to="/checkout">Confirm Order</router-link>
+        <!--Payment Methods-->
+        <div class="payment-container">
+            <div>
+                <span class="payment-title">Payment Methods</span>
             </div>
+
+            <div v-if="!selectedMethod">
+                <span style="font-size: 1.05rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
+                    No payment method selected
+                </span>
+            </div>
+            <label class="payment-option">
+                <input type="radio" class="pay-option" name="payOption" v-model="selectedMethod" :value="{
+                    method: 'COD'
+                }" />
+                <div class="payment-methods">
+                    <span id="cod">COD</span>
+                </div>
+            </label>
+            <label class="payment-option">
+                <input type="radio" class="pay-option" name="payOption" v-model="selectedMethod" :value="{
+                    method: 'Online Banking'
+                }" />
+                <div class="payment-methods">
+                    <span id="onl-banking">Online Banking</span>
+                </div>
+            </label>
+        </div>
+        <div class="checkout-container">
+            <button @click="createOrder" class="btn checkout-btn">Confirm Order</button>
         </div>
     </section>
 </template>
@@ -118,7 +146,8 @@ export default {
         return {
             productCart: JSON.parse(localStorage.getItem("cart")) || [],
             selectedAddress: null,
-            addressList: []
+            addressList: [],
+            selectedMethod: null,
         };
     },
     mounted() {
@@ -149,7 +178,6 @@ export default {
     methods: {
         async fetchAddressList() {
             const customer = JSON.parse(localStorage.getItem("customer"));
-            console.log(123)
             if (!customer) {
                 return;
             }
@@ -173,7 +201,48 @@ export default {
         saveCart() {
             localStorage.setItem('cart', JSON.stringify(this.productCart));
         },
-        
+
+        async createOrder() {
+            const customer = JSON.parse(localStorage.getItem("customer"));
+            if (!customer || !this.selectedAddress || !this.selectedMethod) {
+                Swal.fire("Incomplete Info", "Please select address and payment method", "warning");
+                return;
+            }
+
+            const orderData = {
+                CustomerID: customer.CustomerID,
+                Date: new Date().toISOString().split('T')[0], // yyyy-mm-dd
+                TotalAmount: parseFloat(this.cartTotal),
+                Status: "Pending",
+                Address: this.selectedAddress.address,
+                PaymentMethod: this.selectedMethod.method,
+                OrderItems: this.productCart.map(item => ({
+                    ProductID: item.ProductID,
+                    Quantity: item.Quantity,
+                    UnitPrice: item.Price,
+                }))
+            };
+
+            console.log("Order Data:", orderData);
+
+            try {
+                const res = await axios.post(`${import.meta.env.VITE_API_URI}/orders`, orderData);
+                if (res.data.success) {
+                    Swal.fire("Success", "Order created successfully!", "success");
+                    localStorage.removeItem("cart");
+                    this.productCart = [];
+                    setTimeout(() => {
+                        this.$router.push('/'); // Redirect to home after 2 seconds
+                    }, 2000);
+                } else {
+                    Swal.fire("Error", res.data.message || "Failed to create order", "error");
+                }
+            } catch (err) {
+                console.error(err);
+                Swal.fire("Error", "Something went wrong", "error");
+            }
+        }
+
     }
 };
 </script>
@@ -227,9 +296,6 @@ export default {
     font-size: 1.05rem;
 }
 
-
-
-
 .cart td {
     padding: 10px 0px;
     font-size: 1rem;
@@ -282,12 +348,12 @@ th:last-child {
 .checkout-btn {
     display: flex;
     justify-content: flex-end;
-    background-color: #006b3d;
-    color: white;
+    background-color: #006b3d !important;
+    color: white !important;
     font-size: 1rem;
     box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
     transition: all 0.2s ease-in-out;
-    margin-top: 1rem;
+    margin-top: 3rem;
 }
 
 .checkout-btn:hover {
@@ -296,7 +362,7 @@ th:last-child {
 }
 
 .checkout-btn:active {
-    background-color: #006b3d !important;
+    background-color: #006b3d;
     color: white !important;
 }
 
@@ -391,6 +457,111 @@ th:last-child {
     display: flex;
     align-items: stretch;
     gap: 0.75rem;
+}
+
+/*Payment Methods*/
+/* .payment-container {
+    display: flex;
+    flex-direction: column;
+    border: #006b3d 3px dashed;
+    box-shadow: 0 4px 8px rgba(0, 107, 61, 0.15);
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    margin-top: 2rem;
+}
+.payment-title {
+    color: rgb(200, 0, 0);
+    font-size: 16.8px;
+    margin-left: 0.2rem;
+}
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+.pay-option {
+    margin-left: 0.5rem;
+    accent-color: #006b3d;
+}
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(207, 207, 207, 0.6);
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    transition: border-color 0.1s;
+}
+.payment-methods:hover {
+    border-color: rgb(0, 107, 61, 0.3);
+    box-shadow: 5px 5px 8px 0px rgba(0, 107, 61, 0.1);
+    cursor: pointer;
+} */
+
+/* Payment Methods*/
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    border: 2px solid #e0e0e0;
+    background: linear-gradient(135deg, #fafafa, #ffffff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin-top: 2.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.payment-title {
+    color: #004225;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+}
+
+.payment-option:last-child {
+    padding-top: 0;
+}
+
+.pay-option {
+    margin-left: 0.5rem;
+    accent-color: #004225;
+}
+
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(180, 180, 180, 0.4);
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+
+.payment-methods:hover {
+    border-color: #006b3d;
+    box-shadow: 0 4px 10px rgba(0, 107, 61, 0.15);
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {

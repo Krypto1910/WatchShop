@@ -13,14 +13,14 @@ module.exports.setup = (app) => {
 
   router.post(
     '/',
-    validateRequest(
-      z.object({
-        input: ordersSchema.pick({ CustomerId: true }).strict()
-      }),
-    ),
+    // validateRequest(
+    //   z.object({
+    //     input: ordersSchema.pick({ CustomerId: true }).strict()
+    //   }),
+    // ),
     ordersController.createOrder,
   );
-
+  
   router.delete('/', ordersController.deleteAllOrders);
 
   router.get(

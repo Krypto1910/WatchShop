@@ -65,19 +65,21 @@
 
             <div class="checkout-container">
 
-                <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link>
+                <!-- <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link> -->
+                <button  @click="handleCheckout" class="btn checkout-btn">Checkout</button>
             </div>
         </div>
     </section>
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
     name: 'Cart',
     data() {
         return {
-
-            productCart: JSON.parse(localStorage.getItem("cart")) || []
+            productCart: JSON.parse(localStorage.getItem("cart")) || [],
+            customer: JSON.parse(localStorage.getItem("customer")) || null
         };
     },
     computed: {
@@ -89,6 +91,25 @@ export default {
         }
     },
     methods: {
+        handleCheckout() {
+            if (!this.customer) {
+                Swal.fire({
+                    title: 'Please login to continue',
+                    icon: 'warning',
+                    confirmButtonText: 'Login',
+                    cancelButtonText: 'Cancel',
+                    showCancelButton: true,
+                    confirmButtonColor: '#006b3d',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push('/login');
+                    }
+                });
+                return;
+            }
+            this.$router.push('/checkout');
+        },
+
         removeCartItem(id) {
             this.productCart = this.productCart.filter((item) => item.ProductID != id)
             localStorage.setItem("cart", JSON.stringify(this.productCart))

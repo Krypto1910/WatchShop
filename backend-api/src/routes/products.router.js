@@ -63,8 +63,6 @@ module.exports.setup = (app) => {
   router.delete('/', productsController.deleteAllProducts);
 
  
-  
-  
   router.delete(
     '/:id',
     validateRequest(
