@@ -9,9 +9,8 @@ const router = express.Router();
 module.exports.setup = (app) => {
   app.use('/api/v1/orders', router);
 
-  router.get('/', ordersController.getOrdersByFilter);
 
-  router.post('/',ordersController.createOrder,);
+  router.post('/',ordersController.createOrder);
   
   router.delete('/', ordersController.deleteAllOrders);
 
