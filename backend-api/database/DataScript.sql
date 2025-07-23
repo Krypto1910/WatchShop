@@ -1,29 +1,105 @@
 --ALTER SEQUENCE "Product_ProductID_seq" RESTART WITH 1;
 
-INSERT INTO "Product" (
-    "Name", "Price", "Category", "QuantityAvailable", "Image", "Description"
-) VALUES
--- 1
-('Citizen Eco-Drive Men''s Watch', 180.00, 'Men''s Watch', 15, 'citizen.jpg',
- 'Solar-powered Citizen watch with scratch-resistant sapphire crystal.'),
--- 2
-('Casio Sheen Women''s Watch', 130.00, 'Women''s Watch', 20, 'sheen.jpg',
- 'Elegant gold-tone stainless steel design, 50m water resistance.'),
--- 3
-('Apple Watch Series 9', 399.00, 'Smartwatch', 10, 'applewatch9.jpg',
- 'Premium smartwatch with always-on display, health and fitness tracking.'),
--- 4
-('Garmin Forerunner 255', 349.00, 'Smartwatch', 12, 'garmin255.jpg',
- 'Running-focused GPS watch with up to 14 days battery life.'),
--- 5
-('Orient Bambino Men''s Automatic Watch', 185.00, 'Men''s Watch', 18, 'orient.jpg',
- 'Classic Japanese design, leather strap, automatic movement.'),
--- 6
-('Daniel Wellington Classic Petite', 159.00, 'Women''s Watch', 22, 'dw_classic.jpg',
- 'Slim 28mm mesh strap watch, ideal for a feminine wrist.'),
--- 7
-('Xiaomi Watch S1 Active', 129.00, 'Smartwatch', 25, 'xiaomi_s1.jpg',
- 'Supports GPS, heart rate and SpO2 tracking, 5ATM water resistant.'),
--- 8
-('G-Shock GA-2100', 110.00, 'Men''s Watch', 30, 'gshock_ga2100.jpg',
- 'Iconic shock-resistant design with durable carbon core guard.');
+-- INSERT INTO "Product" (
+--     "Name", "Price", "Category", "QuantityAvailable", "Image", "Description"
+-- ) VALUES
+-- -- 1
+-- ('Citizen Eco-Drive Men''s Watch', 180.00, 'Men''s Watch', 15, 'citizen.jpg',
+--  'Solar-powered Citizen watch with scratch-resistant sapphire crystal.'),
+-- -- 2
+-- ('Casio Sheen Women''s Watch', 130.00, 'Women''s Watch', 20, 'sheen.jpg',
+--  'Elegant gold-tone stainless steel design, 50m water resistance.'),
+-- -- 3
+-- ('Apple Watch Series 9', 399.00, 'Smartwatch', 10, 'applewatch9.jpg',
+--  'Premium smartwatch with always-on display, health and fitness tracking.'),
+-- -- 4
+-- ('Garmin Forerunner 255', 349.00, 'Smartwatch', 12, 'garmin255.jpg',
+--  'Running-focused GPS watch with up to 14 days battery life.'),
+-- -- 5
+-- ('Orient Bambino Men''s Automatic Watch', 185.00, 'Men''s Watch', 18, 'orient.jpg',
+--  'Classic Japanese design, leather strap, automatic movement.'),
+-- -- 6
+-- ('Daniel Wellington Classic Petite', 159.00, 'Women''s Watch', 22, 'dw_classic.jpg',
+--  'Slim 28mm mesh strap watch, ideal for a feminine wrist.'),
+-- -- 7
+-- ('Xiaomi Watch S1 Active', 129.00, 'Smartwatch', 25, 'xiaomi_s1.jpg',
+--  'Supports GPS, heart rate and SpO2 tracking, 5ATM water resistant.'),
+-- -- 8
+-- ('G-Shock GA-2100', 110.00, 'Men''s Watch', 30, 'gshock_ga2100.jpg',
+--  'Iconic shock-resistant design with durable carbon core guard.');
+
+-- Fashion Watches (casual everyday style brands)
+INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
+('Fossil Neutra Chronograph', 129.99, 'Fashion', 50, 'fossil_neutra.jpg',
+ 'The Fossil Neutra Chronograph features a clean minimalist dial paired with three subdials. The polished stainless steel case complements its genuine leather strap. Ideal for casual yet stylish daily wear.'),
+('Michael Kors Slim Runway', 149.00, 'Fashion', 60, 'mk_slim_runway.jpg',
+ 'Michael Kors Slim Runway offers a sleek 42 mm case design with a slim profile. The quartz movement ensures accurate timekeeping. A versatile piece that effortlessly transitions between work and weekend.'),
+('Daniel Wellington Classic Sheffield', 179.00, 'Fashion', 80, 'dw_sheffield.jpg',
+ 'This Daniel Wellington model offers a minimalist white dial with rose-gold indices. The black leather strap adds timeless appeal. Perfect for those who prefer a clean and refined aesthetic.'),
+('Skagen Ancher Mesh', 129.00, 'Fashion', 70, 'skagen_ancher.jpg',
+ 'The Skagen Ancher features a slim mesh band and Scandinavian design. Its sunray dial offers elegant subtlety. Lightweight and comfortable for all-day wear.'),
+('Casio Vintage A168WA', 49.99, 'Fashion', 100, 'casio_a168wa.jpg',
+ 'Retro digital watch with a stainless steel band and iconic vintage look. Features alarm, stopwatch, and backlight. Combines style and practicality at a great price.'),
+('Timex Weekender 38', 59.95, 'Fashion', 80, 'timex_weekender.jpg',
+ 'Timex Weekender features an interchangeable nylon strap and INDIGLO light. Simple dial with bold numerals offers easy readability. Perfect for casual, everyday use.'),
+('Citizen Chandler Eco‑Drive', 199.00, 'Fashion', 50, 'citizen_chandler.jpg',
+ 'Powered by light with no battery change required thanks to Eco‑Drive tech. The stainless steel case and canvas strap create a rugged yet refined look. Water resistant to 100 m for outdoor wear.'),
+('Seiko 5 SNK807', 115.00, 'Fashion', 40, 'seiko_snk807.jpg',
+ 'A military-style automatic watch with day-date display. Hardlex crystal and fabric strap for durability. Great introduction to mechanical timepieces.');
+
+-- Classic Watches (timeless heritage models)
+INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
+('Seiko Presage Cocktail SRPB43', 425.00, 'Classic', 25, 'seiko_presage_sd.jpg',
+ 'The Presage Cocktail features a stunning blue sunburst dial inspired by Martini. Powered by Seiko’s reliable automatic movement. A refined dress watch suitable for formal occasions.'),
+('Tissot Le Locle Automatic', 525.00, 'Classic', 30, 'tissot_le_locle.jpg',
+ 'Named after Tissot’s hometown, this beautifully crafted dress watch features Roman numerals. Automatic Swiss movement with transparent case back. Elegant for office or formal events.'),
+('Hamilton Jazzmaster Thinline', 675.00, 'Classic', 20, 'hamilton_jazzmaster.jpg',
+ 'Hamilton Thinline offers slim profile and sunburst silver dial. Leather strap adds timeless sophistication. Swiss quartz movement ensures precision.'),
+('Longines Heritage 1969', 1_800.00, 'Classic', 15, 'longines_1969.jpg',
+ 'Reissue of the 1969 model with vintage aesthetic and automatic movement. Classic dial markers and slim silhouette. A beautiful homage to mid-century design.'),
+('Bulova Classic Automatic 96A187', 399.00, 'Classic', 35, 'bulova_96a187.jpg',
+ 'Features curved crystal and silver dial for vintage appeal. See‑through case back shows Japanese automatic movement. Ideal for collectors on a budget.'),
+('Orient Bambino Version IV', 285.00, 'Classic', 45, 'orient_bambino_iv.jpg',
+ 'Popular dress watch with domed crystal and elegant handset. Mechanical movement with smooth sweeping second hand. Combines affordability and classic design.'),
+('Movado Museum Classic', 795.00, 'Classic', 20, 'movado_museum.jpg',
+ 'Iconic minimalist dial with single dot at 12 o’clock. Swiss quartz movement for accuracy. Polished stainless steel design exudes elegance.'),
+('Citizen Eco‑Drive Stiletto', 349.00, 'Classic', 20, 'citizen_stiletto.jpg',
+ 'Elegant ultra-thin Eco‑Drive watch powered by any light source. Sapphire crystal and stainless steel case. A timeless watch with modern technology.');
+
+-- Electronic Watches (smart and digital)
+INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
+('Apple Watch SE (2nd Gen)', 249.00, 'Electronic', 40, 'apple_watch_se2.jpg',
+ 'Apple Watch SE includes fitness tracking, notifications, and fall detection. Retina display and watchOS ensure smooth experience. A cost-effective entry into Apple’s smartwatch ecosystem.'),
+('Samsung Galaxy Watch 6', 299.99, 'Electronic', 35, 'samsung_watch6.jpg',
+ 'Super AMOLED display with advanced health tracking and LTE option. GPS and air‑pressure sensors for outdoor activities. Compatible with Android devices for full functionality.'),
+('Garmin Forerunner 265', 399.99, 'Electronic', 30, 'garmin_forerunner.jpg',
+ 'Designed for runners with built-in GPS and performance metrics. AMOLED touchscreen and long battery life. Lightweight and durable for serious athletes.'),
+('Fitbit Versa 4', 179.95, 'Electronic', 50, 'fitbit_versa4.jpg',
+ 'Comprehensive fitness features with heart‑rate and sleep tracking. Lightweight aluminum case and AMOLED display. Offers guided workouts and music control.'),
+('Casio G‑Shock GA2100', 99.99, 'Electronic', 60, 'gshock_ga2100.jpg',
+ 'Carbon core guard structure provides extreme durability. Analog‑digital display with super illuminator. Resistant to shocks and water up to 200 m.'),
+('Fossil Gen 6 Hybrid HR', 199.00, 'Electronic', 40, 'fossil_gen6_hybrid.jpg',
+ 'Hybrid smartwatch with analog hands and always-on readouts. Tracks heart rate and uses Alexa voice command. Combines classic look with modern tech.'),
+('Suunto 9 Peak', 479.00, 'Electronic', 20, 'suunto_9_peak.jpg',
+ 'Premium multisport watch with up to 170 h battery life. GPS navigation and over 80 sport modes. Sapphire glass and stainless steel for rugged endurance.'),
+('Withings ScanWatch 2', 279.95, 'Electronic', 25, 'withings_scanwatch2.jpg',
+ 'Analog-look watch that records ECG and sleep apnea. Hybrid display hides digital screen under analog hands. Health data syncs with mobile app for insights.');
+
+-- Luxury Watches (premium and haute horlogerie)
+INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
+('Rolex Submariner Date', 12_500.00, 'Luxury', 5, 'rolex_submariner.jpg',
+ 'Iconic professional diver’s watch with Cerachrom bezel and waterproof to 300 m. Swiss automatic movement with date. A symbol of luxury and excellence.'),
+('Omega Speedmaster Professional', 6_300.00, 'Luxury', 8, 'omega_speedmaster.jpg',
+ '“Moonwatch” worn on lunar missions, manual-wind chronograph. Hesalite crystal and 50 h power reserve. A historic icon of space exploration.'),
+('TAG Heuer Carrera Calibre 5', 3_150.00, 'Luxury', 10, 'tag_carrera.jpg',
+ 'Classic motorsport-inspired watch with Calibre 5 automatic movement. Sapphire crystal and transparent case back. Sporty yet refined everyday luxury.'),
+('Cartier Tank Solo', 2_850.00, 'Luxury', 12, 'cartier_tank.jpg',
+ 'Rectangular case and elegant Roman numerals define the Tank. Swiss quartz movement ensures precision. A timeless symbol of refined elegance.'),
+('Breitling Navitimer B01', 9_200.00, 'Luxury', 4, 'breitling_navitimer.jpg',
+ 'Iconic pilot’s chronograph with slide rule bezel. COSC-certified automatic B01 movement. Bold design for aviation enthusiasts.'),
+('IWC Portugieser Automatic', 7_450.00, 'Luxury', 6, 'iwc_portugieser.jpg',
+ 'Elegant 42.3 mm case with railway-track chapter ring. 7‑day power reserve and in‑house automatic movement. Sophisticated dress watch appeal.'),
+('Audemars Piguet Royal Oak Selfwinding', 31_000.00, 'Luxury', 2, 'ap_royaloak.jpg',
+ 'Famed octagonal bezel and “Tapisserie” dial pattern speak luxury. In-house self-winding caliber and sapphire case back. A modern icon of haute horlogerie.'),
+('Patek Philippe Calatrava 5227', 35_000.00, 'Luxury', 2, 'pp_calatrava.jpg',
+ 'Timeless dress watch with lacquered dial and polished bezel. In-house manual-wind movement with hinged case back. A masterpiece of Swiss watchmaking.');

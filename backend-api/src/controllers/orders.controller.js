@@ -54,6 +54,39 @@ function getOrder(req, res) {
   return res.json(Jsend.success({ order: {} }));
 }
 
+const getOrdersByCustomer = async (req, res) => {
+ 
+  const { customerId } = req.params;
+
+  try {
+    const orders = await knex("Order")
+      .where("Order.CustomerID", customerId)
+      .join("OrderItem", "Order.OrderID", "OrderItem.OrderID")
+      .join("Product", "OrderItem.ProductID", "Product.ProductID")
+      .select(
+        "Order.OrderID",
+        "Order.Date",
+        "Order.Status",
+        "OrderItem.Quantity",
+        "OrderItem.UnitPrice",
+        "Product.Name as ProductName",
+        "Product.Image as ProductImage"
+      )
+      .orderBy("Order.Date", "desc");
+    
+      //console.log(orders);
+      console.log("Orders result:", orders.length, JSON.stringify(orders, null, 2));
+
+
+    return res.json(Jsend.success({ orders }));
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return res.status(500).json(Jsend.error("Failed to fetch orders"));
+  }
+};
+
+
+
 function updateOrder(req, res) {
   return res.json(Jsend.success({ order: {} }));
 }
@@ -80,4 +113,5 @@ module.exports = {
   createOrder,
   updateOrder,
   deleteOrder,
+  getOrdersByCustomer,
 };

@@ -23,12 +23,12 @@
                     <h3>Change Password</h3>
                     <hr class="mx-auto">
                     <div class="form-group">
-                        <input type="password" class="form-control" id="account-password" name="password" v-model="form.password"
-                            placeholder="Password" required>
+                        <input type="password" class="form-control" id="account-password" name="password"
+                            v-model="form.password" placeholder="Password" required>
                     </div>
                     <span class="form-group">
-                        <input type="password" class="form-control" id="account-confirm-password" name="confirmPassword"  v-model="form.confirmPassword"
-                            placeholder="Confirm Password" required>
+                        <input type="password" class="form-control" id="account-confirm-password" name="confirmPassword"
+                            v-model="form.confirmPassword" placeholder="Confirm Password" required>
                     </span>
                     <span class="form-group">
                         <input type="submit" class="btn" id="change-pass-btn" value="Change Password">
@@ -48,10 +48,11 @@
         <table class="mt-5 pt-5">
             <tr>
                 <th>Product</th>
+                <th>Status</th>
                 <th>Date</th>
             </tr>
             <!--1-->
-            <tr>
+            <!-- <tr>
                 <td>
                     <div class="product-info">
                         <img :src="watch1" alt="">
@@ -62,9 +63,35 @@
                 </td>
 
                 <td>
+                    <span>Pending</span>
+                </td>
+
+                <td>
                     <span>2025-07-05</span>
                 </td>
 
+            </tr> -->
+
+            <tr v-for="order in orders" :key="order.OrderID">
+                <td>
+                    <div class="product-info">
+                        <!-- <img :src="`/images/${order.ProductImage}`" alt=""> -->
+                        <img :src="`/images/${order.ProductImage}`" alt="product image" />
+
+                        <div>
+                            <p class="mt-3">{{ order.ProductName }}</p>
+                            <p>Qty: {{ order.Quantity }}</p>
+                            <p>Unit price: ${{ order.UnitPrice.toFixed(2) }}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span>{{ order.Status }}</span>
+                </td>
+
+                <td>
+                    <span>{{ order.Date }}</span>
+                </td>
             </tr>
 
 
@@ -75,11 +102,7 @@
 
 <script>
 import watch1 from '@/assets/watch1.jpeg';
-import { useRouter } from 'vue-router';
 import axios from 'axios';
-
-const router = useRouter();
-
 
 export default {
     name: 'Account',
@@ -90,10 +113,33 @@ export default {
             form: {
                 password: '',
                 confirmPassword: ''
-            }
+            },
+            orders: []
         };
     },
+    mounted() {
+        this.fetchOrders();
+    },
     methods: {
+        // async fetchOrders() {
+        //     try {
+        //         const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders?customerId=${this.customer.CustomerID}`);
+        //         this.orders = response.data;
+        //     } catch (error) {
+        //         console.error("Error fetching orders:", error);
+        //     }
+        // },
+        async fetchOrders() {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/customer/${this.customer.CustomerID}`);
+                if (response.data.success) {
+                    this.orders = response.data.data.orders; // vì dùng Jsend.success({ orders })
+                }
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+            }
+        },
+
         handleLogout() {
             localStorage.removeItem('customer');
             //this.$router.push('/login');
@@ -239,7 +285,7 @@ a:nth-child(2) {
     background-color: #006b3d;
 }
 
-.orders th:nth-child(2) {
+.orders th:last-child {
     text-align: right;
 }
 
@@ -248,6 +294,10 @@ a:nth-child(2) {
 }
 
 .orders td:nth-child(2) {
+    padding: 10px;
+}
+
+.orders td:last-child {
     text-align: right;
 }
 

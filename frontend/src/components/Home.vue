@@ -6,14 +6,14 @@
                     <img :src="banner" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="watch" alt="Banner Image">
+                    <img :src="`/images/banner2.jpg`" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="watch4" alt="Banner Image">
+                    <img :src="`/images/banner3.jpg`" alt="Banner Image">
                 </div>
             </VSlickCarousel>
         </div>
-        <div id="featured" class="text-center my-5">
+        <div id="featured" class="text-center my-3">
             <h3 style="font-size: 2rem; color: rgb(155, 155, 155); text-align: left; margin-bottom: 0;">Best Seller</h3>
         </div>
         <div class="product-container">
@@ -188,9 +188,8 @@ img {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
-    /* Chia đều các phần tử */
     margin: 3.5rem 0;
+   
 }
 
 
