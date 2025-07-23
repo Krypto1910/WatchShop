@@ -6,7 +6,7 @@
             <hr>
         </div>
         <div v-if="!productCart.length">
-            <span style="font-size: 1.2rem; font-weight: 400; color: rgb(155, 155, 155); padding: 0.5rem 0 0 0.5rem;">No
+            <span style="font-size: 1.2rem; font-weight: 400; color: rgb(155, 155, 155); padding: 0.5rem 0 0 0;">No
                 selected items</span>
         </div>
         <div v-if="productCart.length">

@@ -61,7 +61,7 @@ import { VSlickCarousel } from 'v-slick-carousel'
 export default {
     name: 'Home',
     components: {
-        VSlickCarousel, // ← thêm dòng này
+        VSlickCarousel, 
     },
     data() {
         return {
@@ -116,11 +116,12 @@ export default {
 .slick-arrow {
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.3);
+
     color: white;
     border: none;
     font-size: 2rem;
-    width: 40px;
-    height: 40px;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     position: absolute;
     top: 50%;

@@ -170,6 +170,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: rgba(255, 228, 196, 0.178);
+  /* background-color: rgba(255, 228, 196, 0.178); */
+  background-color: rgba(232, 192, 140, 0.18);
   padding-top: 0rem !important;
 }

@@ -205,7 +205,7 @@ export default {
         async createOrder() {
             const customer = JSON.parse(localStorage.getItem("customer"));
             if (!customer || !this.selectedAddress || !this.selectedMethod) {
-                Swal.fire("Incomplete Info", "Please select address and payment method", "warning");
+                Swal.fire("Incomplete Information", "Please select address and payment method", "warning");
                 return;
             }
 
@@ -378,7 +378,7 @@ th:last-child {
     font-weight: 400;
     border: none;
     border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    /* box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25); */
     transition: all 0.2s ease-in-out;
     text-align: center;
     cursor: pointer;
@@ -386,7 +386,7 @@ th:last-child {
 
 #add-new-one:hover {
     background-color: #004d2f;
-    box-shadow: 0 5px 10px rgba(0, 107, 61, 0.3);
+    /* box-shadow: 0 5px 10px rgba(0, 107, 61, 0.3); */
 }
 
 #add-new-one:active {
