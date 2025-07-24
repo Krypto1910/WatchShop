@@ -50,10 +50,6 @@ const createOrder = async (req, res) => {
   }
 };
 
-function getOrder(req, res) {
-  return res.json(Jsend.success({ order: {} }));
-}
-
 const getOrdersByCustomer = async (req, res) => {
  
   const { customerId } = req.params;
@@ -85,32 +81,7 @@ const getOrdersByCustomer = async (req, res) => {
 };
 
 
-
-function updateOrder(req, res) {
-  return res.json(Jsend.success({ order: {} }));
-}
-
-function deleteOrder(req, res) {
-  return res.json(
-    Jsend.success({
-      message: "Order deleted",
-    })
-  );
-}
-
-function deleteAllOrders(req, res) {
-  return res.json(
-    Jsend.success({
-      message: "All orders deleted",
-    })
-  );
-}
-
 module.exports = {
-  deleteAllOrders,
-  getOrder,
   createOrder,
-  updateOrder,
-  deleteOrder,
   getOrdersByCustomer,
 };

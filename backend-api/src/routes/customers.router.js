@@ -1,16 +1,18 @@
 const express = require('express');
 const customersController = require('../controllers/customers.controller');
 const { methodNotAllowed } = require('../controllers/errors.controller');
-const { customersSchema,
-        partialCustomersSchema,
+const { customersSchema
  } = require('../schema/customers.schemas')
 const { z } = require('zod');
+const multer = require("multer");
+const upload = multer(); 
+
 
 const router = express.Router();
 const { validateRequest } = require('../middlewares/validator.middleware')
 
 module.exports.setup = (app) => {
-  app.use('/api/v1/customers', router);
+  app.use('/api/v1/customers',upload.none(), router);
 
   router.post('/register', customersController.createCustomer);
 
@@ -24,34 +26,10 @@ module.exports.setup = (app) => {
     customersController.checkCustomer,
   );
 
-  router.get(
-    '/:id',
-    validateRequest(
-      z.object({
-        params: customersSchema.pick({ id: true }).strict(),
-      })
-    ),
-    customersController.getCustomer
-  );
-
+  router.get('/:id', customersController.getCustomer);
 
   router.put('/:id',customersController.updateCustomer);
   
-
-  router.delete(
-    '/:id',
-    validateRequest(
-      z.object({
-        params: customersSchema.pick({ id: true }).strict(),
-      })
-    ),
-    customersController.deleteCustomer
-  );
-
-    router.delete(
-    '/',
-    customersController.deleteAllCustomers
-  );
 
   router.all('/',methodNotAllowed)
   router.all('/:id',methodNotAllowed)
