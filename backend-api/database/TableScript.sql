@@ -59,25 +59,6 @@ CREATE TABLE "Order" (
         ON DELETE CASCADE
 );
 
--- TẠO BẢNG CartItem
--- CREATE TABLE "CartItem" (
---     "CartItemID" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
---     "ProductID"  INT NOT NULL,
---     "CartID"     INT NOT NULL,
---     "Quantity"   INT NOT NULL CHECK ("Quantity" > 0),
---     CONSTRAINT fk_cartitem_product
---         FOREIGN KEY ("ProductID")
---         REFERENCES "Product" ("ProductID")
---         ON UPDATE CASCADE
---         ON DELETE CASCADE,
---     CONSTRAINT fk_cartitem_cart
---         FOREIGN KEY ("CartID")
---         REFERENCES "Cart" ("CartID")
---         ON UPDATE CASCADE
---         ON DELETE CASCADE,
---     CONSTRAINT uq_cart_product UNIQUE ("CartID", "ProductID")
--- );
-
 -- TẠO BẢNG OrderItem
 CREATE TABLE "OrderItem" (
     "OrderItemID" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,

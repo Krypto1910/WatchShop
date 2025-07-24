@@ -1,32 +1,3 @@
---ALTER SEQUENCE "Product_ProductID_seq" RESTART WITH 1;
-
--- INSERT INTO "Product" (
---     "Name", "Price", "Category", "QuantityAvailable", "Image", "Description"
--- ) VALUES
--- -- 1
--- ('Citizen Eco-Drive Men''s Watch', 180.00, 'Men''s Watch', 15, 'citizen.jpg',
---  'Solar-powered Citizen watch with scratch-resistant sapphire crystal.'),
--- -- 2
--- ('Casio Sheen Women''s Watch', 130.00, 'Women''s Watch', 20, 'sheen.jpg',
---  'Elegant gold-tone stainless steel design, 50m water resistance.'),
--- -- 3
--- ('Apple Watch Series 9', 399.00, 'Smartwatch', 10, 'applewatch9.jpg',
---  'Premium smartwatch with always-on display, health and fitness tracking.'),
--- -- 4
--- ('Garmin Forerunner 255', 349.00, 'Smartwatch', 12, 'garmin255.jpg',
---  'Running-focused GPS watch with up to 14 days battery life.'),
--- -- 5
--- ('Orient Bambino Men''s Automatic Watch', 185.00, 'Men''s Watch', 18, 'orient.jpg',
---  'Classic Japanese design, leather strap, automatic movement.'),
--- -- 6
--- ('Daniel Wellington Classic Petite', 159.00, 'Women''s Watch', 22, 'dw_classic.jpg',
---  'Slim 28mm mesh strap watch, ideal for a feminine wrist.'),
--- -- 7
--- ('Xiaomi Watch S1 Active', 129.00, 'Smartwatch', 25, 'xiaomi_s1.jpg',
---  'Supports GPS, heart rate and SpO2 tracking, 5ATM water resistant.'),
--- -- 8
--- ('G-Shock GA-2100', 110.00, 'Men''s Watch', 30, 'gshock_ga2100.jpg',
---  'Iconic shock-resistant design with durable carbon core guard.');
 
 -- Fashion Watches (casual everyday style brands)
 INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
@@ -65,25 +36,6 @@ INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","De
  'Iconic minimalist dial with single dot at 12 o’clock. Swiss quartz movement for accuracy. Polished stainless steel design exudes elegance.'),
 ('Citizen Eco‑Drive Stiletto', 349.00, 'Classic', 20, 'citizen_stiletto.jpg',
  'Elegant ultra-thin Eco‑Drive watch powered by any light source. Sapphire crystal and stainless steel case. A timeless watch with modern technology.');
-
--- Electronic Watches (smart and digital)
-INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
-('Apple Watch SE (2nd Gen)', 249.00, 'Electronic', 40, 'apple_watch_se2.jpg',
- 'Apple Watch SE includes fitness tracking, notifications, and fall detection. Retina display and watchOS ensure smooth experience. A cost-effective entry into Apple’s smartwatch ecosystem.'),
-('Samsung Galaxy Watch 6', 299.99, 'Electronic', 35, 'samsung_watch6.jpg',
- 'Super AMOLED display with advanced health tracking and LTE option. GPS and air‑pressure sensors for outdoor activities. Compatible with Android devices for full functionality.'),
-('Garmin Forerunner 265', 399.99, 'Electronic', 30, 'garmin_forerunner.jpg',
- 'Designed for runners with built-in GPS and performance metrics. AMOLED touchscreen and long battery life. Lightweight and durable for serious athletes.'),
-('Fitbit Versa 4', 179.95, 'Electronic', 50, 'fitbit_versa4.jpg',
- 'Comprehensive fitness features with heart‑rate and sleep tracking. Lightweight aluminum case and AMOLED display. Offers guided workouts and music control.'),
-('Casio G‑Shock GA2100', 99.99, 'Electronic', 60, 'gshock_ga2100.jpg',
- 'Carbon core guard structure provides extreme durability. Analog‑digital display with super illuminator. Resistant to shocks and water up to 200 m.'),
-('Fossil Gen 6 Hybrid HR', 199.00, 'Electronic', 40, 'fossil_gen6_hybrid.jpg',
- 'Hybrid smartwatch with analog hands and always-on readouts. Tracks heart rate and uses Alexa voice command. Combines classic look with modern tech.'),
-('Suunto 9 Peak', 479.00, 'Electronic', 20, 'suunto_9_peak.jpg',
- 'Premium multisport watch with up to 170 h battery life. GPS navigation and over 80 sport modes. Sapphire glass and stainless steel for rugged endurance.'),
-('Withings ScanWatch 2', 279.95, 'Electronic', 25, 'withings_scanwatch2.jpg',
- 'Analog-look watch that records ECG and sleep apnea. Hybrid display hides digital screen under analog hands. Health data syncs with mobile app for insights.');
 
 -- Luxury Watches (premium and haute horlogerie)
 INSERT INTO "Product" ("Name","Price","Category","QuantityAvailable","Image","Description") VALUES
