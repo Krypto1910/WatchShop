@@ -50,16 +50,6 @@ module.exports.setup = (app) => {
     productsController.updateProduct,
   );
 
-  router.post(
-    '/',
-    validateRequest(
-      z.object({
-        input: productsSchema.omit({ id: true, image: true }).strict()
-      }),
-    ),
-    productsController.createProduct,
-  );
-
   router.delete('/', productsController.deleteAllProducts);
 
  

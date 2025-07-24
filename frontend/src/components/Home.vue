@@ -3,40 +3,153 @@
         <div class="carousel">
             <VSlickCarousel v-bind="settings">
                 <div class="banner-container">
-                    <img :src="banner" alt="Banner Image">
+                    <img :src="`/images/banner4.jpg`" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="`/images/banner2.jpg`" alt="Banner Image">
+                    <img :src="`/images/banner5.jpg`" alt="Banner Image">
                 </div>
                 <div class="banner-container">
-                    <img :src="`/images/banner3.jpg`" alt="Banner Image">
+                    <img :src="`/images/banner10.jpg`" alt="Banner Image">
                 </div>
             </VSlickCarousel>
         </div>
-        <div id="featured" class="text-center my-3">
-            <h3 style="font-size: 2rem; color: rgb(155, 155, 155); text-align: left; margin-bottom: 0;">Best Seller</h3>
-        </div>
-        <div class="product-container">
-            <div class="mx-auto container-fluid">
-                <router-link v-for="product in products" :key="product.ProductID"
-                    class="product text-center col-lg-3 col-md-4 col-sm-12"
-                    :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
-                    <img :src="`/images/${product.Image}`" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">{{ product.Name }}</h5>
-                    <h4 class="p-price">${{ product.Price }}</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
+
+        <!--Brands-->
+        <section id="brand" class="container">
+            <div class="row" style="padding: 1rem 0;">
+                <img class="img-fluid col-lg-3 col-md-6 col-sm-12" :src="`/images/brioni.png`" alt="">
+                <img class="img-fluid col-lg-3 col-md-6 col-sm-12" :src="`/images/canali.jpeg`" alt="">
+                <img class="img-fluid col-lg-3 col-md-6 col-sm-12" :src="`/images/coach.png`" alt="">
+                <img class="img-fluid col-lg-3 col-md-6 col-sm-12" :src="`/images/balmain.jpeg`" alt="">
             </div>
+        </section>
 
+        <!--New-->
+        <section id="new" class="w-100">
+            <div class="row p-0 m-0">
+                <!--1-->
+                <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                    <img class="img-fluid" :src="`/images/vest.jpeg`" alt="">
+                    <div class="details">
+                        <h2>Premium</h2>
 
-        </div>
+                    </div>
+                </div>
+
+                <!--2-->
+                <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                    <img class="img-fluid" :src="`/images/watch1.jpeg`" alt="">
+                    <div class="details">
+                        <h2>High-End</h2>
+
+                    </div>
+                </div>
+
+                <!--3-->
+                <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                    <img class="img-fluid" :src="`/images/banner3.jpg`" alt="">
+                    <div class="details">
+                        <h2>Prestigious</h2>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Fashion-->
+        <section>
+            <div id="featured" class="text-center my-5">
+                <h3>Fashion</h3>
+                <hr class="mx-auto">
+                <p>Check out our fashion watches</p>
+            </div>
+            <div class="product-container">
+                <div class="mx-auto container-fluid">
+                    <router-link v-for="product in productsByCategory.fashion" :key="product.ProductID"
+                        class="product text-center col-lg-3 col-md-4 col-sm-12"
+                        :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
+                        <img :src="`/images/${product.Image}`" alt="">
+                        <div class="star">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h5 class="p-name">{{ product.Name }}</h5>
+                        <h4 class="p-price">${{ product.Price }}</h4>
+                        <button class="buy-btn">Buy Now</button>
+                    </router-link>
+                </div>
+            </div>
+        </section>
+
+        <!--Banner-->
+        <section id="banner" class="my-5 py-5">
+            <div class="container">
+                <h4>MID SEASON'S SALE</h4>
+                <h1>Summer Collection <br> Up to 15% OFF</h1>
+                <button class="text-uppercase" @click="goToRegister">Get Discount</button>
+                <router-link class="button text-uppercase" to="/register"></router-link>
+            </div>
+        </section>
+
+        <!--Classic-->
+        <section>
+            <div id="featured" class="text-center my-5">
+                <h3>Classic</h3>
+                <hr class="mx-auto">
+                <p>Check out our classic watches</p>
+            </div>
+            <div class="product-container">
+                <div class="mx-auto container-fluid">
+                    <router-link v-for="product in productsByCategory.classic" :key="product.ProductID"
+                        class="product text-center col-lg-3 col-md-4 col-sm-12"
+                        :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
+                        <img :src="`/images/${product.Image}`" alt="">
+                        <div class="star">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h5 class="p-name">{{ product.Name }}</h5>
+                        <h4 class="p-price">${{ product.Price }}</h4>
+                        <button class="buy-btn">Buy Now</button>
+                    </router-link>
+                </div>
+            </div>
+        </section>
+
+        <!--Luxury-->
+        <section>
+            <div id="featured" class="text-center my-5">
+                <h3>Luxury</h3>
+                <hr class="mx-auto">
+                <p>Check out our luxury watches</p>
+            </div>
+            <div class="product-container">
+                <div class="mx-auto container-fluid">
+                    <router-link v-for="product in productsByCategory.luxury" :key="product.ProductID"
+                        class="product text-center col-lg-3 col-md-4 col-sm-12"
+                        :to="{ name: 'SingleProduct', params: { id: product.ProductID } }">
+                        <img :src="`/images/${product.Image}`" alt="">
+                        <div class="star">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h5 class="p-name">{{ product.Name }}</h5>
+                        <h4 class="p-price">${{ product.Price }}</h4>
+                        <button class="buy-btn">Buy Now</button>
+                    </router-link>
+                </div>
+            </div>
+        </section>
+
 
     </div>
 </template>
@@ -52,16 +165,13 @@ import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
-
-import { useRouter } from 'vue-router'
-const router = useRouter()
 import 'v-slick-carousel/style.css'
 import { VSlickCarousel } from 'v-slick-carousel'
 
 export default {
     name: 'Home',
     components: {
-        VSlickCarousel, 
+        VSlickCarousel,
     },
     data() {
         return {
@@ -84,23 +194,34 @@ export default {
                 speed: 500,
                 slidesToScroll: 1,
             },
-            products: []
+            products: [],
+            productsByCategory: {
+                fashion: [],
+                classic: [],
+                luxury: []
+            }
         };
     },
     mounted() {
-        this.fetchProducts();
+        this.fetchAllCategories();
     },
     methods: {
-        async fetchProducts() {
+        goToRegister() {
+            this.$router.push('/register')
+        },
+        async fetchAllCategories() {
+            await this.fetchProductsByCategory('fashion');
+            await this.fetchProductsByCategory('classic');
+            await this.fetchProductsByCategory('luxury');
+        },
+        async fetchProductsByCategory(category) {
             try {
-                const response = await axios.get(
-                    `${import.meta.env.VITE_API_URI}/products`
-                );
-                this.products = response.data;
+                const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
+                this.productsByCategory[category] = response.data.data.products;
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error(`Error fetching ${category} products:`, error);
             }
-        }
+        },
 
     }
 }
@@ -116,7 +237,6 @@ export default {
 .slick-arrow {
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.3);
-
     color: white;
     border: none;
     font-size: 2rem;
@@ -189,8 +309,8 @@ img {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin: 3.5rem 0;
-   
+    margin-top: 3rem;
+    padding-top: 3rem;
 }
 
 
@@ -281,8 +401,124 @@ p {
     }
 
     .content {
-        margin: 7% auto;
+        margin: 5% auto;
     }
+}
+
+#brand .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.img-fluid {
+    width: 15.5rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: unset;
+}
+
+#new .one img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#new .one {
+    position: relative;
+}
+
+#new .one .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: burlywood;
+    font-weight: 500;
+    opacity: 0.8;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* Căn giữa theo chiều dọc */
+    flex-direction: column;
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
+    text-align: center;
+    /* Căn giữa chữ */
+    transition: opacity 0.4s ease;
+    /* Hiệu ứng mượt */
+}
+
+#new .one .details:hover {
+    background-color: rgba(222, 184, 135, 0.1);
+    color: transparent;
+    cursor: pointer;
+    transition: 0.4s ease-out;
+}
+
+#new .one .details:hover button {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease-in-out;
+}
+
+#banner {
+    background-image: url("images/brightened-product-photography.jpeg");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: 80px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 0 !important;
+}
+
+#banner .container {
+    height: 15rem !important;
+}
+
+#banner h4 {
+    font-weight: 400;
+    color: rgb(250, 250, 250, 0.7);
+    margin-left: 4rem;
+    margin-top: 1rem;
+}
+
+#banner h1 {
+    color: rgb(222, 184, 135, 0.8);
+    font-weight: 400;
+    margin-left: 4rem;
+    margin-bottom: 1rem;
+}
+
+#banner button {
+    text-decoration: none;
+    background-color: rgb(222, 184, 135, 1.05);
+    color: rgb(34, 34, 34, 0.8);
+    padding: 0.8rem 1rem;
+    border: none;
+    transition: 0.2s ease-in-out;
+    margin-left: 4rem;
+    margin-top: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#banner button:hover {
+    background-color: black;
+    color: rgb(250, 250, 250, 0.9);
+    scale: 1.05;
 }
 
 /*mobile*/
@@ -292,7 +528,7 @@ p {
     }
 
     .content {
-        margin-top: 10%;
+        margin-top: 18%;
     }
 
     #featured h3 {
@@ -323,5 +559,36 @@ p {
         font-size: 0.52rem;
     }
 
+    .img-fluid {
+        width: 9rem;
+        height: 8rem;
+    }
+
+    #new .one img {
+        width: 100%;
+        height: 12rem;
+
+    }
+
+    /* #banner {
+        height: 80%;
+    } */
+
+    #banner .container {
+        height: 10rem !important;
+    }
+
+    #banner h4 {
+        font-size: 0.9rem;
+    }
+
+    #banner h1 {
+        font-size: 1.1rem;
+    }
+
+    #banner button {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
 }
 </style>

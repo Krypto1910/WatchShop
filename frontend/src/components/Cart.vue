@@ -47,7 +47,7 @@
 
                     <td>
                         <span>$</span>
-                        <span class="product-price">{{ product.Quantity * +product.Price }}</span>
+                        <span class="product-price">{{ (product.Quantity * +product.Price).toFixed(2) }}</span>
                     </td>
                 </tr>
 
@@ -64,8 +64,6 @@
             </div>
 
             <div class="checkout-container">
-
-                <!-- <router-link tag="button" class="btn checkout-btn" to="/checkout">Checkout</router-link> -->
                 <button  @click="handleCheckout" class="btn checkout-btn">Checkout</button>
             </div>
         </div>
@@ -292,7 +290,6 @@ th:last-child {
     color: white;
     font-size: 1rem;
     box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
- 
     margin-top: 1rem;
 }
 

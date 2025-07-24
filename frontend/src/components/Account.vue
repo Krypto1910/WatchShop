@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="flex items-center gap-4 mt-6">
-                        <a>Orders</a>
+                        <a @click="scrollToOrders">Orders</a>
                         <a @click="handleLogout">Logout</a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
     </section>
 
     <!--Orders-->
-    <section class="orders container my-5 py-3">
+    <section ref="ordersSection" class="orders container my-5 py-3">
         <div class="container" mt-5>
             <h2 class="font-weight-bold text-center">Your Orders</h2>
             <hr class="mx-auto">
@@ -51,26 +51,6 @@
                 <th>Status</th>
                 <th>Date</th>
             </tr>
-            <!--1-->
-            <!-- <tr>
-                <td>
-                    <div class="product-info">
-                        <img :src="watch1" alt="">
-                        <div>
-                            <p class="mt-3">Premium Watch</p>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <span>Pending</span>
-                </td>
-
-                <td>
-                    <span>2025-07-05</span>
-                </td>
-
-            </tr> -->
 
             <tr v-for="order in orders" :key="order.OrderID">
                 <td>
@@ -79,9 +59,9 @@
                         <img :src="`/images/${order.ProductImage}`" alt="product image" />
 
                         <div>
-                            <p class="mt-3">{{ order.ProductName }}</p>
-                            <p>Qty: {{ order.Quantity }}</p>
-                            <p>Unit price: ${{ order.UnitPrice.toFixed(2) }}</p>
+                            <p class="item-detail">{{ order.ProductName }}</p>
+                            <p class="item-detail">Qty: {{ order.Quantity }}</p>
+                            <p class="item-detail">Unit price: ${{ (+order.UnitPrice).toFixed(2) }}</p>
                         </div>
                     </div>
                 </td>
@@ -90,7 +70,10 @@
                 </td>
 
                 <td>
-                    <span>{{ order.Date }}</span>
+                    <span>{{ moment(order.Date).format(
+                        'YYYY-MM-DD'
+                        ) }}</span>
+
                 </td>
             </tr>
 
@@ -103,11 +86,13 @@
 <script>
 import watch1 from '@/assets/watch1.jpeg';
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
     name: 'Account',
     data() {
         return {
+            moment,
             watch1,
             customer: JSON.parse(localStorage.getItem("customer")) || {},
             form: {
@@ -121,22 +106,23 @@ export default {
         this.fetchOrders();
     },
     methods: {
-        // async fetchOrders() {
-        //     try {
-        //         const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders?customerId=${this.customer.CustomerID}`);
-        //         this.orders = response.data;
-        //     } catch (error) {
-        //         console.error("Error fetching orders:", error);
-        //     }
-        // },
         async fetchOrders() {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/customer/${this.customer.CustomerID}`);
-                if (response.data.success) {
+                //console.log(response.data);
+                if (response.data.status == "success") {
                     this.orders = response.data.data.orders; // vì dùng Jsend.success({ orders })
+                    console.log(response.data.data.orders);
                 }
             } catch (error) {
                 console.error("Error fetching orders:", error);
+            }
+        },
+
+        scrollToOrders() {
+            const el = this.$refs.ordersSection;
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
             }
         },
 
@@ -146,48 +132,48 @@ export default {
             window.location.href = '/login';
         },
         async handleChangePassword() {
-        if (this.form.password !== this.form.confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
+            if (this.form.password !== this.form.confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
 
-        try {
-            console.log("Submitting:", {
-            id: this.customer.CustomerID,
-            body: { password: this.form.password }
-            });
-            console.log("PUT URL:", `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`);
-            console.log("PUT body:", { password: this.form.password });
+            try {
+                console.log("Submitting:", {
+                    id: this.customer.CustomerID,
+                    body: { password: this.form.password }
+                });
+                console.log("PUT URL:", `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`);
+                console.log("PUT body:", { password: this.form.password });
 
-            const response = await axios.put(
-                `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
-                {
-                    password: this.form.password
+                const response = await axios.put(
+                    `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
+                    {
+                        password: this.form.password
+                    }
+                );
+                if (response.data.success) {
+                    alert('Password updated successfully!');
+                    this.form.password = '';
+                    this.form.confirmPassword = '';
+                } else {
+                    alert(response.data.message || 'Update failed');
                 }
-            );
-            if (response.data.success) {
-                alert('Password updated successfully!');
-                this.form.password = '';
-                this.form.confirmPassword = '';
-            } else {
-                alert(response.data.message || 'Update failed');
-            }
-        } catch (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code >= 400
-                console.error("Server responded with error:", error.response.data);
-                alert(error.response.data.message || 'Update failed from server');
-            } else if (error.request) {
-                // The request was made but no response received
-                console.error("No response from server:", error.request);
-                alert('No response from server');
-            } else {
-                // Something else
-                console.error("Error setting up request:", error.message);
-                alert('Request setup error');
+            } catch (error) {
+                if (error.response) {
+                    // The request was made and the server responded with a status code >= 400
+                    console.error("Server responded with error:", error.response.data);
+                    alert(error.response.data.message || 'Update failed from server');
+                } else if (error.request) {
+                    // The request was made but no response received
+                    console.error("No response from server:", error.request);
+                    alert('No response from server');
+                } else {
+                    // Something else
+                    console.error("Error setting up request:", error.message);
+                    alert('Request setup error');
+                }
             }
         }
-    }
 
     },
 }
@@ -306,4 +292,14 @@ a:nth-child(2) {
     height: 4.5rem;
     margin-right: 10px;
 }
+
+.item-detail {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.item-detail:nth-child(1) {
+    font-size: 1rem;
+}
+
 </style>

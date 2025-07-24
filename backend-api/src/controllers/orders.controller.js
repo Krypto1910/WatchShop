@@ -74,9 +74,8 @@ const getOrdersByCustomer = async (req, res) => {
       )
       .orderBy("Order.Date", "desc");
     
-      //console.log(orders);
-      console.log("Orders result:", orders.length, JSON.stringify(orders, null, 2));
-
+      console.log(orders);
+      //console.log("Orders result:", orders.length, JSON.stringify(orders, null, 2));
 
     return res.json(Jsend.success({ orders }));
   } catch (error) {

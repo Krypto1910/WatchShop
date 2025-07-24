@@ -124,8 +124,8 @@ export default {
     },
     mounted() {
         this.productId = this.$route.params.id;
-        // Gọi API hoặc tìm sản phẩm theo ID:
         this.fetchProductById(this.productId);
+        this.fetchProductsByCategory()
     },
     methods: {
         changeImage(index) {
@@ -143,31 +143,9 @@ export default {
                 console.error("Error fetching products:", error);
             }
         },
-        // addToCart() {
-        //     const store = useAppStore()
-        //     const productCart = JSON.parse(localStorage.getItem("cart")) || []
-        //     const existProduct = productCart.find((item) => item.ProductID == this.product.ProductID)
-        //     console.log(existProduct)
-        //     if (existProduct) {
-        //         existProduct.Quantity += 1
-        //     }
-        //     else {
-        //         const product = {
-        //             ProductID: this.product.ProductID,
-        //             Name: this.product.Name,
-        //             Price: this.product.Price,
-        //             Image: this.product.Image,
-        //             Quantity: 1
-        //         }
-        //         store.updateCart([...store.cart, product])
-        //         productCart.push(product)
-        //     }
-        //     localStorage.setItem("cart", JSON.stringify(productCart))
 
-        // }
         async addToCart() {
             const store = useAppStore()
-
             store.addToCart({
                 ProductID: this.product.ProductID,
                 Name: this.product.Name,
@@ -175,10 +153,16 @@ export default {
                 Image: this.product.Image,
                 Quantity: this.Quantity
             })
+        },
 
-            // optional toast
-            // this.$toast.success('Added to cart')
-        }
+        async fetchProductsByCategory(category) {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
+                this.productsByCategory[category] = response.data.data.products;
+            } catch (error) {
+                console.error(`Error fetching ${category} products:`, error);
+            }
+        },
     }
 };
 
@@ -214,8 +198,8 @@ export default {
     border: none;
     padding: 8px 10px;
     border: none;
-    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
-    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
+    transition: 0.2s ease-in-out;
 }
 
 .single-product .buy-btn:hover {

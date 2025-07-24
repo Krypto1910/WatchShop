@@ -88,7 +88,7 @@ export default {
 #checkout-form .checkout-small-element {
     display: inline-block;
     width: 40%;
-    margin: 10px auto;
+    margin: 1rem auto;
 }
 
 #checkout-form .checkout-small-element:nth-child(2n) {
@@ -113,14 +113,13 @@ export default {
 #checkout-form #checkout-btn {
     color: #fff;
     background-color: #006b3d;
-    box-shadow: 0 3px 6px rgba(0, 107, 61, 0.25);
+    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
     transition: all 0.2s ease-in-out;
 
 }
 
 #checkout-form #checkout-btn:hover {
     background-color: #004d2f;
-    box-shadow: 0 5px 10px rgba(0, 107, 61, 0.3);
 }
 
 #checkout-form #checkout-btn:active {
