@@ -85,7 +85,7 @@
         </section>
 
         <!--Banner-->
-        <section id="banner" class="my-5 py-5">
+        <section id="banner" class="my-5 py-5" :style="{ '--banner-image': `url(${bannerBackground})` }">
             <div class="container">
                 <h4>MID SEASON'S SALE</h4>
                 <h1>Summer Collection <br> Up to 15% OFF</h1>
@@ -155,6 +155,7 @@
 </template>
 
 <script>
+import bannerBackground from '@/assets/brightened-product-photography.jpeg';
 import Navbar from '@/components/Navbar.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import axios from 'axios';
@@ -184,6 +185,7 @@ export default {
             watch3,
             watch4,
             banner2,
+            bannerBackground,
             settings: {
                 slidesToShow: 1,
                 dots: true,
@@ -469,7 +471,7 @@ p {
 }
 
 #banner {
-    background-image: url("images/brightened-product-photography.jpeg");
+    background-image: var(--banner-image);
     width: 100%;
     height: 100%;
     background-size: cover;
