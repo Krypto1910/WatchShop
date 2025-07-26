@@ -70,103 +70,68 @@
     </section>
 </template>
 
-<script>
-import Swal from 'sweetalert2';
-export default {
-    name: 'Cart',
-    data() {
-        return {
-            productCart: JSON.parse(localStorage.getItem("cart")) || [],
-            customer: JSON.parse(localStorage.getItem("customer")) || null
-        };
-    },
-    computed: {
-        cartTotal() {
-            return this.productCart.reduce(
-                (sum, item) => sum + item.Quantity * item.Price,
-                0
-            );
-        }
-    },
-    methods: {
-        handleCheckout() {
-            if (!this.customer) {
-                Swal.fire({
-                    title: 'Please login to continue',
-                    icon: 'warning',
-                    confirmButtonText: 'Login',
-                    cancelButtonText: 'Cancel',
-                    showCancelButton: true,
-                    confirmButtonColor: '#006b3d',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$router.push('/login');
-                    }
-                });
-                return;
+
+<script setup>
+import Swal from 'sweetalert2'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const productCart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+const customer = ref(JSON.parse(localStorage.getItem('customer')) || null)
+
+const cartTotal = computed(() =>
+    productCart.value.reduce((sum, item) => sum + item.Quantity * item.Price, 0).toFixed(2)
+)
+
+function handleCheckout() {
+    if (!customer.value) {
+        Swal.fire({
+            title: 'Please login to continue',
+            icon: 'warning',
+            confirmButtonText: 'Login',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            confirmButtonColor: '#006b3d',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.push('/login')
             }
-            this.$router.push('/checkout');
-        },
-
-        removeCartItem(id) {
-            this.productCart = this.productCart.filter((item) => item.ProductID != id)
-            localStorage.setItem("cart", JSON.stringify(this.productCart))
-        },
-        // Giảm số lượng
-        decreaseQuantity(product) {
-            if (product.Quantity > 1) {
-                product.Quantity--;
-                this.saveCart();
-            }
-        },
-
-        // Tăng số lượng
-        increaseQuantity(product) {
-            product.Quantity++;
-            this.saveCart();
-        },
-
-        // Nhập trực tiếp và lọc
-        onQuantityInput(event, product) {
-            let value = event.target.value.replace(/[^0-9]/g, '1');
-
-            if (parseInt(value) < 1 || !parseInt(value)) {
-                value = '1';
-            }
-
-            product.quantity = parseInt(value);
-            event.target.value = value;
-
-            this.saveCart();
-        },
-
-        // Cập nhật localStorage
-        saveCart() {
-            localStorage.setItem('cart', JSON.stringify(this.productCart));
-        },
-        onQuantityInput(event, product) {
-            let value = event.target.value;
-
-            // Chỉ giữ lại chữ số 0-9
-            value = value.replace(/[^0-9]/g, '1');
-
-            // Không cho phép rỗng hoặc 0
-            product.quantity = parseInt(value) || "";
-            event.target.value = value;
-
-            // Cập nhật vào localStorage
-            localStorage.setItem('cart', JSON.stringify(this.productCart));
-        },
-        updateQuantity(id, newQuantity) {
-            const index = this.productCart.findIndex(item => item.ProductID === id);
-            if (index !== -1) {
-                if (newQuantity < 1) newQuantity = 1; // Ngăn nhập số âm hoặc 0
-                this.productCart[index].Quantity = newQuantity;
-                localStorage.setItem("cart", JSON.stringify(this.productCart));
-            }
-        }
+        })
+        return
     }
-};
+    router.push('/checkout')
+}
+
+function removeCartItem(id) {
+    productCart.value = productCart.value.filter((item) => item.ProductID !== id)
+    saveCart()
+}
+
+function decreaseQuantity(product) {
+    if (product.Quantity > 1) {
+        product.Quantity--
+        saveCart()
+    }
+}
+
+function increaseQuantity(product) {
+    product.Quantity++
+    saveCart()
+}
+
+function updateQuantity(id, newQuantity) {
+    const index = productCart.value.findIndex((item) => item.ProductID === id)
+    if (index !== -1) {
+        productCart.value[index].Quantity = newQuantity < 1 ? 1 : newQuantity
+        saveCart()
+    }
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(productCart.value))
+}
 </script>
 
 <style scoped>

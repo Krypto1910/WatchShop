@@ -32,74 +32,59 @@
     </section>
 </template>
 
-<script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useAppStore } from '@/stores/app'
 
-export default {
-    name: "Login",
-    setup() {
-        const email = ref('');
-        const password = ref('');
-        const error = ref('');
-        const router = useRouter();
-        const store = useAppStore()
+const email = ref('')
+const password = ref('')
+const error = ref('')
 
-        const handleLogin = async () => {
-            error.value = '';
+const router = useRouter()
+const store = useAppStore()
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-            if (!email.value || !password.value) {
-                error.value = 'Please fill in all fields.';
-                return;
-            }
-            if (!emailRegex.test(email.value)) {
-                error.value = 'Invalid email format.';
-                return;
-            }
+const handleLogin = async () => {
+    error.value = ''
 
-            try {
-                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/login`, {
-                    email: email.value,
-                    password: password.value
-                });
-
-                if (response.data.success) {
-                    // Show success message
-                    Swal.fire({
-                        icon: "success",
-                        title: "Login successful",
-                        text: response.data.message || "You are logged in!",
-                        confirmButtonColor: "#006b3d"
-                    });
-
-                    // Save customer info (optional: token/localStorage)
-                    localStorage.setItem('customer', JSON.stringify(response.data.customer));
-                    // store.setCustomer(response.data.customer)
-                    
-                    window.location.href = "/"
-                    // this.$router.push('/');
-                } else {
-                    error.value = response.data.message || 'Login failed.';
-                }
-            } catch (err) {
-                error.value = err.response?.data?.message || 'Login failed.';
-            }
-        };
-
-        return {
-            email,
-            password,
-            error,
-            handleLogin
-        };
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    if (!email.value || !password.value) {
+        error.value = 'Please fill in all fields.'
+        return
     }
-};
-</script>
+    if (!emailRegex.test(email.value)) {
+        error.value = 'Invalid email format.'
+        return
+    }
 
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/login`, {
+            email: email.value,
+            password: password.value
+        })
+
+        if (response.data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Login successful',
+                text: response.data.message || 'You are logged in!',
+                confirmButtonColor: '#006b3d'
+            })
+
+            localStorage.setItem('customer', JSON.stringify(response.data.customer))
+            // store.setCustomer(response.data.customer)
+
+            window.location.href = '/'
+        } else {
+            error.value = response.data.message || 'Login failed.'
+        }
+    } catch (err) {
+        error.value = err.response?.data?.message || 'Login failed.'
+    }
+}
+</script>
 
 <style scoped>
 .form-control {

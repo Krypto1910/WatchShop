@@ -154,79 +154,56 @@
     </div>
 </template>
 
-<script>
-import bannerBackground from '@/assets/brightened-product-photography.jpeg';
-import Navbar from '@/components/Navbar.vue'
-import PageFooter from '@/components/PageFooter.vue'
-import axios from 'axios';
-import banner from '@/assets/banner.jpeg';
-import banner2 from '@/assets/banner2.jpg'
-import watch from '@/assets/watch.jpeg';
-import watch1 from '@/assets/watch1.jpeg';
-import watch2 from '@/assets/watch2.jpeg';
-import watch3 from '@/assets/watch3.jpeg';
-import watch4 from '@/assets/watch4.jpeg';
-import 'v-slick-carousel/style.css'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+
+import bannerBackground from '@/assets/brightened-product-photography.jpeg'
 import { VSlickCarousel } from 'v-slick-carousel'
+import 'v-slick-carousel/style.css'
 
-export default {
-    name: 'Home',
-    components: {
-        VSlickCarousel,
-    },
-    data() {
-        return {
-            Navbar,
-            PageFooter,
-            banner,
-            watch,
-            watch1,
-            watch2,
-            watch3,
-            watch4,
-            banner2,
-            bannerBackground,
-            settings: {
-                slidesToShow: 1,
-                dots: true,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                infinite: true,
-                speed: 500,
-                slidesToScroll: 1,
-            },
-            products: [],
-            productsByCategory: {
-                fashion: [],
-                classic: [],
-                luxury: []
-            }
-        };
-    },
-    mounted() {
-        this.fetchAllCategories();
-    },
-    methods: {
-        goToRegister() {
-            this.$router.push('/register')
-        },
-        async fetchAllCategories() {
-            await this.fetchProductsByCategory('fashion');
-            await this.fetchProductsByCategory('classic');
-            await this.fetchProductsByCategory('luxury');
-        },
-        async fetchProductsByCategory(category) {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
-                this.productsByCategory[category] = response.data.data.products;
-            } catch (error) {
-                console.error(`Error fetching ${category} products:`, error);
-            }
-        },
+const router = useRouter()
 
+const settings = {
+    slidesToShow: 1,
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+}
+
+const productsByCategory = ref({
+    fashion: [],
+    classic: [],
+    luxury: []
+})
+
+const goToRegister = () => {
+    router.push('/register')
+}
+
+const fetchProductsByCategory = async (category) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`)
+        productsByCategory.value[category] = response.data.data.products
+    } catch (error) {
+        console.error(`Error fetching ${category} products:`, error)
     }
 }
+
+const fetchAllCategories = async () => {
+    await fetchProductsByCategory('fashion')
+    await fetchProductsByCategory('classic')
+    await fetchProductsByCategory('luxury')
+}
+
+onMounted(() => {
+    fetchAllCategories()
+})
 </script>
 
 <style scoped>
@@ -498,7 +475,7 @@ p {
 }
 
 #banner h1 {
-    color: rgb(222, 184, 135, 0.8);
+    color: rgb(222, 184, 135, 0.93);
     font-weight: 400;
     margin-left: 4rem;
     margin-bottom: 1rem;
@@ -506,20 +483,19 @@ p {
 
 #banner button {
     text-decoration: none;
-    background-color: rgb(222, 184, 135, 1.05);
-    color: rgb(34, 34, 34, 0.8);
+    background-color: rgb(0, 0, 0);
+    color: rgb(250, 250, 250, 0.9);
     padding: 0.8rem 1rem;
     border: none;
-    transition: 0.2s ease-in-out;
+    transition: 0.2s all;
     margin-left: 4rem;
     margin-top: 0.8rem;
     font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #banner button:hover {
     background-color: black;
-    color: rgb(250, 250, 250, 0.9);
     scale: 1.05;
 }
 

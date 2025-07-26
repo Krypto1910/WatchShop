@@ -38,72 +38,56 @@
     </section>
 </template>
 
-<script>
-import { ref } from 'vue';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 
-export default {
-    name: 'Register',
-    setup() {
-        const name = ref('');
-        const email = ref('');
-        const password = ref('');
-        const confirmPassword = ref('');
-        const error = ref('');
-        const success = ref('');
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
-        const handleSubmit = async (e) => {
-            e.preventDefault();
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const error = ref('')
+const success = ref('')
 
-            // Kiểm tra đơn giản
-            if (!name.value || !email.value || !password.value || !confirmPassword.value) {
-                error.value = 'Please fill in all fields.';
-                return;
-            }
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-            if (!emailRegex.test(email.value)) {
-                error.value = 'Invalid email format.';
-                return;
-            }
+const handleSubmit = async () => {
+    // Kiểm tra đơn giản
+    if (!name.value || !email.value || !password.value || !confirmPassword.value) {
+        error.value = 'Please fill in all fields.'
+        return
+    }
 
-            if (password.value !== confirmPassword.value) {
-                error.value = 'Passwords do not match.';
-                return;
-            }
-            
-            try {
-                // Gửi dữ liệu đến API đăng ký
-                const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/register`, {
-                    name: name.value,
-                    email: email.value,
-                    password: password.value
-                });
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    if (!emailRegex.test(email.value)) {
+        error.value = 'Invalid email format.'
+        return
+    }
 
-                if(response.data.success){
-                    Swal.fire({
-                        icon: "success",
-                        text: response.data.message || "Registration successful!",
-                        title: "Success"
-                    })
-                    success.value = 'Registration successful!';
-                    error.value = '';
-                }
-            } catch (err) {
-                error.value = err.response?.data?.message || 'Registration failed.';
-                success.value = '';
-            }
-        };
+    if (password.value !== confirmPassword.value) {
+        error.value = 'Passwords do not match.'
+        return
+    }
 
-        return {
-            name,
-            email,
-            password,
-            confirmPassword,
-            handleSubmit,
-            error,
-            success
-        };
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_API_URI}/customers/register`, {
+            name: name.value,
+            email: email.value,
+            password: password.value
+        })
+
+        if (response.data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: response.data.message || 'Registration successful!'
+            })
+            success.value = 'Registration successful!'
+            error.value = ''
+        }
+    } catch (err) {
+        error.value = err.response?.data?.message || 'Registration failed.'
+        success.value = ''
     }
 }
 </script>

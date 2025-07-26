@@ -100,72 +100,46 @@
 
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useAppStore } from '@/stores/app';
 import axios from 'axios';
-import watch from '@/assets/watch.jpeg';
+
 import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
-import { useAppStore } from '@/stores/app'
 
-export default {
-    name: 'SingleProduct',
-    data() {
-        return {
-            watch,
-            watch1,
-            watch2,
-            watch3,
-            watch4,
-            product: {},
-            Quantity: 1,
-        };
-    },
-    mounted() {
-        this.productId = this.$route.params.id;
-        this.fetchProductById(this.productId);
-        this.fetchProductsByCategory()
-    },
-    methods: {
-        changeImage(index) {
-            this.mainImg = this.smallImgs[index];
-        },
-        
-        async fetchProductById(id) {
-            try {
-                const response = await axios.get(
-                    `${import.meta.env.VITE_API_URI}/products/${id}`
-                );
-                this.product = response.data.product;
+const product = ref({});
+const Quantity = ref(1);
+const route = useRoute();
+const productId = route.params.id;
 
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        },
+onMounted(() => {
+    fetchProductById(productId);
+    // fetchProductsByCategory(product.value.Category); // optional if needed
+});
 
-        async addToCart() {
-            const store = useAppStore()
-            store.addToCart({
-                ProductID: this.product.ProductID,
-                Name: this.product.Name,
-                Price: this.product.Price,
-                Image: this.product.Image,
-                Quantity: this.Quantity
-            })
-        },
-
-        async fetchProductsByCategory(category) {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
-                this.productsByCategory[category] = response.data.data.products;
-            } catch (error) {
-                console.error(`Error fetching ${category} products:`, error);
-            }
-        },
+const fetchProductById = async (id) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/${id}`);
+        product.value = response.data.product;
+    } catch (error) {
+        console.error("Error fetching products:", error);
     }
 };
 
+const addToCart = () => {
+    const store = useAppStore();
+    store.addToCart({
+        ProductID: product.value.ProductID,
+        Name: product.value.Name,
+        Price: product.value.Price,
+        Image: product.value.Image,
+        Quantity: Quantity.value,
+    });
+};
 </script>
 
 <style scoped>
@@ -193,17 +167,19 @@ export default {
 }
 
 .single-product .buy-btn {
-    background-color: #006b3d;
+   
+    background-color: black;
     color: white;
     border: none;
     padding: 8px 10px;
     border: none;
-    box-shadow: 0 2px 5px rgba(0, 107, 61, 0.2);
+   
     transition: 0.2s ease-in-out;
 }
 
 .single-product .buy-btn:hover {
-    background-color: #004d2f;
+   
+    background-color: #006b3d;
 }
 
 h2 {

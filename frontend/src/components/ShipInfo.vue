@@ -30,54 +30,44 @@
     </section>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
 
-export default {
-    name: 'ShipInfo',
-    data() {
-        return {
-            contactName: '',
-            contactNumber: '',
-            shippingAddress: ''
+const router = useRouter();
+
+const contactName = ref('');
+const contactNumber = ref('');
+const shippingAddress = ref('');
+
+const addNewInfo = async () => {
+    try {
+        const payload = {
+            name: contactName.value,
+            phone: contactNumber.value,
+            address: shippingAddress.value,
+            customerID: JSON.parse(localStorage.getItem("customer"))?.CustomerID || null,
         };
-    },
-    methods: {
-        async addNewInfo() {
-            try {
-                const payload = {
-                    name: this.contactName,
-                    phone: this.contactNumber,
-                    address: this.shippingAddress,
-                    customerID: JSON.parse(localStorage.getItem("customer"))?.CustomerID || null
-                };
 
-                const response = await axios.post(
-                    `${import.meta.env.VITE_API_URI}/shipinfo`,
-                    payload
-                );
-                if (response.data.success) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success",
-                        text: "Add new shipping information successfully!"
-                    })
-                    this.$router.push('/checkout');
-                }
-                
+        const response = await axios.post(`${import.meta.env.VITE_API_URI}/shipinfo`, payload);
 
-
-            } catch (error) {
-                console.error("Lỗi gửi thông tin:", error);
-                // alert("Đã xảy ra lỗi khi gửi thông tin.");
-                Swal.fire({
-                    icon: "error",
-                    title: "Erorr",
-                    text: "Please login to continue"
-                })
-            }
+        if (response.data.success) {
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Add new shipping information successfully!"
+            });
+            router.push('/checkout');
         }
+    } catch (error) {
+        console.error("Lỗi gửi thông tin:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Please login to continue"
+        });
     }
 };
 </script>

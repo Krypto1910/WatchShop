@@ -137,115 +137,94 @@
     </section>
 </template>
 
-<script>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-export default {
-    name: 'Cart',
-    data() {
-        return {
-            productCart: JSON.parse(localStorage.getItem("cart")) || [],
-            selectedAddress: null,
-            addressList: [],
-            selectedMethod: null,
-        };
-    },
-    mounted() {
-        this.fetchAddressList();
-    },
-    computed: {
-        cartTotal() {
-            return this.productCart.reduce((sum, item) => {
-                const priceAfterDiscount = item.Price * (1 - (item.Discount || 0) / 100);
-                return sum + item.Quantity * priceAfterDiscount;
-            }, 0).toFixed(2); // làm tròn 2 chữ số
+
+const router = useRouter();
+
+const productCart = ref(JSON.parse(localStorage.getItem("cart")) || []);
+const selectedAddress = ref(null);
+const addressList = ref([]);
+const selectedMethod = ref(null);
+
+onMounted(() => {
+    fetchAddressList();
+});
+
+// Gán discount nếu thiếu
+productCart.value.forEach(item => {
+    if (item.Discount === undefined) {
+        item.Discount = Math.floor(Math.random() * 16); // random 0–15
+    }
+});
+localStorage.setItem("cart", JSON.stringify(productCart.value));
+
+const cartTotal = computed(() =>
+    productCart.value.reduce((sum, item) => {
+        const priceAfterDiscount = item.Price * (1 - (item.Discount || 0) / 100);
+        return sum + item.Quantity * priceAfterDiscount;
+    }, 0).toFixed(2)
+);
+
+const fetchAddressList = async () => {
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    if (!customer) return;
+    const customerId = customer.CustomerID;
+
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URI}/shipinfo/${customerId}`);
+        if (response.data.success) {
+            addressList.value = response.data.shipInfo;
+        } else {
+            console.error("Failed to fetch addresses:", response.data.message);
         }
+    } catch (error) {
+        console.error("Error fetching addresses:", error);
+    }
+};
 
-    },
-    created() {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const createOrder = async () => {
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    if (!customer || !selectedAddress.value || !selectedMethod.value) {
+        Swal.fire("Incomplete Information", "Please select address and payment method", "warning");
+        return;
+    }
 
-        // discount
-        cart.forEach(item => {
-            if (item.Discount === undefined) {
-                item.Discount = this.getRandomDiscount();
-            }
-        });
+    const orderData = {
+        CustomerID: customer.CustomerID,
+        Date: new Date().toISOString().split('T')[0],
+        TotalAmount: parseFloat(cartTotal.value),
+        Status: "Pending",
+        Address: selectedAddress.value.address,
+        PaymentMethod: selectedMethod.value.method,
+        OrderItems: productCart.value.map(item => ({
+            ProductID: item.ProductID,
+            Quantity: item.Quantity,
+            UnitPrice: item.Price,
+        })),
+    };
 
-        this.productCart = cart;
-        localStorage.setItem("cart", JSON.stringify(cart));
-    },
-    methods: {
-        async fetchAddressList() {
-            const customer = JSON.parse(localStorage.getItem("customer"));
-            if (!customer) {
-                return;
-            }
-            const customerId = customer.CustomerID;
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URI}/shipinfo/${customerId}`);
-                if (response.data.success) {
-                    this.addressList = response.data.shipInfo;
-                } else {
-                    console.error("Failed to fetch addresses:", response.data.message);
-                }
-            } catch (error) {
-                console.error("Error fetching addresses:", error);
-            }
-        },
-        getRandomDiscount() {
-            return Math.floor(Math.random() * 16); // 0 - 15
-        },
-
-        // Cập nhật localStorage
-        saveCart() {
-            localStorage.setItem('cart', JSON.stringify(this.productCart));
-        },
-
-        async createOrder() {
-            const customer = JSON.parse(localStorage.getItem("customer"));
-            if (!customer || !this.selectedAddress || !this.selectedMethod) {
-                Swal.fire("Incomplete Information", "Please select address and payment method", "warning");
-                return;
-            }
-
-            const orderData = {
-                CustomerID: customer.CustomerID,
-                Date: new Date().toISOString().split('T')[0], // yyyy-mm-dd
-                TotalAmount: parseFloat(this.cartTotal),
-                Status: "Pending",
-                Address: this.selectedAddress.address,
-                PaymentMethod: this.selectedMethod.method,
-                OrderItems: this.productCart.map(item => ({
-                    ProductID: item.ProductID,
-                    Quantity: item.Quantity,
-                    UnitPrice: item.Price,
-                }))
-            };
-
-            console.log("Order Data:", orderData);
-
-            try {
-                const res = await axios.post(`${import.meta.env.VITE_API_URI}/orders`, orderData);
-                if (res.data.success) {
-                    Swal.fire("Success", "Order created successfully!", "success");
-                    localStorage.removeItem("cart");
-                    this.productCart = [];
-                    setTimeout(() => {
-                        this.$router.push('/'); // Redirect to home after 2 seconds
-                    }, 2000);
-                } else {
-                    Swal.fire("Error", res.data.message || "Failed to create order", "error");
-                }
-            } catch (err) {
-                console.error(err);
-                Swal.fire("Error", "Something went wrong", "error");
-            }
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_API_URI}/orders`, orderData);
+        if (res.data.success) {
+            Swal.fire("Success", "Order created successfully!", "success");
+            localStorage.removeItem("cart");
+            productCart.value = [];
+            setTimeout(() => router.push('/'), 2000);
+        } else {
+            Swal.fire("Error", res.data.message || "Failed to create order", "error");
         }
-
+    } catch (err) {
+        console.error(err);
+        Swal.fire("Error", "Something went wrong", "error");
     }
 };
 </script>
+
 
 <style scoped>
 .quantity-control {

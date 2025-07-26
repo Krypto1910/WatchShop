@@ -83,89 +83,79 @@
     </section>
 </template>
 
-<script>
-import watch1 from '@/assets/watch1.jpeg';
+<script setup>
+import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import moment from 'moment';
 
-export default {
-    name: 'Account',
-    data() {
-        return {
-            moment,
-            watch1,
-            customer: JSON.parse(localStorage.getItem("customer")) || {},
-            form: {
-                password: '',
-                confirmPassword: ''
-            },
-            orders: []
-        };
-    },
-    mounted() {
-        this.fetchOrders();
-    },
-    methods: {
-        async fetchOrders() {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/customer/${this.customer.CustomerID}`);
-                //console.log(response.data);
-                if (response.data.status == "success") {
-                    this.orders = response.data.data.orders; // vì dùng Jsend.success({ orders })
-                    console.log(response.data.data.orders);
-                }
-            } catch (error) {
-                console.error("Error fetching orders:", error);
-            }
-        },
+const ordersSection = ref(null);
+const momentRef = moment;
 
-        scrollToOrders() {
-            const el = this.$refs.ordersSection;
-            if (el) {
-                el.scrollIntoView({ behavior: "smooth" });
-            }
-        },
+const customer = reactive(JSON.parse(localStorage.getItem("customer")) || {});
+const form = reactive({
+    password: '',
+    confirmPassword: ''
+});
 
-        handleLogout() {
-            localStorage.removeItem('customer');
-            //this.$router.push('/login');
-            window.location.href = '/login';
-        },
-        async handleChangePassword() {
-            if (this.form.password !== this.form.confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
+const orders = ref([]);
 
-            try {
-                const formData = new FormData();
-                formData.append('password', this.form.password);
-
-                const response = await axios.put(
-                `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
-                formData,
-                {
-                    headers: {
-                    'Content-Type': 'multipart/form-data'
-                    }
-                }
-                );
-
-                if (response.data.success) {
-                    alert('Password updated successfully!');
-                    this.form.password = '';
-                    this.form.confirmPassword = '';
-                } else {
-                    alert(response.data.message || 'Update failed');
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert('Update failed');
-            }
+async function fetchOrders() {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URI}/orders/customer/${customer.CustomerID}`);
+        if (response.data.status === "success") {
+            orders.value = response.data.data.orders;
+            console.log(response.data.data.orders);
         }
-
-    },
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+    }
 }
+
+function scrollToOrders() {
+    if (ordersSection.value) {
+        ordersSection.value.scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('customer');
+    window.location.href = '/login';
+}
+
+async function handleChangePassword() {
+    if (form.password !== form.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append('password', form.password);
+
+        const response = await axios.put(
+            `${import.meta.env.VITE_API_URI}/customers/${customer.CustomerID}`,
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
+
+        if (response.data.success) {
+            alert('Password updated successfully!');
+            form.password = '';
+            form.confirmPassword = '';
+        } else {
+            alert(response.data.message || 'Update failed');
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert('Update failed');
+    }
+}
+
+onMounted(fetchOrders);
 </script>
 
 <style scoped>

@@ -84,87 +84,50 @@
   </nav>
 </template>
 
-<!-- 
+
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import logoUrl from '@/assets/logo_removebg.png'
-import { useAppStore } from '@/stores/app'
+import axios from 'axios'
 
-const store = useAppStore()
+const router = useRouter()
 
-const customer = store.customer
-const cartAmount = store.cartAmount
-</script> -->
+const logo = logoUrl
+const customer = ref(JSON.parse(localStorage.getItem('customer')) || null)
+const cartAmount = ref(JSON.parse(localStorage.getItem('cart'))?.length || 0)
+const searchQuery = ref('')
+const suggestions = ref([])
+const debounceTimeout = ref(null)
 
+const onSearchInput = () => {
+  clearTimeout(debounceTimeout.value)
+  debounceTimeout.value = setTimeout(async () => {
+    if (!searchQuery.value) {
+      suggestions.value = []
+      return
+    }
 
-<script>
-import logoUrl from '@/assets/logo_removebg.png';
-import { useAppStore } from '@/stores/app';
-import axios from 'axios';
-export default {
-    name: 'Home',
-    // setup() {
-    //     const store = useAppStore()
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_URI}/products/search?query=${searchQuery.value}`)
+      suggestions.value = res.data.data.products
+    } catch (err) {
+      console.error('Live search error:', err)
+    }
+  }, 300)
+}
 
-    // return {
-    //         logoUrl,
-    //         customer: store.customer,
-    //         cartAmount: store.cartAmount
-    //     }
-    // },
-    data() {
-        return {
-            logoUrl,
-            customer: JSON.parse(localStorage.getItem("customer")) || null,
-            cartAmount: JSON.parse(localStorage.getItem("cart"))?.length || 0,
-            searchQuery: "",
-            suggestions: [],
-            debounceTimeout: null,
-        };
-    },
-    mounted() {
-        // Update cart amount when component is mounted
-        (() => {
-            setInterval(() => {
-                this.cartAmount = JSON.parse(localStorage.getItem("cart"))?.length || 0;
-            }, 500);
-        })();
-    },
-        methods: {
-                async onSearchInput() {
-                    clearTimeout(this.debounceTimeout);
-                    this.debounceTimeout = setTimeout(async () => {
-                        if (!this.searchQuery) {
-                            this.suggestions = [];
-                            return;
-                    }
+const goToProduct = (productId) => {
+  searchQuery.value = ''
+  suggestions.value = []
+  router.push({ name: 'SingleProduct', params: { id: productId } })
+}
 
-                    try {
-                        const res = await axios.get(`${import.meta.env.VITE_API_URI}/products/search?query=${this.searchQuery}`);
-                        this.suggestions = res.data.data.products;
-                    } catch (err) {
-                        console.error("Live search error:", err);
-                    }
-                    }, 300); // debounce
-                },
-                goToProduct(productId) {
-                    this.searchQuery = '';
-                    this.suggestions = [];
-                    this.$router.push({ name: 'SingleProduct', params: { id: productId } });
-                },  
-            }
-        }
-    // data() {
-    //     return {
-    //         store: useAppStore()
-    //     };
-    // },
-    // computed: {
-    //     customer() {
-    //         return this.store.customer;
-    //     }
-    // }
-
-
+onMounted(() => {
+  setInterval(() => {
+    cartAmount.value = JSON.parse(localStorage.getItem('cart'))?.length || 0
+  }, 500)
+})
 </script>
 
 <style scoped>

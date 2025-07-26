@@ -66,28 +66,15 @@
     </footer>
 </template>
 
-<script>
-import logoUrl from '@/assets/logo_removebg.png';
-import watch1 from '@/assets/watch1.jpeg';
-import watch2 from '@/assets/watch2.jpeg';
-import watch3 from '@/assets/watch3.jpeg';
-import watch4 from '@/assets/watch4.jpeg';
-import payment from '@/assets/payment.jpeg';
-
-export default {
-    name: 'Home',
-    data() {
-        return {
-            logoUrl,
-            watch1,
-            watch2,
-            watch3,
-            watch4,
-            payment
-        };
-    }
-}
+<script setup>
+import logoUrl from '@/assets/logo_removebg.png'
+import watch1 from '@/assets/watch1.jpeg'
+import watch2 from '@/assets/watch2.jpeg'
+import watch3 from '@/assets/watch3.jpeg'
+import watch4 from '@/assets/watch4.jpeg'
+import payment from '@/assets/payment.jpeg'
 </script>
+
 
 <style>
 .small-img-group {
