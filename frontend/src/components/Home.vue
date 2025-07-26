@@ -227,8 +227,9 @@ onMounted(() => {
     color: black;
     width: 80%;
     height: min-content;
-    margin: 10% auto;
+    /* margin: 10% auto; */
     box-sizing: border-box;
+    margin-top: 9% !important;
 }
 
 /* banner */
