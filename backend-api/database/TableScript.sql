@@ -81,7 +81,6 @@ CREATE TABLE "OrderItem" (
 
 -- TẠO INDEX (tuỳ chọn)
 CREATE INDEX idx_product_category     ON "Product"("Category");
--- CREATE INDEX idx_cartitem_cartid      ON "CartItem"("CartID");
 CREATE INDEX idx_order_customerid     ON "Order"("CustomerID");
 CREATE INDEX idx_order_date           ON "Order"("Date");
 
