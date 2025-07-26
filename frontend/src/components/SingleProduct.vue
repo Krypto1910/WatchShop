@@ -41,7 +41,7 @@
                 <h3>Related Products</h3>
                 <hr width="150rem" class=" mx-auto">
             </div>
-            <div class="row mx-auto container-fluid">
+            <!-- <div class="row mx-auto container-fluid">
                 <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
                     <img :src="watch1" alt="">
                     <div class="star">
@@ -94,7 +94,24 @@
                     <h4 class="p-price">$999.9</h4>
                     <button class="buy-btn">Buy Now</button>
                 </router-link>
+            </div> -->
+
+            <div class="row mx-auto container-fluid">
+                <router-link v-for="p in relatedProducts" :key="p.ProductID"
+                    class="product text-center col-lg-3 col-md-4 col-sm-12"
+                    :to="{ name: 'SingleProduct', params: { id: p.ProductID } }">
+                    <img :src="`/images/${p.Image}`" :alt="p.Name" />
+                    <div class="star">
+                        <i class="far fa-star" v-for="i in 4" :key="i"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h5 class="p-name">{{ p.Name }}</h5>
+                    <h4 class="p-price">${{ p.Price }}</h4>
+                    <button class="buy-btn">Buy Now</button>
+                </router-link>
             </div>
+
+
         </section>
     </div>
 
@@ -110,25 +127,61 @@ import watch1 from '@/assets/watch1.jpeg';
 import watch2 from '@/assets/watch2.jpeg';
 import watch3 from '@/assets/watch3.jpeg';
 import watch4 from '@/assets/watch4.jpeg';
+import { watch } from 'vue';
 
 const product = ref({});
 const Quantity = ref(1);
 const route = useRoute();
 const productId = route.params.id;
+const relatedProducts = ref([]);
+
+watch(() => route.params.id, (newId) => {
+    fetchProductById(newId);
+});
 
 onMounted(() => {
     fetchProductById(productId);
-    // fetchProductsByCategory(product.value.Category); // optional if needed
+    fetchProductsByCategory(product.value.Category); 
 });
+
+// const fetchProductById = async (id) => {
+//     try {
+//         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/${id}`);
+//         product.value = response.data.product;
+//     } catch (error) {
+//         console.error("Error fetching products:", error);
+//     }
+// };
+
+// const fetchProductsByCategory = async (category) => {
+//     try {
+//         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/category/${category}`);
+//         // Handle the response if needed
+//     } catch (error) {
+//         console.error("Error fetching products by category:", error);
+//     }
+// };
 
 const fetchProductById = async (id) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/${id}`);
         product.value = response.data.product;
+        fetchProductsByCategory(product.value.Category); // Gọi sau khi có product
     } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching product:", error);
     }
 };
+
+const fetchProductsByCategory = async (category) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
+        relatedProducts.value = response.data.data.products.filter(p => p.ProductID !== product.value.ProductID).slice(0, 4);
+        console.log(response.data.data.products);
+    } catch (error) {
+        console.error("Error fetching related products:", error);
+    }
+};
+
 
 const addToCart = () => {
     const store = useAppStore();

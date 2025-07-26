@@ -87,6 +87,7 @@
 import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const ordersSection = ref(null);
 const momentRef = moment;
@@ -143,7 +144,12 @@ async function handleChangePassword() {
         );
 
         if (response.data.success) {
-            alert('Password updated successfully!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Password Updated',
+                text: 'Your password has been changed successfully.',
+                confirmButtonColor: '#006b3d',
+            });
             form.password = '';
             form.confirmPassword = '';
         } else {
