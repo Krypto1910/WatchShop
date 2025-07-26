@@ -450,13 +450,13 @@ p {
 
 #banner h4 {
     font-weight: 400;
-    color: rgb(250, 250, 250, 0.7);
+    color: rgb(250, 250, 250, 0.8);
     margin-left: 4rem;
     margin-top: 1rem;
 }
 
 #banner h1 {
-    color: rgb(222, 184, 135, 0.93);
+    color: rgb(222, 184, 135, 0.83);
     font-weight: 400;
     margin-left: 4rem;
     margin-bottom: 1rem;
@@ -464,20 +464,25 @@ p {
 
 #banner button {
     text-decoration: none;
-    background-color: rgb(0, 0, 0);
-    color: rgb(250, 250, 250, 0.9);
-    padding: 0.8rem 1rem;
-    border: none;
-    transition: 0.2s all;
+    background-color: black;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
     margin-left: 4rem;
     margin-top: 0.8rem;
-    font-weight: 500;
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.1),
+        0 6px 20px rgb(222, 184, 135, 1),
+        inset 0 0 5px rgba(255, 255, 255, 0.05);
 }
 
 #banner button:hover {
     background-color: black;
-    scale: 1.05;
+    scale: 1.1;
 }
 
 /*mobile*/

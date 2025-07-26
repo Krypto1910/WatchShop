@@ -5,8 +5,8 @@
             <div class="row mt-5">
                 <!--Images-->
                 <div class="col-lg-5 col-md-6 col-sm-12" style="padding: 0 30px">
-                    <img id="mainImg" class="img-fluid w-100 pb-2" :src="`/images/${product.Image}`">
-                    <div class="small-img-group">
+                    <img id="mainImg" class="img-fluid w-100 pb-2" :src="mainImg">
+                    <!-- <div class=" small-img-group">
                         <div class="small-img-col">
                             <img class="small-img" :src="`/images/${product.Image}`" width="100%">
                         </div>
@@ -18,6 +18,11 @@
                         </div>
                         <div class="small-img-col">
                             <img class="small-img" :src="watch4" width="100%">
+                        </div>
+                    </div> -->
+                    <div class="small-img-group d-flex justify-content-between">
+                        <div class="small-img-col" v-for="(img, index) in smallImages" :key="index">
+                            <img :src="img" class="small-img" width="100%" @click="mainImg = img" />
                         </div>
                     </div>
                 </div>
@@ -41,60 +46,6 @@
                 <h3>Related Products</h3>
                 <hr width="150rem" class=" mx-auto">
             </div>
-            <!-- <div class="row mx-auto container-fluid">
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch1" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 1</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch2" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 2</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch3" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 3</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-                <router-link class="product text-center col-lg-3 col-md-4 col-sm-12" :to="{ name: 'SingleProduct' }">
-                    <img :src="watch4" alt="">
-                    <div class="star">
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h5 class="p-name">Watch 4</h5>
-                    <h4 class="p-price">$999.9</h4>
-                    <button class="buy-btn">Buy Now</button>
-                </router-link>
-            </div> -->
 
             <div class="row mx-auto container-fluid">
                 <router-link v-for="p in relatedProducts" :key="p.ProductID"
@@ -134,6 +85,9 @@ const Quantity = ref(1);
 const route = useRoute();
 const productId = route.params.id;
 const relatedProducts = ref([]);
+const mainImg = ref('');
+const smallImages = ref([]);
+
 
 watch(() => route.params.id, (newId) => {
     fetchProductById(newId);
@@ -141,32 +95,23 @@ watch(() => route.params.id, (newId) => {
 
 onMounted(() => {
     fetchProductById(productId);
-    fetchProductsByCategory(product.value.Category); 
+    fetchProductsByCategory(product.value.Category);
 });
-
-// const fetchProductById = async (id) => {
-//     try {
-//         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/${id}`);
-//         product.value = response.data.product;
-//     } catch (error) {
-//         console.error("Error fetching products:", error);
-//     }
-// };
-
-// const fetchProductsByCategory = async (category) => {
-//     try {
-//         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/category/${category}`);
-//         // Handle the response if needed
-//     } catch (error) {
-//         console.error("Error fetching products by category:", error);
-//     }
-// };
 
 const fetchProductById = async (id) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products/${id}`);
         product.value = response.data.product;
-        fetchProductsByCategory(product.value.Category); // Gọi sau khi có product
+        product.value = response.data.product;
+        mainImg.value = `/images/${product.value.Image}`;
+        smallImages.value = [
+            `/images/${product.value.Image}`,
+            watch2,
+            watch1,
+            watch4,
+        ];
+
+        fetchProductsByCategory(product.value.Category);
     } catch (error) {
         console.error("Error fetching product:", error);
     }
@@ -176,7 +121,6 @@ const fetchProductsByCategory = async (category) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
         relatedProducts.value = response.data.data.products.filter(p => p.ProductID !== product.value.ProductID).slice(0, 4);
-        console.log(response.data.data.products);
     } catch (error) {
         console.error("Error fetching related products:", error);
     }
@@ -220,18 +164,18 @@ const addToCart = () => {
 }
 
 .single-product .buy-btn {
-   
+
     background-color: black;
     color: white;
     border: none;
     padding: 8px 10px;
     border: none;
-   
+
     transition: 0.2s ease-in-out;
 }
 
 .single-product .buy-btn:hover {
-   
+
     background-color: #006b3d;
 }
 
@@ -324,9 +268,18 @@ h2 {
     border-radius: 12px;
 }
 
-.small-img {
-    height: 100%;
+#mainImg {
+    height: 17.9rem;
     object-fit: cover;
+}
+
+.small-img {
+    height: 70%;
+    object-fit: cover;
+}
+
+.small-img-group {
+    height: 6.5rem;
 }
 
 .product-info h4 {

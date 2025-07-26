@@ -8,7 +8,8 @@ export const useAppStore = defineStore("app", () => {
   const customer = ref(JSON.parse(localStorage.getItem('customer')) || null);
   const isLoaded = ref(true);
   const cartAmount = computed(() =>
-    cart.value.reduce((sum, i) => sum + (i.Quantity || 1), 0)
+    // cart.value.reduce((sum, i) => sum + (i.Quantity || 1), 0)
+    cart.value.length
   );
 
   const productsByCategory = ref({

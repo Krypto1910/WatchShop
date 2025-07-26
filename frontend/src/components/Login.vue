@@ -78,7 +78,7 @@ const handleLogin = async () => {
 
            setTimeout(() => {
                 router.push('/');
-            }, 50)
+            }, 100)
         } else {
             error.value = response.data.message || 'Login failed.'
         }

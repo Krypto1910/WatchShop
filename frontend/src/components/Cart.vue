@@ -184,8 +184,9 @@ function updateQuantity(id, newQuantity) {
 }
 
 .cart td img {
-    width: 80px;
-    height: 80px;
+    width: 4rem; 
+    height: 4rem;
+    object-fit: cover;
     margin-right: 10px;
 }
 
