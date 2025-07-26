@@ -140,10 +140,12 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useAppStore } from '@/stores/app';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+const store = useAppStore();
 const router = useRouter();
 
 const productCart = ref(JSON.parse(localStorage.getItem("cart")) || []);
@@ -212,7 +214,7 @@ const createOrder = async () => {
         const res = await axios.post(`${import.meta.env.VITE_API_URI}/orders`, orderData);
         if (res.data.success) {
             Swal.fire("Success", "Order created successfully!", "success");
-            localStorage.removeItem("cart");
+            store.clearCart();
             productCart.value = [];
             setTimeout(() => router.push('/'), 2000);
         } else {

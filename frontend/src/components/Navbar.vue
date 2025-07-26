@@ -86,19 +86,21 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import logoUrl from '@/assets/logo_removebg.png'
 import axios from 'axios'
+import { useAppStore } from '@/stores/app'
 
 const router = useRouter()
-
+const store = useAppStore()
 const logo = logoUrl
-const customer = ref(JSON.parse(localStorage.getItem('customer')) || null)
-const cartAmount = ref(JSON.parse(localStorage.getItem('cart'))?.length || 0)
+const customer = computed(() => store.customer)
+const cartAmount = computed(() => store.cartAmount)
 const searchQuery = ref('')
 const suggestions = ref([])
 const debounceTimeout = ref(null)
+
 
 const onSearchInput = () => {
   clearTimeout(debounceTimeout.value)
@@ -122,12 +124,6 @@ const goToProduct = (productId) => {
   suggestions.value = []
   router.push({ name: 'SingleProduct', params: { id: productId } })
 }
-
-onMounted(() => {
-  setInterval(() => {
-    cartAmount.value = JSON.parse(localStorage.getItem('cart'))?.length || 0
-  }, 500)
-})
 </script>
 
 <style scoped>

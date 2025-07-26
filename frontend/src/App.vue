@@ -1,20 +1,29 @@
 <template>
-  <Navbar />
-  <router-view />
-  <PageFooter />
+  <div id="app">
+    <Navbar v-if="isStoreLoaded" />
+
+    <router-view />
+    <PageFooter />
+  </div>
 </template>
 
-
 <script>
-// import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import PageFooter from './components/PageFooter.vue'
+import { useAppStore } from './stores/app'
 
 export default {
   name: 'App',
   components: {
     Navbar,
     PageFooter
+  },
+  computed: {
+    isStoreLoaded() {
+      const store = useAppStore();
+      const loadedStatus = store.isLoaded;
+      return loadedStatus;
+    }
   }
 }
 </script>

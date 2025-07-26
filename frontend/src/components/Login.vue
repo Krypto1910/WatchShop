@@ -72,11 +72,13 @@ const handleLogin = async () => {
                 text: response.data.message || 'You are logged in!',
                 confirmButtonColor: '#006b3d'
             })
+            console.log('Login successful. Customer data being saved:', response.data.customer);
+            // localStorage.setItem('customer', JSON.stringify(response.data.customer))
+            store.setCustomer(response.data.customer)
 
-            localStorage.setItem('customer', JSON.stringify(response.data.customer))
-            // store.setCustomer(response.data.customer)
-
-            window.location.href = '/'
+           setTimeout(() => {
+                router.push('/');
+            }, 50)
         } else {
             error.value = response.data.message || 'Login failed.'
         }

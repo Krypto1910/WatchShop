@@ -17,7 +17,7 @@
                     <th>Subtotal</th>
                 </tr>
                 <!--1-->
-                <tr v-for="product in productCart">
+                <tr v-for="product in productCart" :key="product.ProductID">
                     <td>
                         <div class="product-info">
                             <img :src="`/images/${product.Image}`" alt="">
@@ -75,14 +75,17 @@
 import Swal from 'sweetalert2'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAppStore } from '@/stores/app'
 
 const router = useRouter()
+const store = useAppStore()
 
-const productCart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+const productCart = computed(() => store.cart)
+
 const customer = ref(JSON.parse(localStorage.getItem('customer')) || null)
 
 const cartTotal = computed(() =>
-    productCart.value.reduce((sum, item) => sum + item.Quantity * item.Price, 0).toFixed(2)
+    store.cart.reduce((sum, item) => sum + item.Quantity * item.Price, 0).toFixed(2)
 )
 
 function handleCheckout() {
@@ -105,33 +108,25 @@ function handleCheckout() {
 }
 
 function removeCartItem(id) {
-    productCart.value = productCart.value.filter((item) => item.ProductID !== id)
-    saveCart()
+    store.removeCartItem(id)
 }
 
 function decreaseQuantity(product) {
-    if (product.Quantity > 1) {
-        product.Quantity--
-        saveCart()
-    }
+    store.decreaseQuantity(product.ProductID);
 }
 
 function increaseQuantity(product) {
-    product.Quantity++
-    saveCart()
+    store.increaseQuantity(product.ProductID);
 }
 
 function updateQuantity(id, newQuantity) {
     const index = productCart.value.findIndex((item) => item.ProductID === id)
     if (index !== -1) {
         productCart.value[index].Quantity = newQuantity < 1 ? 1 : newQuantity
-        saveCart()
+        store.saveCart()
     }
 }
 
-function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(productCart.value))
-}
 </script>
 
 <style scoped>
