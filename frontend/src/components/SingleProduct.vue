@@ -164,19 +164,19 @@ const addToCart = () => {
 }
 
 .single-product .buy-btn {
-
     background-color: black;
+    background-color: #006b3d;
     color: white;
     border: none;
     padding: 8px 10px;
     border: none;
 
-    transition: 0.2s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .single-product .buy-btn:hover {
 
-    background-color: #006b3d;
+    background-color: #004225;
 }
 
 h2 {

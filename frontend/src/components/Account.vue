@@ -195,6 +195,10 @@ onMounted(fetchOrders);
 
 }
 
+section {
+    margin-top: 5% !important;
+} 
+
 .account-info #orders-btn,
 #logout-btn {
     color: #006b3d;
@@ -231,15 +235,6 @@ a:nth-child(2) {
     color: #E60F0F !important;
 
 }
-
-/* .btn, .btn:hover, .btn:active {
-    background-color: #006b3d !important;
-}
-.btn.btn-primary, .btn.btn-secondary {
-    margin-top: 0.5rem;
-    border: none;
-} */
-
 
 /*Orders*/
 .orders table {

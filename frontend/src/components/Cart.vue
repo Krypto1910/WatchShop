@@ -159,6 +159,10 @@ function updateQuantity(id, newQuantity) {
     margin-top: 2000px !important;
 }
 
+section {
+    margin-top: 5% !important;
+}
+
 /*Cart*/
 .cart table {
     width: 100%;
