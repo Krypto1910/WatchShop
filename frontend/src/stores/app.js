@@ -24,10 +24,36 @@ export const useAppStore = defineStore("app", () => {
     saveCart(); // persist once
   }
 
+    function removeCartItem(id) {
+        cart.value = cart.value.filter((item) => item.ProductID !== id);
+        saveCart();
+    }
+
   function updateCart(newCart) {
     cart.value = newCart;
     saveCart();
   }
 
-  return { cart, cartAmount, addToCart, updateCart };
+  function clearCart() {
+    cart.value = [];
+    saveCart();
+  }
+
+  function increaseQuantity(id) {
+        const item = cart.value.find((p) => p.ProductID === id);
+        if (item) {
+            item.Quantity++;
+            saveCart();
+        }
+    }
+
+  function decreaseQuantity(id) {
+        const item = cart.value.find((p) => p.ProductID === id);
+        if (item && item.Quantity > 1) {
+            item.Quantity--;
+            saveCart();
+        }
+    }
+
+  return { cart, cartAmount, addToCart, updateCart, removeCartItem, increaseQuantity, decreaseQuantity, clearCart };
 });
