@@ -37,7 +37,7 @@
                      style="font-size: 1rem; padding-top: 0.1rem !important; padding-bottom: 0.1rem !important;" />
             </form>
 
-            <!-- Suggestions Dropdown -->
+            <!-- Gợi ý dropdown -->
             <ul v-if="suggestions.length"
                 class="list-group position-absolute w-100 shadow-sm"
                 style="z-index: 1000;">

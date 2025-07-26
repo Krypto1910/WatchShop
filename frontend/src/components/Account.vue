@@ -138,19 +138,19 @@ export default {
             }
 
             try {
-                console.log("Submitting:", {
-                    id: this.customer.CustomerID,
-                    body: { password: this.form.password }
-                });
-                console.log("PUT URL:", `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`);
-                console.log("PUT body:", { password: this.form.password });
+                const formData = new FormData();
+                formData.append('password', this.form.password);
 
                 const response = await axios.put(
-                    `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
-                    {
-                        password: this.form.password
+                `${import.meta.env.VITE_API_URI}/customers/${this.customer.CustomerID}`,
+                formData,
+                {
+                    headers: {
+                    'Content-Type': 'multipart/form-data'
                     }
+                }
                 );
+
                 if (response.data.success) {
                     alert('Password updated successfully!');
                     this.form.password = '';
@@ -159,19 +159,8 @@ export default {
                     alert(response.data.message || 'Update failed');
                 }
             } catch (error) {
-                if (error.response) {
-                    // The request was made and the server responded with a status code >= 400
-                    console.error("Server responded with error:", error.response.data);
-                    alert(error.response.data.message || 'Update failed from server');
-                } else if (error.request) {
-                    // The request was made but no response received
-                    console.error("No response from server:", error.request);
-                    alert('No response from server');
-                } else {
-                    // Something else
-                    console.error("Error setting up request:", error.message);
-                    alert('Request setup error');
-                }
+                console.error("Error:", error);
+                alert('Update failed');
             }
         }
 

@@ -122,14 +122,17 @@ async function updateCustomer(req, res) {
       return res.status(404).json({ message: "Customer not found" });
     }
 
-    const existing = await knex("Customer")
-      .where("Email", email)
-      .andWhereNot("CustomerID", id)
-      .first();
-    if (existing) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Email already in use" });
+    if (email) {
+      const existing = await knex("Customer")
+        .where("Email", email)
+        .andWhereNot("CustomerID", id)
+        .first();
+
+      if (existing) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Email already in use" });
+      }
     }
 
     // Xây dựng các thông tin được cập nhật
@@ -157,8 +160,8 @@ async function updateCustomer(req, res) {
       customer: updatedCustomer,
     });
   } catch (error) {
-    console.log("Error", error);
-    return res.json({ message: "Error" });
+    console.error("Error in updateCustomer:", error);
+    return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
   }
 }
 

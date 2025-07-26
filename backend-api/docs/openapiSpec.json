@@ -401,6 +401,63 @@
         }
       }
     },
+    "/api/v1/products/search": {
+      "get": {
+        "summary": "Search products by name",
+        "description": "Returns products that match the search query",
+        "tags": ["products"],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Search term for product name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["success"] },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": { "$ref": "#/components/schemas/Product" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "error" },
+                    "message": { "type": "string", "example": "Internal server error" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
         "/api/v1/shipinfo": {
       "post": {
         "summary": "Create new shipping info",
