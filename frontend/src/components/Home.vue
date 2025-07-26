@@ -155,15 +155,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
-
+import { useAppStore } from '@/stores/app'
 import bannerBackground from '@/assets/brightened-product-photography.jpeg'
 import { VSlickCarousel } from 'v-slick-carousel'
 import 'v-slick-carousel/style.css'
 
 const router = useRouter()
+const store = useAppStore()
 
 const settings = {
     slidesToShow: 1,
@@ -176,33 +176,14 @@ const settings = {
     slidesToScroll: 1,
 }
 
-const productsByCategory = ref({
-    fashion: [],
-    classic: [],
-    luxury: []
-})
-
 const goToRegister = () => {
     router.push('/register')
 }
 
-const fetchProductsByCategory = async (category) => {
-    try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`)
-        productsByCategory.value[category] = response.data.data.products
-    } catch (error) {
-        console.error(`Error fetching ${category} products:`, error)
-    }
-}
-
-const fetchAllCategories = async () => {
-    await fetchProductsByCategory('fashion')
-    await fetchProductsByCategory('classic')
-    await fetchProductsByCategory('luxury')
-}
+const productsByCategory = computed(() => store.productsByCategory);
 
 onMounted(() => {
-    fetchAllCategories()
+    store.fetchAllCategories();
 })
 </script>
 

@@ -1,6 +1,7 @@
 // stores/app.js
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import axios from "axios";
 
 export const useAppStore = defineStore("app", () => {
   const cart = ref(JSON.parse(localStorage.getItem("cart")) || []);
@@ -9,6 +10,12 @@ export const useAppStore = defineStore("app", () => {
   const cartAmount = computed(() =>
     cart.value.reduce((sum, i) => sum + (i.Quantity || 1), 0)
   );
+
+  const productsByCategory = ref({
+        fashion: [],
+        classic: [],
+        luxury: []
+    });
 
   function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart.value));
@@ -67,5 +74,28 @@ export const useAppStore = defineStore("app", () => {
         }
     }
 
-  return { cart, cartAmount, customer, isLoaded, addToCart, updateCart, removeCartItem, increaseQuantity, decreaseQuantity, clearCart, setCustomer, removeCustomer };
+  async function fetchProductsByCategory(category) {
+        
+        if (productsByCategory.value[category] && productsByCategory.value[category].length > 0) {
+            // console.log(`Using cached data for category: ${category}`);
+            return;
+        }
+        
+        
+        // console.log(`Fetching data for category: ${category}`);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URI}/products?category=${category}`);
+            productsByCategory.value[category] = response.data.data.products;
+        } catch (error) {
+            console.error(`Error fetching ${category} products:`, error);
+        }
+    }
+
+  async function fetchAllCategories() {
+        await fetchProductsByCategory('fashion');
+        await fetchProductsByCategory('classic');
+        await fetchProductsByCategory('luxury');
+    }
+
+  return { cart, cartAmount, customer, isLoaded, productsByCategory, fetchAllCategories, fetchAllCategories, addToCart, updateCart, removeCartItem, increaseQuantity, decreaseQuantity, clearCart, setCustomer, removeCustomer };
 });
