@@ -88,7 +88,9 @@ import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
+import { useAppStore } from '@/stores/app'
 
+const store = useAppStore()
 const router = useRouter();
 const ordersSection = ref(null);
 
@@ -120,7 +122,7 @@ function scrollToOrders() {
 }
 
 function handleLogout() {
-    localStorage.removeItem('customer');
+    store.removeCustomer();
     router.push('/login');
 }
 

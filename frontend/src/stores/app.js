@@ -4,7 +4,8 @@ import { ref, computed } from "vue";
 
 export const useAppStore = defineStore("app", () => {
   const cart = ref(JSON.parse(localStorage.getItem("cart")) || []);
-
+  const customer = ref(JSON.parse(localStorage.getItem('customer')) || null);
+  const isLoaded = ref(true);
   const cartAmount = computed(() =>
     cart.value.reduce((sum, i) => sum + (i.Quantity || 1), 0)
   );
@@ -34,6 +35,17 @@ export const useAppStore = defineStore("app", () => {
     saveCart();
   }
 
+  function setCustomer(newCustomer) {
+        customer.value = newCustomer;
+        localStorage.setItem('customer', JSON.stringify(newCustomer));
+        console.log('Pinia Store: customer state updated to:', customer.value);
+  }
+
+  function removeCustomer() {
+      customer.value = null;
+      localStorage.removeItem('customer');
+  }
+
   function clearCart() {
     cart.value = [];
     saveCart();
@@ -55,5 +67,5 @@ export const useAppStore = defineStore("app", () => {
         }
     }
 
-  return { cart, cartAmount, addToCart, updateCart, removeCartItem, increaseQuantity, decreaseQuantity, clearCart };
+  return { cart, cartAmount, customer, isLoaded, addToCart, updateCart, removeCartItem, increaseQuantity, decreaseQuantity, clearCart, setCustomer, removeCustomer };
 });
