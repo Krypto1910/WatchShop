@@ -85,11 +85,13 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
 
+const router = useRouter();
 const ordersSection = ref(null);
-const momentRef = moment;
+
 
 const customer = reactive(JSON.parse(localStorage.getItem("customer")) || {});
 const form = reactive({
@@ -119,7 +121,7 @@ function scrollToOrders() {
 
 function handleLogout() {
     localStorage.removeItem('customer');
-    window.location.href = '/login';
+    router.push('/login');
 }
 
 async function handleChangePassword() {
