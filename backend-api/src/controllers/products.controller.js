@@ -41,7 +41,29 @@ async function getProductById(req, res) {
   }
 }
 
+async function searchProducts(req, res) {
+  const { query } = req.query;
+
+  if (!query || query.trim() === "") {
+    return res.status(400).json({ error: "Missing search query" });
+  }
+
+  try {
+    const products = await knex("Product").whereILike("Name", `%${query}%`).select("ProductID", "Name", "Image").limit(5);
+
+    return res.status(200).json({
+      status: "success",
+      data: { products }
+    });
+  } catch (error) {
+    console.error("Live search error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 module.exports = {
   getProduct,
   getProductById,
+  searchProducts,
+
 };

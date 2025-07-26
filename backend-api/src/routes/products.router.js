@@ -11,6 +11,7 @@ module.exports.setup = (app) => {
   app.use('/api/v1/products',upload.none(), router);
 
   router.get('/', productsController.getProduct);
+  router.get('/search', productsController.searchProducts)
   router.get('/:id', productsController.getProductById);
 
 
