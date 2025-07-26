@@ -100,7 +100,6 @@ import payment from '@/assets/payment.jpeg'
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f2f2f2;
     padding: 20px;
     flex-wrap: wrap;
 }
@@ -123,7 +122,7 @@ import payment from '@/assets/payment.jpeg'
 }
 
 footer {
-    background-color: #222222;
+    background-color: #1a1a1a;
     display: flex;
     flex-direction: row;
 }
