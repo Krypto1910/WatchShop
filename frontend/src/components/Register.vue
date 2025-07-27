@@ -80,7 +80,8 @@ const handleSubmit = async () => {
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
-                text: response.data.message || 'Registration successful!'
+                text: response.data.message || 'Registration successful!',
+                confirmButtonColor: '#006b3d',
             })
             success.value = 'Registration successful!'
             error.value = ''

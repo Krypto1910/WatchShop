@@ -57,7 +57,8 @@ const addNewInfo = async () => {
             Swal.fire({
                 icon: "success",
                 title: "Success",
-                text: "Add new shipping information successfully!"
+                text: "Add new shipping information successfully!",
+                confirmButtonColor: '#006b3d',
             });
             router.push('/checkout');
         }
