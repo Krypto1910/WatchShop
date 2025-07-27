@@ -504,7 +504,7 @@
         "tags": ["shipinfo"],
         "parameters": [
           {
-            "name": "customer Id",
+            "name": "customerId",
             "in": "path",
             "required": true,
             "schema": { "type": "integer" }
