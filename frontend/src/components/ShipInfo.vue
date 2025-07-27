@@ -78,7 +78,7 @@ const addNewInfo = async () => {
 #checkout-form .checkout-small-element {
     display: inline-block;
     width: 40%;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
 }
 
 #checkout-form .checkout-small-element:nth-child(2n) {

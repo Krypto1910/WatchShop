@@ -213,7 +213,13 @@ const createOrder = async () => {
     try {
         const res = await axios.post(`${import.meta.env.VITE_API_URI}/orders`, orderData);
         if (res.data.success) {
-            Swal.fire("Success", "Order created successfully!", "success");
+            Swal.fire({
+                title: "Order Created",
+                text: "Your order has been successfully created!",
+                icon: "success",
+                confirmButtonText: "OK",
+                confirmButtonColor: '#006b3d',
+            });
             store.clearCart();
             productCart.value = [];
             setTimeout(() => router.push('/'), 2000);

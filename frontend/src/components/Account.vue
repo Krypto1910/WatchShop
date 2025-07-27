@@ -89,7 +89,9 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
 import Swal from 'sweetalert2';
+import { useAppStore } from '@/stores/app';
 
+const store = useAppStore();
 const router = useRouter();
 const ordersSection = ref(null);
 
@@ -121,8 +123,8 @@ function scrollToOrders() {
 }
 
 function handleLogout() {
-    // store.removeCustomer();
-    localStorage.removeItem('customer');
+    store.removeCustomer();
+    //localStorage.removeItem('customer');
     router.push('/login');
 }
 
