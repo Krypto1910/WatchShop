@@ -18,7 +18,7 @@
 
             <div v-if="!selectedAddress" class="ship-info-option">
                 <span style="font-size: 1.05rem; font-weight: 400; color: rgb(155, 155, 155); padding-left: 0.5rem;">
-                    No selected address
+                    No address selected
                 </span>
             </div>
             <label v-for="address in addressList" class="ship-info-option">
@@ -28,9 +28,18 @@
                     address: address.ShippingAddress
                 }" />
                 <div class="ship-info">
-                    <span id="contact-name">{{ address.ContactName }}</span>
-                    <span id="contact-number">{{ address.ContactNumber }}</span>
-                    <span id="ship-position">{{ address.ShippingAddress }}</span>
+                    <div class="ship-info-details">
+                        <span id="contact-name">{{ address.ContactName }}</span>
+                        <span id="contact-number">{{ address.ContactNumber }}</span>
+                        <span id="ship-position">{{ address.ShippingAddress }}</span>
+                    </div>
+                    <div class="ship-info-delete-btn" @click="deleteAddress(address.ShipInfoID)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="16" height="16"
+                            fill="#E60F0F">
+                            <path
+                                d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z" />
+                        </svg>
+                    </div>
                 </div>
             </label>
 
@@ -154,7 +163,8 @@ const addressList = ref([]);
 const selectedMethod = ref(null);
 
 onMounted(() => {
-    fetchAddressList();
+    fetchAddressList(),
+    deleteAddress();
 });
 
 // Gán discount nếu thiếu
@@ -188,6 +198,26 @@ const fetchAddressList = async () => {
         console.error("Error fetching addresses:", error);
     }
 };
+
+const deleteAddress = async (shipInfoId) => {
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    if (!customer) return;
+    const customerId = customer.CustomerID;
+
+    try {
+        const response = await axios.delete(`${import.meta.env.VITE_API_URI}/shipinfo/${customerId}/${shipInfoId}`);
+        if (response.data.success) {
+            // delete successfully -> reload list
+            await fetchAddressList();
+        } else {
+            console.error("Failed to delete address:", response.data.message);
+        }
+    } catch (error) {
+        console.error("Error deleting address:", error);
+    }
+};
+
+
 
 const createOrder = async () => {
     const customer = JSON.parse(localStorage.getItem("customer"));
@@ -417,7 +447,8 @@ th:last-child {
 .ship-info {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -435,6 +466,25 @@ th:last-child {
     cursor: pointer;
 }
 
+.ship-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex-grow: 1;
+}
+
+.ship-info-delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: #f8d7da;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+
 .ship-option {
     margin-left: 0.5rem;
     accent-color: #006b3d;
@@ -446,53 +496,7 @@ th:last-child {
     gap: 0.75rem;
 }
 
-/*Payment Methods*/
-/* .payment-container {
-    display: flex;
-    flex-direction: column;
-    border: #006b3d 3px dashed;
-    box-shadow: 0 4px 8px rgba(0, 107, 61, 0.15);
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: #fdfdfd;
-    margin-top: 2rem;
-}
-.payment-title {
-    color: rgb(200, 0, 0);
-    font-size: 16.8px;
-    margin-left: 0.2rem;
-}
-.payment-option {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-}
-.pay-option {
-    margin-left: 0.5rem;
-    accent-color: #006b3d;
-}
-.payment-methods {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    padding-left: 0.5rem;
-    margin-right: 1rem;
-    border: 1px solid rgba(207, 207, 207, 0.6);
-    padding: 0.75rem 1rem;
-    background-color: #ffffff;
-    transition: border-color 0.1s;
-}
-.payment-methods:hover {
-    border-color: rgb(0, 107, 61, 0.3);
-    box-shadow: 5px 5px 8px 0px rgba(0, 107, 61, 0.1);
-    cursor: pointer;
-} */
 
-/* Payment Methods*/
 .payment-container {
     display: flex;
     flex-direction: column;

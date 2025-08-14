@@ -10,7 +10,5 @@ module.exports.setup = (app) => {
 
     router.post("/", shipInfoController.addNewShipInfo);
     router.get("/:customerId", shipInfoController.getShipInfoByCustomerId);
-
-    router.all('/',methodNotAllowed)
-    router.all('/:id',methodNotAllowed)
+    router.delete("/:customerId/:shipInfoId", shipInfoController.deleteShipInfoByCustomerId);
 }

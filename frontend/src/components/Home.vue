@@ -451,13 +451,13 @@ p {
 
 #banner h4 {
     font-weight: 400;
-    color: rgb(250, 250, 250, 0.8);
+    color: rgb(250, 250, 250, 0.85);
     margin-left: 4rem;
     margin-top: 1rem;
 }
 
 #banner h1 {
-    color: rgb(222, 184, 135, 0.83);
+    color: rgb(222, 184, 135, 1);
     font-weight: 400;
     margin-left: 4rem;
     margin-bottom: 1rem;

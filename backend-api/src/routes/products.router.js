@@ -13,8 +13,4 @@ module.exports.setup = (app) => {
   router.get('/', productsController.getProduct);
   router.get('/search', productsController.searchProducts)
   router.get('/:id', productsController.getProductById);
-
-
-  router.all('/',methodNotAllowed)
-  router.all('/:id',methodNotAllowed)
 };

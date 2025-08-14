@@ -38,12 +38,10 @@ const getShipInfoByCustomerId = async (req, res) => {
       .where("CustomerID", customerId)
       .select("ShipInfoID", "ContactName", "ContactNumber", "ShippingAddress");
     if (shipInfo.length === 0) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No ship info found for this customer",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No ship info found for this customer",
+      });
     }
     return res.status(200).json({ success: true, shipInfo });
   } catch (error) {
@@ -54,7 +52,40 @@ const getShipInfoByCustomerId = async (req, res) => {
   }
 };
 
+const deleteShipInfoByCustomerId = async (req, res) => {
+  const { customerId, shipInfoId } = req.params;
+
+  try {
+    // check if ship info belong to customer
+    const deletedRows = await knex("ShipInfo")
+      .where({
+        ShipInfoID: shipInfoId,
+        CustomerID: customerId,
+      })
+      .del();
+
+    if (deletedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Ship info not found or does not belong to this customer",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Ship info deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting ship info:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 module.exports = {
   addNewShipInfo,
   getShipInfoByCustomerId,
+  deleteShipInfoByCustomerId,
 };

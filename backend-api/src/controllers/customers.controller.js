@@ -19,7 +19,7 @@ async function createCustomer(req, res) {
     if (existing)
       return res
         .status(400)
-        .json({ success: false, message: "Customer already exists" });
+        .json({ success: false, message: "Email already existed" });
 
     // 3) Hash password
     const hashed = await bcrypt.hash(password, SALT_ROUNDS);
@@ -216,3 +216,4 @@ module.exports = {
   checkCustomer,
   deleteCustomer,
 };
+

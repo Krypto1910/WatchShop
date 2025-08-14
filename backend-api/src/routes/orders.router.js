@@ -10,11 +10,7 @@ const upload = multer();
 
 module.exports.setup = (app) => {
   app.use("/api/v1/orders", upload.none(),router);
-  router.post("/", ordersController.createOrder);
-
-
-  router.get("/customer/:customerId", ordersController.getOrdersByCustomer);
   
-  router.all("/", methodNotAllowed);
-  router.all("/:id", methodNotAllowed);
+  router.post("/", ordersController.createOrder);
+  router.get("/customer/:customerId", ordersController.getOrdersByCustomer);
 };

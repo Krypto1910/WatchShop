@@ -68,7 +68,7 @@
         }
       }
     },
-        "/api/v1/customers/login": {
+    "/api/v1/customers/login": {
       "post": {
         "summary": "Check for customer",
         "description": "Check for customer",
@@ -305,23 +305,25 @@
         }
       }
     },
-"/api/v1/products": {
-  "get": {
-    "summary": "Get list of products",
-    "description": "Returns a list of all products. You can optionally filter by category.",
-    "tags": ["products"],
-    "parameters": [
-      {
-        "name": "category",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "string"
-        },
-        "description": "Filter products by category (case-insensitive match)"
-      }
-    ],
-      "responses": {
+    "/api/v1/products": {
+      "get": {
+        "summary": "Get list of products",
+        "description": "Returns a list of all products. You can optionally filter by category.",
+        "tags": [
+          "products"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter products by category (case-insensitive match)"
+          }
+        ],
+        "responses": {
           "200": {
             "description": "A list of product",
             "content": {
@@ -354,7 +356,6 @@
         }
       }
     },
-    
     "/api/v1/products/{id}": {
       "get": {
         "summary": "Get Product by ID",
@@ -405,13 +406,17 @@
       "get": {
         "summary": "Search products by name",
         "description": "Returns products that match the search query",
-        "tags": ["products"],
+        "tags": [
+          "products"
+        ],
         "parameters": [
           {
             "name": "query",
             "in": "query",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "Search term for product name"
           }
         ],
@@ -423,13 +428,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "enum": ["success"] },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
                     "data": {
                       "type": "object",
                       "properties": {
                         "products": {
                           "type": "array",
-                          "items": { "$ref": "#/components/schemas/Product" }
+                          "items": {
+                            "$ref": "#/components/schemas/Product"
+                          }
                         }
                       }
                     }
@@ -448,8 +460,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "error" },
-                    "message": { "type": "string", "example": "Internal server error" }
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
                   }
                 }
               }
@@ -458,11 +476,13 @@
         }
       }
     },
-        "/api/v1/shipinfo": {
+    "/api/v1/shipinfo": {
       "post": {
         "summary": "Create new shipping info",
         "operationId": "addShippingAddress",
-        "tags": ["shipinfo"],
+        "tags": [
+          "shipinfo"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -481,8 +501,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success": { "type": "boolean", "example": true },
-                    "message": { "type": "string", "example": "Ship info added successfully" }
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Ship info added successfully"
+                    }
                   }
                 }
               }
@@ -497,17 +523,21 @@
         }
       }
     },
-        "/api/v1/shipinfo/{customerId}": {
+    "/api/v1/shipinfo/{customerId}": {
       "get": {
         "summary": "Get shipping info for customer",
         "operationId": "getShippingByCustomer",
-        "tags": ["shipinfo"],
+        "tags": [
+          "shipinfo"
+        ],
         "parameters": [
           {
             "name": "customerId",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" }
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
@@ -518,10 +548,15 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "success": { "type": "boolean", "example": true },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
                     "shipInfo": {
                       "type": "array",
-                      "items": { "$ref": "#/components/schemas/ShipInfo" }
+                      "items": {
+                        "$ref": "#/components/schemas/ShipInfo"
+                      }
                     }
                   }
                 }
@@ -539,7 +574,85 @@
           }
         }
       }
-    }},
+    },
+    "/api/v1/shipinfo/{customerId}/{shipInfoId}": {
+      "delete": {
+        "summary": "Delete shipping info for customer",
+        "operationId": "deleteShippingByCustomer",
+        "tags": [
+          "shipinfo"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the customer"
+          },
+          {
+            "name": "shipInfoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the shipping info to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shipping info deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Ship info deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shipping info not found or does not belong to this customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Ship info not found or does not belong to this customer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400BadRequest"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {
       "Customer": {
@@ -562,7 +675,7 @@
             "format": "email",
             "description": "customer email"
           },
-                    "address": {
+          "address": {
             "type": "string",
             "description": "customer address"
           },
@@ -585,7 +698,10 @@
             "description": "Customer's password"
           }
         },
-        "required": ["email", "password"]
+        "required": [
+          "email",
+          "password"
+        ]
       },
       "Orders": {
         "type": "object",
@@ -621,11 +737,21 @@
             "items": {
               "type": "object",
               "properties": {
-                "ProductID": { "type": "integer" },
-                "Quantity": { "type": "integer" },
-                "UnitPrice": { "type": "number" }
+                "ProductID": {
+                  "type": "integer"
+                },
+                "Quantity": {
+                  "type": "integer"
+                },
+                "UnitPrice": {
+                  "type": "number"
+                }
               },
-              "required": ["ProductID", "Quantity", "UnitPrice"]
+              "required": [
+                "ProductID",
+                "Quantity",
+                "UnitPrice"
+              ]
             }
           }
         },
@@ -639,37 +765,76 @@
           "OrderItems"
         ]
       },
-
       "Product": {
         "type": "object",
         "properties": {
-          "ProductID": { "type": "integer" },
-          "Name": { "type": "string" },
-          "Price": { "type": "number", "format": "float" },
-          "Category": { "type": "string" },
-          "QuantityAvailable": { "type": "integer" },
-          "Image": { "type": "string" },
-          "Description": { "type": "string" }
+          "ProductID": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Price": {
+            "type": "number",
+            "format": "float"
+          },
+          "Category": {
+            "type": "string"
+          },
+          "QuantityAvailable": {
+            "type": "integer"
+          },
+          "Image": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          }
         }
       },
       "ShipInfo": {
         "type": "object",
         "properties": {
-          "ShipInfoID": { "type": "integer" },
-          "ContactName": { "type": "string" },
-          "ContactNumber": { "type": "string" },
-          "ShippingAddress": { "type": "string" }
+          "ShipInfoID": {
+            "type": "integer"
+          },
+          "ContactName": {
+            "type": "string"
+          },
+          "ContactNumber": {
+            "type": "string"
+          },
+          "ShippingAddress": {
+            "type": "string"
+          }
         }
       },
       "ShipInfoRequest": {
         "type": "object",
         "properties": {
-          "name": { "type": "string", "description": "Contact person's full name" },
-          "phone": { "type": "string", "description": "Phone number" },
-          "address": { "type": "string", "description": "Shipping address" },
-          "customerID": { "type": "integer", "description": "Associated customer ID" }
+          "name": {
+            "type": "string",
+            "description": "Contact person's full name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "address": {
+            "type": "string",
+            "description": "Shipping address"
+          },
+          "customerID": {
+            "type": "integer",
+            "description": "Associated customer ID"
+          }
         },
-        "required": ["name", "phone", "address", "customerID"]
+        "required": [
+          "name",
+          "phone",
+          "address",
+          "customerID"
+        ]
       }
     },
     "responses": {
